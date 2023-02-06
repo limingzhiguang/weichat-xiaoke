@@ -1,0 +1,18 @@
+<!--components/selectLabel/index.wxml-->
+<view>
+  <view class="label-select {{labelDialog?'active':''}}" bindtap="closeLabelDialog"></view>
+  <view class="label-select-main {{labelDialog?'active':''}}">
+    <view class="au-title">
+      <text class="au-close " catchtap="closeLabelDialog">取消</text>
+      <text class="au-title" catchtap="confirm">确定</text>
+    </view>
+    <view class="au-body">
+      <view 
+        wx:for="{{labelList}}" 
+        wx:key="index" 
+        data-label-index="{{index}}" 
+        class="label-item {{item.status?'active':''}}"
+        bindtap="selectCurrentLabel">{{item.labelName}}</view>
+    </view>
+  </view>
+</view>

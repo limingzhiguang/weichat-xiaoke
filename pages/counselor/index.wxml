@@ -1,0 +1,31 @@
+<!--pages/counselor/index.wxml-->
+<wxs module="format" src="../../filter/filterDate.wxs"></wxs>
+
+<view class="counselor-box">
+  <view class="tabs-box flex-row between" bindtap="switch">
+    <text class="{{ activeName == 'current'?'active':'' }}" id="current">当前顾问</text>
+    <text class="{{ activeName == 'history'?'active':'' }}" id="history">历史顾问</text>
+    <text class="{{ activeName == 'synergy'?'active':'' }}" id="synergy">当前协同人</text>
+  </view>
+
+  <view class="">
+    <view 
+      wx:for="{{dataList}}"
+      wx:key="index"
+      class="flex-row between counselor">
+      <view class="person">
+        <view class="text-clip role">{{item.department || item.dept}}{{item.roleName?'/'+item.roleName:''}}</view>
+        <view class="name">{{item.username || item.userName || item.createMan}}</view>
+      </view>
+
+      <view wx:if="{{ item.status }}" class="status {{ item.status == 1?'color-orange':'color-gray' }}">
+        {{item.status}}
+      </view>
+
+      <view class="date">
+        {{ format.datetime(item.createTime || item.doordinationEndDate) }}
+      </view>
+    </view>
+  </view>
+
+</view>

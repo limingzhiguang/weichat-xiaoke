@@ -1,0 +1,90 @@
+/* pages/dataFlow/index.wxss */
+.data-flow{
+  position: relative;
+  box-sizing: border-box;
+  padding-top:16rpx;
+  padding-bottom: 124rpx;
+  height: 100%;
+  width: 100%;
+  font-size: 28rpx;
+}
+
+.data-box{
+  box-sizing: border-box;
+  padding:0 25rpx;
+  height: 100%;
+  background: #fff
+}
+
+.bottom-button{
+  position: absolute;
+  left:0;
+  bottom:30rpx;
+  width: 100%;
+  height: 94rpx;
+  line-height: 94rpx;
+  text-align: center;
+  font-size: 36rpx;
+  color:#bbb;
+  transition: all .3s;
+}
+
+.bottom-button.bg-color-blue{
+  color:#fff;
+}
+
+.select-status{
+  border-bottom: 2rpx solid #ddd;
+  padding:40rpx 0;
+}
+
+.select-status radio{
+  display: block;
+  margin-bottom: 16rpx;
+  line-height: 45rpx;
+  font-size: 32rpx;
+  color:#000;
+}
+
+.explain{
+  display: block;
+  margin-bottom: 32rpx;
+  padding-left:60rpx;
+  line-height: 45rpx;  
+  color:#333;
+}
+
+.module{
+  border-bottom: 2rpx solid #ddd;
+}
+
+.module .title{
+  display: block;
+  line-height: 45rpx;
+  font-size: 32rpx;
+  color:#000;
+}
+
+.module.flex-row{
+  padding:28rpx 0;
+}
+
+.wait-send{
+  padding-top:32rpx;
+}
+
+.wait-send .title{
+  margin-bottom: 16rpx;
+}
+
+.wait-send .color-black{
+  font-size: 32rpx;
+}
+
+.select-button{
+  display: block;
+  line-height: 45rpx;
+  font-size: 32rpx;
+  color: #017FFF;
+}
+

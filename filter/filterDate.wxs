@@ -1,0 +1,127 @@
+/**
+ * @params val：String 
+ * @return date
+ */
+
+function replaceDate(val){
+  var reg = getRegExp('-','g')
+  var reg2 = getRegExp('\.\d*','i')
+  return val.replace(reg,'/').replace(reg2,'')
+}
+
+function addZero(n){
+  return +n<10?'0'+n:n
+}
+
+var fn = {}
+
+var date = function(val){
+  if(!val) return ''
+  var val = typeof val === 'string'?replaceDate(val):val
+  var oDate = getDate(val)
+  var y,m,d
+
+  y = oDate.getFullYear()
+  m = oDate.getMonth() + 1
+  d = oDate.getDate()
+
+  m = addZero(m)
+  d = addZero(d)
+
+  return y + '-' + m + '-' + d
+
+}
+
+var dateCn = function (val) {
+  if (!val) return ''
+  var val = typeof val === 'string'?replaceDate(val):val
+  var oDate = getDate(val)
+  var y, m, d
+
+  y = oDate.getFullYear()
+  m = oDate.getMonth() + 1
+  d = oDate.getDate()
+
+  m = addZero(m)
+  d = addZero(d)
+
+  return y + '年' + m + '月' + d + '日'
+
+}
+  
+var yearMonth = function (val) {
+  if (!val) return ''
+  var val = typeof val === 'string'?replaceDate(val):val
+  var oDate = getDate(val)
+  var y, m, d
+
+  y = oDate.getFullYear()
+  m = oDate.getMonth() + 1
+
+  m = addZero(m)
+
+  return y + '-' + m
+}
+
+var datetime = function (val) {
+  if (!val) return ''
+  var val = typeof val === 'string'?replaceDate(val):val
+  var oDate = getDate(val)
+  
+  var y, M, d, h , m, s
+  
+  y = oDate.getFullYear()
+  M = oDate.getMonth() + 1
+  d = oDate.getDate()
+  h = oDate.getHours()
+  m = oDate.getMinutes()
+  s = oDate.getSeconds()
+
+  M = addZero(M)
+  d = addZero(d)
+  h = addZero(h)
+  m = addZero(m)
+  s = addZero(s)
+
+  return y + '-' + M + '-' + d + ' ' + h + ':' + m + ':' + s
+}
+
+var money = function(val){
+  if(!val) return 0
+  if(+val < 10000){
+    return parseFloat(val).toFixed(2)
+  } else if (+val > 10000 && +val < 10000000){
+    return parseFloat(val/10000).toFixed(2) + '万'
+  }else{
+    return parseFloat(val / 10000000).toFixed(2) + '千万'
+  }
+}
+
+var timestampToDate = function(val){
+  return date(getDate(parseInt(val)))
+}
+var timestampToDateCn = function(val){
+  return dateCn(getDate(parseInt(val)))
+}
+var timestampToYearMonth = function(val){
+  return yearMonth(getDate(parseInt(val)))
+}
+
+var timestampToDatetime = function(val){
+  return datetime(getDate(parseInt(val)))
+}
+
+fn = {
+  date:date,
+  dateCn:dateCn,
+  yearMonth:yearMonth,
+  datetime:datetime,
+  timestampToDate:timestampToDate,
+  timestampToDateCn:timestampToDateCn,
+  timestampToYearMonth:timestampToYearMonth,
+  timestampToDatetime:timestampToDatetime,
+  money:money
+}
+
+module.exports = fn
+

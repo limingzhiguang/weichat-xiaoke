@@ -1,0 +1,62 @@
+/* pages/counselor/index.wxss */
+.tabs-box{
+  margin-bottom: 16rpx;
+  border-bottom: 2rpx solid #ddd;
+  padding: 0 45rpx;
+  background: #fff;
+}
+
+.tabs-box text{
+  display: block;
+  border-bottom: 4rpx solid #fff;
+  min-width: 160rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 30rpx;
+  transition: all .3s;
+}
+
+.tabs-box .active,
+.tabs-box text:active{
+  border-bottom: 4rpx solid #017FFF;
+  color:#017FFF;
+}
+
+.counselor{
+  align-items: center;
+  margin-bottom: 16rpx;
+  padding: 20rpx 25rpx 20rpx 32rpx;
+  background: #fff;
+}
+
+.counselor .person{
+  flex: 1;
+  overflow: hidden;
+  padding-right:20rpx;
+  color:#333;
+  font-size: 30rpx;
+}
+
+.person .role{
+  margin-bottom: 8rpx;
+  line-height: 42rpx;
+}
+
+.person .name{
+  line-height: 49rpx;
+}
+
+.counselor .status{
+  padding:0 50rpx;
+}
+
+.counselor .date{
+  display: block;
+  flex: 0 1 atuo;
+  width:144rpx;
+  line-height: 33rpx;
+  color:#999;
+  font-size: 24rpx
+}
+

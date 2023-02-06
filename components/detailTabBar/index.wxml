@@ -1,0 +1,7 @@
+<!--components/tabBar/index.wxml-->
+<view class="detail-footer {{isIphoneX?'active':''}}">
+  <view class="footer-item {{currentTab===index?'active':''}}" wx:for="{{tabList}}" wx:key="index" data-tabIndex="{{index}}" data-path="{{item.path}}" data-path-name="{{ item.pathName }}" catchtap="switchTab">
+    <icon class="iconfont {{item.icon}}" style="font-size:{{item.size}}" />
+    <view class="foot-text">{{item.name}}</view>
+  </view>
+</view>

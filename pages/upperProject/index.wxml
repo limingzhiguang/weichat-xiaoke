@@ -1,0 +1,141 @@
+<!--pages/upperProject/index.wxml-->
+
+<wxs module="filter" src="../../filter/filterArray.wxs"></wxs>
+
+<view class="orginfor-page {{ isEditing?'active':'' }}">
+  <view class="orginfor-box">
+    <common-header></common-header>
+    <view class="orginfor-container">
+      <view class="orginfor-header {{isEditing?'active':''}}">
+        <view class="title">营销项目</view>
+        <text class="edit" bindtap="editInfor" hidden="{{ isEditing }}">
+          <text class="iconfont iconxingzhuang2-copy"></text>修改        
+        </text>
+      </view>
+      <view class="orginfor-content">
+        <form bindsubmit="formSubmit">
+          <view class="infor-row flex-row">
+            <text class="label">创始人数：</text>
+            <text class="content" wx:if="{{ !isEditing }}">{{ inforData.founderNum?inforData.founderNum:''}}</text>      
+            <input 
+              class="content editing"
+              name="founderNum"
+              value="{{ setForm.founderNum }}" 
+              placeholder="请输入创始人数"
+              type="number"
+              wx:else
+              bindinput="setOrgName"
+              placeholder-class="placeholder"></input>
+          </view>
+          
+          <view class="infor-row flex-row">
+            <text class="label">合伙人数：</text>
+            <text class="content" wx:if="{{ !isEditing }}">{{ inforData.partnerNum?inforData.partnerNum:''}}</text>      
+            <input 
+              class="content editing"
+              name="partnerNum"
+              value="{{ setForm.partnerNum }}" 
+              placeholder="请输入合伙人数"
+              type="number"
+              wx:else
+              bindinput="setOrgName"
+              placeholder-class="placeholder"></input>
+          </view>
+
+          <view class="infor-row flex-row">
+            <text class="label">中层人数：</text>
+            <text class="content" wx:if="{{ !isEditing }}">{{ inforData.middleManagementNum?inforData.middleManagementNum:''}}</text>      
+            <input 
+              class="content editing"
+              name="middleManagementNum"
+              value="{{ setForm.middleManagementNum }}" 
+              placeholder="请输入中层人数"
+              type="number"
+              wx:else
+              bindinput="setOrgName"
+              placeholder-class="placeholder"></input>
+          </view>
+
+          <view class="infor-row flex-row">
+            <text class="label">市场人数：</text>
+            <text class="content" wx:if="{{ !isEditing }}">{{ inforData.marketingManagementNum?inforData.marketingManagementNum:''}}</text>      
+            <input 
+              class="content editing"
+              name="marketingManagementNum"
+              value="{{ setForm.marketingManagementNum }}" 
+              placeholder="请输入市场人数"
+              type="number"
+              wx:else
+              bindinput="setOrgName"
+              placeholder-class="placeholder"></input>
+          </view>
+
+          <view class="infor-row flex-row">
+            <text class="label">销售人数：</text>
+            <text class="content" wx:if="{{ !isEditing }}">{{ inforData.salerNum?inforData.salerNum:''}}</text>      
+            <input 
+              class="content editing"
+              name="salerNum"
+              value="{{ setForm.salerNum }}" 
+              placeholder="请输入销售人数"
+              type="number"
+              wx:else
+              bindinput="setOrgName"
+              placeholder-class="placeholder"></input>
+          </view>
+
+          <view class="infor-row flex-row">
+            <text class="label">研发人数：</text>
+            <text class="content" wx:if="{{ !isEditing }}">{{ inforData.researcherNum?inforData.researcherNum:''}}</text>      
+            <input 
+              class="content editing"
+              name="researcherNum"
+              value="{{ setForm.researcherNum }}" 
+              placeholder="请输入研发人数"
+              type="number"
+              wx:else
+              bindinput="setOrgName"
+              placeholder-class="placeholder"></input>
+          </view>
+
+          <view class="infor-row {{ isEditing?'':'flex-row' }}">
+            <text class="label">主营项目：</text>
+            <text class="content" wx:if="{{ !isEditing }}">{{inforData.teachingSubject}}</text>    
+            
+            <view class="content checkbox-box" wx:else>
+              <checkbox-group bindchange="changeTeachingRange">
+                <label class="checkbox" wx:for="{{ filterData.upperTeachingRange }}" wx:key="index">
+                  <checkbox value="{{item.label}}" color="#017FFF" checked="{{ item.checked }}">{{item.label}}</checkbox>
+                </label>
+              </checkbox-group>
+            </view>            
+          </view>       
+          
+          <view class="infor-row">
+            <text class="label">备注：</text>
+            <text class="content remark" wx:if="{{ !isEditing }}">{{ inforData.remark?inforData.remark:'' }}</text>
+            <view class="content remark editing" wx:else>
+              <textarea
+                name="remark" 
+                class="editing" 
+                value="{{ setForm.remark }}" 
+                placeholder="请输入备注"
+                bindinput="setRemark"
+                maxlength="500"
+                placeholder-class="placeholder"></textarea>
+                <text class="word-box">{{ wordNumber }}/500</text> 
+            </view>  
+          </view>
+
+          <view class="button-group flex-row" hidden="{{ !isEditing }}">
+            <view class="cancle" bindtap="cancle">取消</view>
+            <button formType="submit" class="confirm active">提交</button>
+          </view>
+        </form>
+      </view>
+    </view>
+  </view>
+  
+</view>
+
+

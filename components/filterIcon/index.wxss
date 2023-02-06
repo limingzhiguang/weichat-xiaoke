@@ -1,0 +1,14 @@
+/* components/filterIcon/index.wxss */
+@import "../../icon/iconfont.wxss";
+.current-file{
+  display: inline-block;
+  width: 156rpx;
+  margin-top: -20rpx;
+  margin-bottom: 20rpx;
+  margin-right: 50rpx;
+  color: #017FFF;
+  font-weight:400;
+}
+.current-file .iconfont{
+  margin-right: 6rpx;
+}

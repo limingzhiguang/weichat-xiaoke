@@ -1,0 +1,14 @@
+/* pages/followUp/index.wxss */
+.page-box{
+  width: 100%;
+  height: 100%;
+}
+
+.page-box.overflow{
+  overflow:hidden;
+}
+
+.follow-list{
+  margin-top: -80rpx;
+  padding-bottom: 120rpx;
+}

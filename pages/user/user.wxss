@@ -1,0 +1,72 @@
+/* pages/user/user.wxss */
+.user{
+  height: 100%;
+  background-color: #fff;
+}
+.user-top{
+  text-align: center;
+  color: #fff;
+  font-size: 37rpx;
+ 
+}
+.header {  
+	box-sizing: border-box;
+  width: 100%;
+  min-height: 660rpx;
+  padding: 56rpx 0 45rpx;
+  background:linear-gradient(135deg,rgba(68,102,255,1) 0%,rgba(39,193,255,1) 100%);
+  font-family:PingFangSC-Regular,PingFang SC;
+}
+
+.change-account{
+  position: absolute;
+  top:152rpx;
+  right: 32rpx;
+  text-align: right;
+  color: #fff;
+  font-size:28rpx;
+}
+.change-account .iconfont{
+   margin-right: 10rpx;
+}
+.user-avatar{
+  margin-top:44rpx;
+  text-align: center;
+}
+.user-avatar image{
+  width: 162rpx;
+  height: 162rpx;
+  border-radius: 50%;
+}
+.user-name{
+  margin-top: 32rpx;
+  font-size:40rpx;
+  font-family:PingFangSC-Medium,PingFang SC;
+  font-weight:500;
+  color: #fff;
+  text-align: center;
+}
+.user-role{
+  margin:24rpx 148rpx 0 150rpx;
+  line-height: 50rpx;
+  text-align: center;
+  color: #fff;
+  font-size:28rpx;
+}
+.department{
+  margin-top: 37rpx;
+  height: 56rpx;
+  text-align: center;  
+}
+.department .de-name{
+  height: 56rpx;
+  padding:6rpx 38rpx;
+  text-align: center;
+  color: #fff;
+  background:rgba(255,255,255,0.25);
+  border-radius:28rpx;
+  border:1rpx solid #fff;
+}
+.department .de-name .iconfont{
+  margin-left: 12rpx;
+}

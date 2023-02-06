@@ -1,0 +1,170 @@
+/* pages/index/home.wxss */
+.login {
+	box-sizing: border-box;
+	padding: 94rpx 32rpx 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(to bottom, #027AFF, #05B1FF);
+}
+
+.login-model {
+	position: relative;
+	margin: 0 auto;
+	box-sizing: border-box;
+	border-radius: 8rpx;
+	padding: 25rpx 48rpx 40rpx;
+	background: #fff;
+	width: 100%;
+}
+
+.yellow-bar{
+	position: absolute;
+	background: #FFB800;
+	width:14rpx;
+	height:40rpx;
+	border-radius: 30rpx;
+	top:-20rpx;
+	left:25%;
+}
+
+.yellow-bar.bar1{
+	left:23%;
+}
+
+.yellow-bar.bar2{
+	left:27%;
+}
+
+.yellow-bar.bar3{
+	left:73%;
+}
+
+.yellow-bar.bar4{
+	left:77%;
+}
+
+.banner-box {
+	text-align: center
+}
+
+.banner-box .img-box {
+	display: inline-block;
+	width: 155rpx;
+	height: 152rpx;
+}
+
+.banner-box .img-box image {
+	width: 100%;
+	height: 100%;
+}
+
+.banner-box .mp-name {
+	display: block;
+	width: 100%;
+	font-size: 36rpx;
+	color: #0F294D;
+}
+
+.banner-box .des-text {
+	display: block;
+	margin: 8rpx 0 60rpx;
+	width: 100%;
+	color: #0F294D;
+	font-size: 26rpx;
+}
+
+.loggin-box label {
+	flex-direction: row;	
+}
+
+.loggin-box .icon {
+	flex-grow: 0;
+	float: right;
+	width: 32rpx;
+	height: 40rpx;
+}
+
+.loggin-box .icon i {
+	display: block;
+	border-radius: 50%;
+	margin-top: 32rpx;
+	width: 100%;
+	height: 32rpx;
+	text-align: center;
+	line-height: 28rpx;
+	color: #fff;
+	cursor: pointer;
+}
+
+.loggin-box .icon i em {
+	display: inline-block;
+	color: rgba(51, 51, 51, .6);
+}
+
+.loggin-box input {
+	flex: 1;
+	height: 100rpx;
+	line-height: 100rpx;
+	font-size: 32rpx;
+	color: #012840;
+}
+
+.loggin-box .login-input,
+.department {
+	border-bottom: 2rpx solid #CBDBE1;
+}
+
+.loggin-box .input-focus,
+.picker {
+	border-bottom: 2rpx solid #027AFF;
+}
+
+.department,
+.picker {
+	width: 100%;
+	flex-direction: row;
+	height: 100rp;
+	line-height: 100rpx;
+	overflow: hidden;
+}
+
+.department .title {
+	display: block;
+	color: #D1D8DC;
+}
+
+.department .input {
+	color: #012840;
+}
+
+.content {
+	float: left;
+	width: 90%;
+}
+
+.picker-icon {
+	float: right;
+	width: 40rpx;
+	height:100%;
+}
+
+.notice{
+	display: block;
+	margin:24rpx 0 60rpx;
+	width: 100%;
+	text-align: center;
+	color:#027AFF;
+	font-size:24rpx;
+	text-align: justify;
+	text-align-last: justify;
+}
+
+.login-button{
+	border-radius: 48rpx;
+	width: 100%;
+	height:96rpx;
+	line-height:70rpx;
+	background:#027AFF;
+	color:#fff;
+	font-size:32rpx;
+}

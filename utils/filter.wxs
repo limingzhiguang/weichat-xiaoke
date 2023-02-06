@@ -1,0 +1,414 @@
+/**
+ * 状态包含：
+ *   阶段状态、跟进方式、跟进记录、跟进记录、机构状态、商务中心一级标签(上游)、商务中心二级标签(上游)、咨询部标签
+ * 
+*/
+
+// 金额筛选 eg: 1000 --> ￥1,000
+var formatMoney = function(value){
+  if(!value){
+    value = 0;
+  }
+  var defaultValue = value;
+  value = value.toString();
+  var moneyArr = value.toString().split(".");
+  var _moneyArr = [];
+  var _mArr = moneyArr[0].split("").reverse();
+  for (var i = 0; i < _mArr.length; i++) {
+    if (i > 0 && i % 3 == 0) {
+      _moneyArr.push(",");
+    }
+    _moneyArr.push(_mArr[i]);
+  }
+  var _money = _moneyArr.reverse().join("");
+  // 返回数据带小数
+  if (moneyArr.length > 1) {
+    _money += "." + moneyArr[1].substring(0,2);
+  }
+  // 返回数据不带小数，补两位
+  if(moneyArr.length===1){
+    _money += ".00";
+  }
+  var numwan = parseFloat(defaultValue);
+  if(numwan>10000){
+    return '￥'+(numwan/10000).toFixed(2)+'w';
+  }else{
+    return '￥'+_money;
+  }
+ // return '￥'+_money;
+};
+//时间筛选
+function formatTimeDateTime(date){
+  if(!date){
+    return '';
+  } 
+  date = parseInt(date);
+  var oDate = getDate(date);
+  var y, M, d, h , m, s
+  year = oDate.getFullYear();
+  month = oDate.getMonth() + 1;
+  day = oDate.getDate();
+  hour = oDate.getHours();
+  minute = oDate.getMinutes();
+  var time = '';
+  return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute].map(formatNumber).join(':');
+}
+function formatNumber(n){
+  n = n.toString()
+  return n[1] ? n : '0' + n
+}
+function filterLabel(list,type){
+  if(!type){
+    return '';
+  }
+  var label = '';
+  list.forEach(function(item){
+    if(item.value.toString() === type.toString()){
+      label= item.label
+   }
+  });
+  return label;
+}
+
+// 阶段状态
+var stageContent = function(type){
+  var stageList = [
+    {
+      value:1,
+      label:'发现需求'
+  },
+  {
+      value:2,
+      label:'确认需求'
+  },
+  {
+      value:3,
+      label:'解决方案'
+  },
+  {
+      value:4,
+      label:'商务谈判'
+  },
+  {
+      value:5,
+      label:'招标'
+  },
+  {
+      value:6,
+      label:'赢单'
+  },
+  {
+      value:7,
+      label:'输单'
+  },
+  {
+      value:8,
+      label:'延期'
+  }
+  ];
+  return filterLabel(stageList,type);
+}
+// 跟进方式
+var filterFollowType = function(type){
+  //1-电话;2-微信;3-上门拜访;4-公司参访;5-学君校参访;6-邮件;7-会议；99-其它；
+  var typeList = [
+    {
+      value:1,
+      label:'电话'
+    },
+    {
+      value:2,
+      label:'微信'
+    },
+    {
+      value:3,
+      label:'上门拜访'
+    },
+    {
+      value:4,
+      label:'公司参访'
+    },
+    {
+      value:5,
+      label:'学君校参访'
+    },
+    {
+      value:6,
+      label:'邮件'
+    },
+    {
+      value:7,
+      label:'会议'
+    },
+    {
+      value:99,
+      label:'其它'
+    },
+  ];
+  return filterLabel(typeList,type);
+}
+
+// 跟进记录
+var filterFollowForm = function(type){
+  //1-客户关怀;2-课件发送;3-课程邀约;4-客诉处理;5-常规咨询;6-业务开发;7-业务跟进;8-团队培训;9-常规服务;10-落地辅导;11-其他;
+  var typeList = [
+    {
+      value:1,
+      label:'客户关怀'
+    },
+    {
+      value:2,
+      label:'课件发送'
+    },
+    {
+      value:3,
+      label:'课程邀约'
+    },
+    {
+      value:4,
+      label:'客诉处理'
+    },
+    {
+      value:5,
+      label:'常规咨询'
+    },
+    {
+      value:6,
+      label:'业务开发'
+    },
+    {
+      value:7,
+      label:'业务跟进'
+    },
+    {
+      value:8,
+      label:'团队培训'
+    },
+    {
+      value:9,
+      label:'常规服务'
+    },
+    {
+      value:10,
+      label:'落地辅导'
+    },
+    {
+      value:11,
+      label:'其他'
+    }
+  ];
+  return filterLabel(typeList,type);
+}
+
+// 机构状态
+function orgStatus(type){
+  var orgStatusList = [
+    {
+      value: 1,
+      label: "待下发"
+    },
+    {
+        value: 2,
+        label: "跟进中"
+    },
+    {
+        value: 3,
+        label: "待踢单"
+    },
+    {
+        value: 4,
+        label: "退还待下发"
+    },
+    {
+        value: 5,
+        label: "移交客服"
+    },
+    {
+        value: 6,
+        label: "市场部死池"
+    },
+    {
+        value: 7,
+        label: "咨询部死池"
+    }
+  ]
+  return filterLabel(orgStatusList,type);
+}
+
+// 商务中心一级标签(上游)
+function oneLevelLabel(type){
+  var list = [
+    {
+      value: 1,
+      label: "有效"
+    },
+    {
+      value: 2,
+      label: "有效"
+    },
+    {
+      value: 3,
+      label: "待定"
+    },
+    {
+      value: 9,
+      label: "N/A"
+    }
+  ]
+  return filterLabel(list,type);
+}
+
+// 商务中心二级标签(上游) 
+function twoLevelLabel(type){
+  var list = [
+    {
+      value: 1,
+      label: "A"
+    },
+    {
+      value: 2,
+      label: "B"
+    },
+    {
+      value: 3,
+      label: "C"
+    },
+    {
+      value: 4,
+      label: "D"
+    },
+    {
+      value: 7,
+      label: "无效"
+    },
+    {
+      value: 8,
+      label: "待定"
+    },
+    {
+      value: 9,
+      label: "N/A"
+    }
+  ]
+  return filterLabel(list,type);
+}
+
+//咨询部标签
+function ziXunBu(type){
+   var list = [
+    {
+      value: 1,
+      label: "A"
+    },
+    {
+      value: 2,
+      label: "B"
+    },
+    {
+      value: 3,
+      label: "C"
+    },
+    {
+      value: 4,
+      label: "D"
+    },
+    {
+      value: 5,
+      label: "E"
+    },
+    {
+      value: 6,
+      label: "无意向"
+    }
+   ]
+   return filterLabel(list,type);
+}
+
+// 决策关系
+function policyRelation(type){
+  var list = [
+    {
+      label:'关键决策',
+      value:1
+    },
+    {
+      label:'意见影响',
+      value:2
+    },
+    {
+      label:'普通',
+      value:3
+    }
+]
+return filterLabel(list,type);
+}
+// 证件类型
+function certificatesType(type){
+  var list = [
+    {
+      label:'身份证',
+      value:1
+    },
+    {
+      label:'护照',
+      value:2
+    },
+    {
+      label:'港澳通行证',
+      value:3
+    },
+    {
+      label:'户口本',
+      value:4
+    },
+    {
+      label:'军官证',
+      value:5
+    }
+  ]
+  return filterLabel(list,type);
+}
+function  marriage(type){
+  var list = [
+    {
+      label:'未婚',
+      value:1
+    },
+    {
+      label:'已婚已育',
+      value:2
+    },
+    {
+      label:'已婚未育',
+      value:3
+    },
+    {
+      label:'离异',
+      value:4
+    },
+    {
+      label:'丧偶',
+      value:5
+    }
+  ]
+  return filterLabel(list,type);
+}
+function changLine(content){
+  var co = content.split('\n');
+ return co;
+}
+module.exports = {
+  formatMoney: formatMoney,
+  formatTimeDateTime:formatTimeDateTime,
+  stageContent:stageContent,
+  filterFollowType:filterFollowType,
+  filterFollowForm:filterFollowForm,
+  orgStatus:orgStatus,
+  oneLevelLabel:oneLevelLabel,
+  twoLevelLabel:twoLevelLabel,
+  ziXunBu:ziXunBu,
+  policyRelation:policyRelation,
+  certificatesType:certificatesType,
+  marriage:marriage,
+  changLine:changLine
+}

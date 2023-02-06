@@ -1,0 +1,15 @@
+<!--components/contactsItem/index.wxml-->
+<view class="contacts-item" catchtap="toPersonDetail" data-is-detail="{{row.isOrgDetail}}" data-id="{{row.orgUserId||row.id}}" data-org-id="{{row.orgId}}" data-org-name="{{row.orgName}}">
+  <view class="left">
+    <view class="c-name one-ellipsis">
+      <text class="name">{{row.username}}</text>
+      <text wx:if="{{(row.inMainContact&&row.inMainContact==1)||(row.isMainContact&&row.isMainContact==1)}}" class="zhu">主</text> 
+      <!-- <text class="fu" wx:if="{{row.type===2}}">次</text> -->
+    </view>
+    <view class="c-orgname one-ellipsis">{{row.orgName}}</view>
+  </view>
+  <view class="middle">{{row.mobilePhone}}</view>
+  <view class="right" data-mobile="{{row.mobilePhone}}" catchtap="callPhone">
+    <icon wx:if="{{row.mobilePhone}}" class="iconfont icondianhua"></icon>
+  </view>
+</view>

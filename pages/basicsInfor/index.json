@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "common-header":"../../components/orgcommonheader/index",
+    "map-tabbar": "../../components/detailTabBar/index",
+    "mp-address": "../../components/address/index"
+  },
+  "navigationBarTitleText": "基本信息"
+}

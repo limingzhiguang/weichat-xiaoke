@@ -1,0 +1,6 @@
+<!--components/filterIcon/index.wxml-->
+<!-- <text>components/filterIcon/index.wxml</text> -->
+<view wx:for="{{urlList}}" wx:key="index"  class="current-file" data-path="{{item.path}}" data-type="{{item.type}}" bindtap="lookFile">
+    <icon class="iconfont {{item.icon}}"></icon>{{item.name}}
+</view>
+<view wx:if="{{urlList.length===0}}" style="color:#fff">.</view>

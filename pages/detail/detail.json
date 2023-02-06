@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "prompt": "../../components/prompt/prompt",
+    "mp-tags": "../../components/tags/index",
+    "map-tabbar": "../../components/detailTabBar/index"
+  },
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "backgroundTextStyle": "dark",
+  "navigationBarTitleText":"机构信息"
+}

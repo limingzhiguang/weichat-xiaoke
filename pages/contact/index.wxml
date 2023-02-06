@@ -1,0 +1,11 @@
+<!--pages/contact/index.wxml-->
+<common-header></common-header>
+<!--列表-->
+<view class="c-list">
+  <contacts-item wx:for="{{contactsList}}" wx:key="index" row="{{item}}"></contacts-item>
+</view>
+<map-tabbar  
+  currentTab="-1"
+  orgId="{{orgInfor.orgId}}"
+  orgName="{{ orgInfor.orgJianName || orgInfor.brandName}}"
+></map-tabbar>

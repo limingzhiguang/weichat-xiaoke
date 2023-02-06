@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "staff-list":"../../components/stafflist/index"
+  },
+  "navigationBarTitleText": "顾问"
+}

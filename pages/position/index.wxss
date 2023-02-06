@@ -1,0 +1,139 @@
+/* pages/position/index.wxss */
+.position-page{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#positionMap{
+  width: 100%;
+  height: 100%;
+}
+
+.detail-header{
+  position: absolute;
+  left: 0;
+  top:0;
+  z-index: 2;
+  box-sizing: border-box;
+  padding:24rpx 32rpx 40rpx;
+  width:100%;
+  color:#fff;
+  background: -webkit-linear-gradient(135deg,rgba(68,102,255,1  ) 0%,rgba(39,193,255,1) 100%);
+  background: linear-gradient(135deg,rgba(68,102,255,1) 0%,rgba(39,193,255,1) 100%);  
+}  
+
+.banner-img{
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.detail-header .title-box{
+  position: relative;
+  z-index: 2;  
+  color:#fff;
+}
+
+.detail-header .title-box .title{
+  display: block;
+  margin-bottom: 18rpx;
+  box-sizing: border-box;
+  padding-right:100rpx;
+  width:100%;
+  height: 56rpx;
+  line-height: 56rpx;
+}
+
+.detail-header .title-box .mark{
+  position: absolute;
+  display: block;
+  top:6rpx;
+  right:0;  
+  -webkit-border-radius: 44rpx;
+  border-radius: 44rpx;
+  width:80rpx;
+  height:44rpx;
+  line-height:40rpx;  
+}
+
+.detail-header .title-box .upper{
+  border:2rpx solid #FFE58F;
+  color:#fa0;
+  background: #FFFBE6;
+}
+
+
+.detail-header .title-box .down{
+  border:2rpx solid #91D5FF;
+  color:#017FFF;
+  background: #E6F7FF;
+}
+
+.controls{
+  position: absolute;
+  right: 20rpx;
+  top:60%;
+  z-index: 2;
+  overflow: hidden;
+  border-radius: 8rpx;
+  transform: translate(0,-50%);
+  background: #fff;
+}
+
+.controls .button{
+  display: block;
+  width: 100rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 60rpx;
+  text-align: center;
+}
+
+.controls .button:active{
+  background: #017FFF;
+  color:#fff;
+}
+
+.controls .button .iconfont{
+  height: 100rpx;
+  line-height: 100rpx;
+}
+
+.bottom{
+  position: absolute;
+  bottom: 0;
+  left:0;
+  z-index: 2;
+  box-sizing: border-box;
+  padding:30rpx;
+  width:100%;
+  font-size: 24rpx;
+  color:#333;
+  background: #fff;
+  transform: translate(0,100%);
+  transition: all .3s;
+}
+
+.bottom.show{
+  transform: translate(0,0);
+}
+
+.bottom .row{
+  line-height: 60rpx;
+}
+
+.inline-block{
+  display: inline-block;
+}
+
+.border-right{
+  margin-right: 20rpx;
+  border-right:2px solid #D8D8D8;
+  padding-right:20rpx; 
+}
+
+

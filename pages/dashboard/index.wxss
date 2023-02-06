@@ -1,0 +1,299 @@
+/* pages/dashboard/index.wxss */
+.fr{
+  float: right;
+}
+.right-iconarrow{
+  position: absolute;
+  top:1rpx;
+  right:1rpx;
+  width: 34rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  color: #003E7C;
+  background-color: #F5F5F5;
+  border-radius: 50%;
+}
+.right-iconarrow .iconfont{
+  font-size: 20rpx;
+  position: absolute;
+  top:-20rpx;
+  left:6rpx
+}
+.dashboard{
+  padding-bottom: 175rpx;
+  font-size: 24rpx;
+}
+/*常用项*/
+.dashboard .common-use{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15rpx;
+  padding: 41rpx 56rpx 25rpx 56rpx;
+  color: #595866;
+  background-color: #fff;
+}
+
+.dashboard .common-use .item{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.dashboard .common-use .item .tip-icon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 92rpx;
+  width: 92rpx;
+  border-radius: 50%;
+  color: #fff;
+}
+.item .tip-icon .iconfont{
+  font-size: 48rpx;
+}
+.dashboard .common-use .item .tip-icon0{
+  background-color: #F5586D;
+}
+.dashboard .common-use .item .tip-icon1{
+  background-color: #6384FF;
+}
+.item .tip-icon1 .iconfont{
+  font-size: 54rpx;
+}
+.dashboard .common-use .item .tip-icon2{
+  background-color: #FFAA00;
+}
+.dashboard .common-use .item .tip-icon3{
+  background-color: #1BC63B;
+}
+.dashboard .common-use .item .des{
+  margin-top: 18rpx;
+}
+/*公用标题*/
+.dashboard .b-title{
+   margin-top: 16rpx;
+   padding: 10rpx 27rpx;
+   line-height: 50rpx;
+   background-color: #fff;
+}
+.dashboard .b-title-text{
+  color: #333;
+  font-size:32rpx;
+  font-family:PingFang-SC-Bold,PingFang-SC;
+  font-weight:bold;
+}
+.dashboard .b-title > .iconfont{
+  margin-right: 12rpx;
+   color: #1890FF;
+   font-weight:400;
+   font-size:36rpx;
+   vertical-align: -1rpx;
+}
+.switch-date{
+  float: right;
+}
+.switch-date text{
+  margin-left: 38rpx;
+  padding-bottom: 4rpx;
+  font-size:26rpx;
+  color: #A5AAC1;
+  text-shadow:0px 12px 14px rgba(254,254,254,1);
+}
+.switch-date text.active{
+  border-bottom: 4rpx solid #017FFF;
+  color:#017FFF;
+}
+/*简报看板组*/
+.board-block{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0 32rpx 32rpx 32rpx;
+  background-color: #fff;
+}
+.board-block-item{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top:24rpx;
+  width: 331rpx;
+  height: 136rpx;
+  background:rgba(165,170,193,.1);
+  border-radius:24rpx;
+}
+.board-block-item .iconfont{
+  position: absolute;
+  top:51rpx;
+  right: 17rpx;
+  display: inline-block;
+  width: 34rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  color: #003E7C;
+  background-color: #F5F5F5;
+  border-radius: 50%;
+  font-size: 20rpx;
+  text-align: center;
+}
+.board-block-item-title{
+  font-size:24rpx;
+  color: #595866;
+}
+.board-block-item-number{
+  margin-top:12rpx;
+  font-size:38rpx;
+  font-family:Helvetica;
+  color:#017FFF
+}
+/*跟进记录*/
+.follow-record{
+  padding: 24rpx 25rpx 40rpx 25rpx;
+  background-color: #fff;
+}
+.follow-record .fo-block{
+  display: flex;
+  margin-top:25rpx;
+}
+.fo-block .org-num{
+  flex:1;
+  text-align: center;
+  color: #017FFF;
+  font-size:32rpx;
+  font-weight:500;
+}
+.fo-block .org-num .title{
+  width: 100%;
+  height: 56rpx;
+  line-height:56rpx;
+  color: #003E7C;
+  background-color: #EAF4FD;
+  font-size:26rpx;
+  font-family:PingFangSC-Medium,PingFang SC;
+  font-weight:500;
+}
+.fo-block .org-num .content{
+  position: relative;
+  font-size:32rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  font-weight: 700;
+  border:2rpx solid rgba(234,244,253,1);
+}
+.fo-block .org-num .content .iconfont{
+  position: absolute;
+  top:20rpx;
+  right: 17rpx;
+  display: inline-block;
+  width: 34rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  color: #003E7C;
+  background-color: #F5F5F5;
+  border-radius: 50%;
+  font-size: 20rpx;
+  text-align: center;
+}
+/*跟进方式*/
+.follow-record .follow-mode{
+  margin-top:24rpx;
+  text-align: center;
+  color: #595866;
+}
+.follow-record .follow-mode .title{
+  height: 56rpx;
+  line-height:56rpx;
+  color: #003E7C;
+  background-color: #EAF4FD;
+  border-radius:8rpx 8rpx 0 0;
+}
+.follow-mode-body{
+  display: flex;
+  flex-wrap: wrap;
+}
+ .follow-mode-block{
+  width: 33.33%;
+  margin-top:12rpx;
+  text-align: center;
+}
+ .follow-mode .inner-title{
+  height: 56rpx;
+  line-height:56rpx;
+  font-size:26rpx;
+  font-weight: 400;
+  border:2rpx solid rgba(234,244,253,1);
+  border-radius: 4rpx;
+  color: #595866;
+}
+ .follow-mode .inner-num{
+  height: 72rpx;
+  line-height:72rpx;
+  font-size:32rpx;
+  border:2rpx solid rgba(234,244,253,1);
+  border-top: none;
+  border-radius: 4rpx;
+  color: #333;
+}
+
+/*遗忘提醒*/
+.forget-remind{
+  position: relative;
+  padding: 0 33rpx 32rpx 27rpx;
+  background-color: #fff;
+  
+}
+.forget-remind .left-line{
+  position: absolute;
+  top:40rpx;
+  left:34rpx;
+  width: 5rpx;
+  height: 290rpx;
+  border-radius: 4rpx;
+  background:rgba(0,0,0,0.06);
+}
+.forget-remind .fr-item{
+  position: relative;
+  padding: 26rpx 0 26rpx 38rpx;
+  font-size:32rpx;
+  color: #333;
+}
+
+.forget-remind .fr-item .fr{
+  position: relative;
+  color:#017FFF;
+  font-size: 32rpx;
+  font-weight:500;
+  font-family:PingFangSC-Medium,PingFang SC;
+}
+.forget-remind .fr-item .fr .iconfont{
+  position: relative;
+  top:-6rpx;
+  display: inline-block;
+  width: 34rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  color: #003E7C;
+  background-color: #F5F5F5;
+  border-radius: 50%;
+  font-size: 20rpx;
+  text-align: center;
+}
+.small-dot{
+  position: absolute;
+  top:32rpx;
+  left:0;
+  width: 12rpx;
+  height: 12rpx;
+  background-color: #fff;
+  border:4rpx solid rgba(165,170,193,1);
+  border-radius: 50%;
+}
+.small-dot-blue{
+  border:4rpx solid rgba(1,127,255,1);
+}
+.small-dot-yellow{
+  border:4rpx solid rgba(255,170,0,1);
+}
+.small-dot-red{
+  border:4rpx solid rgba(255,53,69,1);
+}

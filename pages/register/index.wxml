@@ -1,0 +1,233 @@
+<!--pages/register/index.wxml-->
+<wxs module="filter" src="../../filter/filterArray.wxs"></wxs>
+
+<view class="orginfor-page {{ isEditing?'active':'' }}">
+  <view class="orginfor-box">
+    <common-header></common-header>
+    <view class="orginfor-container">
+      <view class="orginfor-header {{isEditing?'active':''}}">
+        <view class="title">注册信息</view>
+        <text class="edit" bindtap="editInfor"  wx:if="{{ !isEditing && editPermission }}">
+          <text class="iconfont iconxingzhuang2-copy"></text>修改        
+        </text>
+      </view>
+      <view class="orginfor-content">
+        <form bindsubmit="formSubmit">
+          <view class="infor-row flex-row">
+            <text class="label">工商注册名：</text>               
+            <input 
+              class="content editing"
+              name="orgQuanName"
+              value="{{ setForm.orgQuanName }}" 
+              placeholder="请输入工商注册名"
+              wx:if="{{isEditing}}"
+              bindinput="setOrgName"
+              placeholder-class="placeholder"></input>
+            <text class="content" wx:else>{{ inforData.orgQuanName?inforData.orgQuanName:''}}</text>     
+          </view>
+
+          <view class="infor-row flex-row">
+            <text class="label">统一社会信用代码：</text>
+              
+            <input 
+              name="tyxyCode"
+              class="content editing"
+              value="{{ setForm.tyxyCode }}" 
+              placeholder="请输入统一社会信用代码"
+              wx:if="{{isEditing}}" 
+              type="number"
+              bindinput="setCreditCode"
+              placeholder-class="placeholder"></input>
+            <text class="content" wx:else>{{ inforData.tyxyCode?inforData.tyxyCode:'' }}</text>     
+          </view>
+
+          <view class="infor-row flex-row {{isEditing?'between':''}}">
+            <text class="label">商业性质分类：</text>
+            <text class="content" wx:if="{{ !isEditing }}">{{ filter.getLabel(filterData.companyType,inforData.companyType) }}</text>      
+            
+            <picker
+              name="companyType"
+              value="{{ setForm.companyType }}"
+              range="{{ filterData.companyType }}"
+              range-key="label"
+              bindchange="setCompanyType"
+              class="content">
+              <view wx:if="{{ isEditing }}" class="text-right editing">
+                {{ setForm.companyType == null || setForm.companyType === ''?'请选择':filterData.companyType[setForm.companyType].label }}
+                <text>
+                  <text class="iconfont iconChevron"></text>
+                </text>
+              </view>
+            </picker>
+          </view>
+
+          <view class="infor-row flex-row {{isEditing?'between':''}}">
+            <text class="label">客户年产值：</text>
+            <text class="content" wx:if="{{ !isEditing }}">{{ filter.getLabel(filterData.annualOutput,inforData.annualOutput) }}</text>      
+            
+            <picker
+              name="annualOutput"
+              value="{{ setForm.annualOutput }}"
+              range="{{ filterData.annualOutput }}"
+              range-key="label"
+              bindchange="setAnnualOutput"
+              class="content">
+              <view wx:if="{{ isEditing }}" class="text-right editing">
+                {{ setForm.annualOutput == null || setForm.annualOutput === ''?'请选择':filterData.annualOutput[setForm.annualOutput].label }}
+                <text>
+                  <text class="iconfont iconChevron"></text>
+                </text>
+              </view>
+            </picker>
+          </view>
+
+          <view class="infor-row flex-row">
+            <text class="label">注册资金：</text>
+                 
+            <input 
+              class="content editing"
+              name="registeredCapital"
+              value="{{ setForm.registeredCapital }}" 
+              placeholder="请输入注册资金"
+              wx:if="{{isEditing}}"
+              bindinput="setRegisterCapital"
+              placeholder-class="placeholder"></input>
+            <text class="content" wx:else>{{ inforData.registeredCapital?inforData.registeredCapital:''}}</text>   
+          </view>
+
+          <view class="infor-row flex-row {{isEditing?'between':''}}">
+            <text class="label">工商注册地址：</text>
+            <text class="content" wx:if="{{ !isEditing }}">{{ inforData.province?inforData.province:'' }}{{ inforData.city?inforData.city:'' }}{{ inforData.area?inforData.area:'' }}{{ inforData.addressDetail?inforData.addressDetail:'' }}</text>
+            <block wx:else>
+              <view class="content text-right flex-row editing" catchtap="selectAddress">
+                <text class="text-left">{{ setForm.province?setForm.province:'' }}{{ setForm.city?setForm.city:'' }}{{ setForm.area?setForm.area:'' }}</text>
+                <text>
+                  <text class="iconfont iconChevron"></text>
+                </text>
+              </view>
+            </block>         
+          </view>
+  
+          <view class="infor-row flex-row between row-padding" hidden="{{ !isEditing }}">
+            <input name="addressDetail" class="content {{ isEditing?'editing':'' }}" value="{{setForm.addressDetail}}" placeholder="{{ setForm.addressDetail || '请输入详细地址' }}" bindinput="setDetailAddress" placeholder-class="placeholder"></input>
+            <text class="clear-button" catchtap="clearAdressDetailInput" wx:if="{{ setForm.addressDetail }}">
+              <text class="iconfont iconxingzhuang"></text>
+            </text>
+            <view catchtap="chooseAddress" class="position-box">
+              <image src="../../images/marker.png"></image>
+            </view>
+          </view>
+
+          <view class="infor-row flex-row {{isEditing?'between':''}}">
+            <text class="label">是否融资：</text>
+            <text class="content" wx:if="{{ !isEditing }}">{{ inforData.isFinancing == '1'?'否':(inforData.isFinancing=='2'?'是':'')}}</text>
+            <text class="content text-right editing" wx:if="{{ isEditing }}" bindtap="setFinancing">{{ setForm.isFinancing == '1'?'否':(setForm.isFinancing == '2'?'是':'请选择') }}<text class="iconfont iconChevron"></text></text>
+          </view>
+
+          <view class="infor-row flex-row" wx:if="{{ orgInfor.orgStatus != 2 }}">
+            <text class="label">年营业额：</text>
+                 
+            <input 
+              name="yearTurnover"
+              class="content editing"
+              value="{{ setForm.yearTurnover }}" 
+              placeholder="请输入年营业额"
+              wx:if="{{isEditing}}" 
+              bindinput="setYearTurnover"
+              placeholder-class="placeholder"></input>
+            <text class="content" wx:else>{{ inforData.yearTurnover?inforData.yearTurnover:'' }}</text>   
+          </view>
+
+          <view class="infor-row flex-row">
+            <text class="label">融资历史/股票代码：</text>
+              
+            <input 
+              name="financingLog"
+              class="content editing"
+              value="{{ setForm.financingLog }}" 
+              placeholder="请输入融资历史/股票代码"
+              wx:if="{{isEditing}}" 
+              bindinput="setFinancingLog"
+              placeholder-class="placeholder"></input>
+            <text class="content" wx:else>{{ inforData.financingLog?inforData.financingLog:'' }}</text>      
+          </view>
+
+          <view class="infor-row">
+            <view class="picture-container">
+              <text class="title">营业执照：</text>
+              <view class="picture-box">
+                <view class="img-box">
+                  <image bindtap="lookBigImage" data-src="{{ setForm.yyzzPic }}" src="{{ setForm.yyzzPic }}" hidden="{{ !setForm.yyzzPic }}"></image>
+                  <text class="iconfont {{ isEditing?'iconxingzhuang4':'iconzhaopian' }}" hidden="{{ setForm.yyzzPic }}" bindtap="uploadYyzz"></text>
+                </view>
+                <text bindtap="removeYyzz" class="upload-button" wx:if="{{ isEditing }}">
+                  <text class='iconfont iconzhongxinshangchuan'></text>重新上传
+                </text>
+              </view>
+            </view>  
+
+            <view class="picture-container">
+              <text class="title">办学许可证：</text>
+              <view class="picture-box">
+                <view class="img-box">
+                  <image bindtap="lookBigImage" data-src="{{ setForm.bxxkzPic }}" src="{{ setForm.bxxkzPic }}" hidden="{{ !setForm.bxxkzPic }}"></image>
+                  <text class="iconfont {{ isEditing?'iconxingzhuang4':'iconzhaopian' }}" hidden="{{ setForm.bxxkzPic }}" bindtap="uploadBxxk"></text>
+                </view>
+                <text bindtap="removeBxxk" class="upload-button"  wx:if="{{ isEditing }}">
+                  <text class='iconfont iconzhongxinshangchuan'></text>重新上传
+                </text>
+              </view>
+            </view>
+
+            <view class="picture-container">
+              <text class="title">其他：</text>
+              <view class="picture-box">
+                <view class="img-box">
+                  <image bindtap="lookBigImage" data-src="{{ setForm.otherPic }}" src="{{ setForm.otherPic }}" hidden="{{ !setForm.otherPic }}"></image>
+                  <text class="iconfont {{ isEditing?'iconxingzhuang4':'iconzhaopian' }}" hidden="{{ setForm.otherPic }}" bindtap="uploadOther"></text>
+                </view>
+                <text class="upload-button" bindtap="removeOther"  wx:if="{{ isEditing }}">
+                  <text class='iconfont iconzhongxinshangchuan'></text>重新上传
+                </text>
+              </view>
+            </view>
+
+          </view> 
+
+          <view class="infor-row">
+            <text class="label">企业信息备注：</text>
+            <view class="content remark editing" wx:if="{{ isEditing && !selectAddress }}" >
+              <textarea
+                auto-height
+                name="remark" 
+                class="editing" 
+                value="{{ setForm.remark }}" 
+                placeholder="请输入企业信息备注"                
+                bindinput="setRemark"
+                maxlength="500"
+                placeholder-class="placeholder"></textarea>
+                <text class="word-box">{{ wordNumber }}/500</text> 
+            </view>
+            <text class="content remark" wx:else>{{ inforData.remark?inforData.remark:'' }}</text>            
+          </view>
+
+          <cover-view class="button-group flex-row {{ isIphoneX?'pb-30':'' }}" wx:if="{{ isEditing && !selectAddress }}">
+            <cover-view class="cancle" bindtap="cancle">取消</cover-view>
+            <button formType="submit" class="confirm active">提交</button>
+          </cover-view>
+        </form>
+      </view>
+    </view>
+  </view>
+  <map-tabbar
+    wx:if="{{!isEditing}}"
+    currentTab="-1"
+    orgId="{{inforData.orgId}}"
+    orgName="{{ orgInfor.orgJianName || orgInfor.brandName}}"
+  ></map-tabbar>
+  <mp-address
+    isShow="{{ selectAddress }}"
+    bind:confirm="selectedAddress"
+    bind:cancer="hideAddress"
+  ></mp-address>
+</view>

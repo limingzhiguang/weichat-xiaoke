@@ -1,0 +1,181 @@
+/* pages/contactsInfo/index.wxss */
+
+/*头部信息*/
+.contacts-info.overflow-hidden{
+  height: 100%;
+  overflow: hidden;
+}
+
+.top-main{
+  background-color: #fff;
+}
+.top-info{
+  display: flex;
+  height: 132rpx;
+  margin:0 24rpx 0 32rpx;
+  border-bottom: 1rpx solid #ddd;
+}
+.top-info .left{
+  flex:2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.top-info .right{
+  flex:1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.left .user-name{
+  overflow:hidden;
+}
+
+.left .user-name .name{
+  float:left;
+  overflow: hidden;
+  margin-right: 12rpx;
+  max-width: 70%;
+  max-width: calc(100% - 66rpx);
+  line-height: 48rpx;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size:34rpx;
+  font-weight: 500;
+  color:#333;
+}
+
+.left .user-name .zhu{
+  float:left;
+  margin-top:8rpx;
+  border-radius:20rpx;  
+  border: 2rpx solid #FF3545;
+  padding:0 13rpx;
+  height:28rpx;
+  line-height: 28rpx;
+  font-size:24rpx;  
+  font-weight: 500;
+  text-align: center;
+  color: #FF3545;
+}
+.left .user-name .fu{
+  padding: 0 14rpx;
+  text-align: center;
+  color: #00C800;
+  border: 2rpx solid #00C800;
+  font-size:24rpx;
+  border-radius:16rpx;
+  font-weight: 500;
+}
+.left .org-name{
+  position: relative;
+  overflow: hidden;  
+  width: 340rpx;
+  margin-top: 12rpx;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size:28rpx;
+  color: #017FFF;
+}
+
+.left .org-name text{
+  font-size: 24rpx;
+}
+
+.right >text{
+  height: 48rpx;
+  line-height: 48rpx;
+  font-size:28rpx;
+  border-radius:28rpx;
+  text-align: center;
+}
+.edit-info{
+  width: 180rpx;
+  margin-right: 10rpx;
+  color: #017FFF;
+  border: 1rpx solid #017FFF;
+}
+.edit-info .iconfont{
+  margin-left: 10rpx;
+  font-size:24rpx;
+}
+.write-follow{
+  width: 148rpx;
+  color: #fff;
+  background-color: #017FFF;
+}
+.write-follow .iconfont{
+  margin-right: 4rpx;
+}
+
+/*切换*/
+.switch-tab{
+  display: flex;
+  height: 80rpx;
+  background-color: #fff;
+}
+.switch-tab .tab-item{
+  flex:1;
+  text-align: center;
+  line-height: 80rpx;
+  font-size:32rpx;
+  font-weight: 500;
+  color: #999;
+}
+.switch-tab .tab-item.active > text{
+  padding-bottom: 14rpx;
+  color: #017FFF;
+  border-bottom: 5rpx solid #017FFF;
+}
+
+.follow-record{
+  margin-top: -80rpx;
+}
+/*人员信息*/
+.base-info{
+  margin-top: 16rpx;
+  background-color: #fff;
+}
+.b-title{
+  height: 56rpx;
+  line-height: 56rpx;
+  font-size:26rpx;
+  text-align: center;
+  color: #003E7C;
+  background-color: #EAF4FD;
+
+}
+.info-block{
+  height: 95rpx;
+  line-height: 95rpx;
+  margin:0 25rpx;
+  border-bottom: 1rpx solid #F5F5F5;
+  color: #333;
+  font-size:30rpx;
+}
+.info-block .icondianhua{
+  float: right;
+  color: #1890FF;
+  font-size: 34rpx;
+}
+.info-block .red{
+  margin-right: 4rpx;
+  color: #FF3545;
+}
+
+.id-card-block{
+  margin:27rpx 25rpx 20rpx 25rpx;
+  font-size:30rpx;
+  color: #333;
+}
+.id-card-number{
+  margin-top: 12rpx;
+  margin-left: 152rpx;
+  border-bottom: 1rpx solid #F5F5F5;
+}
+.id-card-image{
+  width: 240rpx;
+  height: 155rpx;
+  margin: 20rpx 0 0 152rpx;
+  background-color: #1890FF;
+}

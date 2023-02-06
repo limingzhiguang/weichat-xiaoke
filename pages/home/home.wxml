@@ -1,0 +1,38 @@
+<view class="wapper">
+	<view class="contain">
+		<view class="header">			
+			<view class="date-btn-group">
+				<view id="today" bindtap="changeDate" class="date-btn {{ dateType == 'today'?'active':'' }}">今日</view>
+				<view id="month" bindtap="changeDate" class="date-btn {{ dateType == 'month'?'active':'' }}">本月</view>
+				<view id="history" bindtap="changeDate" class="date-btn {{ dateType == 'history'?'active':'' }}">历史</view>
+			</view>
+		</view>
+		
+		<view class="contentor">
+			<view class="rank-box">
+				<view class="table-header flex-box">
+					<text class="text1">排名</text>
+					<text class="text2">部门</text>
+					<text class="text3">战友</text>
+					<text class="text4">数量</text>
+				</view>
+				<view class="table-content">
+					<view class="flex-box table-td" wx:for="{{rankData}}" wx:key="index">
+						<text class="text1 {{ index < 3?'show':'' }}">
+							<text>{{ index + 1 }}</text>
+							<text class="iconfont icon-huangguan"></text>							
+						</text>
+						<text class="text1 {{ index > 2?'show':'' }}">{{index + 1}}</text>
+						<text class="text2">{{item.department}}</text>
+						<text class="text3">{{item.username || item.userName}}</text>
+						<text class="text4">{{item.statisticsNum}}</text>
+					</view>
+				</view>
+			</view>
+			<view class="bot-btn-box">
+				<view id="add_school" bindtap="changeNumberType" class="handler-btn {{ numberType == 'add_school'?'active':null }}">添加客户数量</view>	
+				<view id="transfer_school" bindtap="changeNumberType" class="handler-btn {{ numberType == 'transfer_school'?'active':null }}">下发客户数量</view>				
+			</view>
+		</view>
+	</view>
+</view>

@@ -1,0 +1,129 @@
+/* components/stafflist/index.wxss */
+@import "../../app.wxss";
+
+.list-container{
+  position: relative;
+  box-sizing: border-box;
+  padding-top:88rpx;
+  width: 100%;
+  height: 100%;
+}
+
+.list-container .header{
+  position: absolute;
+  top:0;
+  left:0;
+  box-sizing: border-box;
+  padding:16rpx 24rpx;
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+}
+
+.input-box{
+  flex:1;
+  background: #fff;
+  overflow: hidden;
+}
+
+.input-box .iconsousuo{
+  float:left;
+  box-sizing: border-box;
+  padding:0 12rpx 0 24rpx ;
+  line-height: 56rpx;
+  height: 56rpx;
+  color:#bbb;
+}
+
+.input-box .input{
+  flex: 1;
+  border: 0 none;
+  height: 56rpx;
+  line-height: 56rpx;
+  font-size: 30rpx;
+}
+
+.input-box .clear{
+  padding-right: 24rpx;
+  line-height: 56rpx;
+  font-size: 36rpx;
+  color:#ccc;
+}
+
+.header .cancel{
+  flex:0 1 auto;
+  padding-left:30rpx;
+  line-height: 56rpx;
+  font-size: 32rpx;
+  color:#017FFF;
+}
+
+.list-container .content{
+  position: relative;
+  box-sizing: border-box;
+  padding-right:52rpx;
+  padding-left:32rpx;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+
+.scroll-view-v{  
+  width: 100%;
+  height: 100%;  
+}
+
+.counselor{
+  border-bottom:2rpx solid #eee;
+  height: 96rpx;
+  line-height: 96rpx;
+  font-size:28rpx;
+  color:#333;
+}
+
+.letter-box{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top:0;
+  right: 0;
+  width: 52rpx;
+  height: 100%;
+}
+
+.letter-box text{
+  position: relative;
+  display: inline-block; 
+  border-radius: 50%;
+  width:32rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  font-size:22rpx;
+  color:#999;
+  text-align: center;  
+}
+
+.letter-box text:active,
+.letter-box text.active{
+  color:#fff;
+  background: #1677FF;
+}
+
+.letter-box text:active::after{  
+  position: absolute;
+  border-radius: 50%;
+  left:-118rpx;
+  top:50%;
+  transform: translate(0,-50%);
+  width:94rpx;
+  height: 94rpx;
+  line-height: 94rpx;
+  font-size: 50rpx;
+  font-weight: 500;
+  color: #fff;
+  text-align: center;
+  background: #ccc;
+  content:attr(data-index);
+}

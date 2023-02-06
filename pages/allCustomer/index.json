@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "tab-bar":"../components/tabBar/index",
+    "sd-address":"../components/address/index"
+  },
+  "navigationBarTitleText":"全部客户"
+}

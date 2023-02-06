@@ -1,0 +1,130 @@
+<!--pages/earningsEstimate/index.wxml-->
+
+<view class="earnings-estimate">
+  <view class="customer-top">
+     <view class="top-switch">
+        <view bindtap="topSwitch" data-top-index='0' class="{{topIndex==0?'active':''}} {{topIndex==0&&topStatus?'active2':''}}">
+         全部  
+        <text class="iconfont iconSort-up ico" wx:if="{{topIndex==0&&topStatus}}"></text>
+        <text class="iconfont iconSort ico" wx:else></text>
+        </view>
+        <view bindtap="topSwitch" data-top-index='1' class="{{topIndex==1?'active':''}} {{topIndex==1&&topStatus?'active2':''}}">
+         筛选
+        <text class="iconfont iconSort-up ico" wx:if="{{topIndex==1&&topStatus}}"></text>
+        <text class="iconfont iconSort ico" wx:else></text>
+        </view>
+        <view bindtap="topSwitch" data-top-index='3' class="{{topIndex==3?'active':''}}">
+          <view class="search" wx:if="{{searchStatus}}">
+            <!-- <view class="cancer" catchtap="cancerSearch"><text data-search-status='false'>取消</text></view> -->
+            <view class="we-input">
+              <input 
+                class="weui-input" 
+                maxlength="30" 
+                value="{{orgName}}" 
+                auto-focus 
+                bindconfirm="toSearch" 
+                confirm-type="search"
+                bindinput="getOrgName" 
+                placeholder="请输入机构名称" />
+              <icon class="iconfont iconxingzhuang" catchtap="clearSearchInput"></icon> 
+              <icon class="iconfont iconsousuo" catchtap="toSearch"></icon>
+            </view>
+            <view class="to-search" catchtap="toSearch"><text>搜索</text></view>
+          </view>
+          <icon class="iconfont iconsousuo" style="margin-top:-10rpx"></icon> 
+        </view>
+     </view>
+     <!--全部-->
+      <view class="top-float {{topStatus&&topIndex==0?'active':''}}">
+        <view class="list-ul">
+          <view class="list-li {{allSelect==index?'active':''}}" wx:for="{{allSelectList}}" data-all-select="{{index}}" wx:key="index" bindtap="allSelect">{{item}}</view> 
+       </view>
+       <!-- <view class="top-footer">
+          <view class="reset" bindtap="reset">重置</view>
+          <view class="sure" bindtap="sure">确定</view>
+       </view> -->
+      </view>
+        <!--筛选-->
+      <view class="top-float {{topStatus&&topIndex==1?'active':''}}">
+        <view>
+         <view class="tf-title" wx:if="{{!creatTime}}">预计成单时间</view>
+         <view class="flow-time" wx:if="{{!creatTime}}">
+            <view 
+              wx:for="{{flowTimeList}}" 
+              wx:key="index" 
+              class="{{followTimeIndex==item.value?'active':''}}" 
+              data-follow-time-index="{{item.value}}"
+              bindtap="followTime">{{item.label}}
+              <image class="bg-active" src="../../images/bg-active.png"></image></view>
+         </view>
+         <view class="tf-title" wx:if="{{followTimeIndex===''}}">创建时间</view>
+         <view class="flow-time" wx:if="{{followTimeIndex===''}}">
+            <picker mode="date" value="{{creatDate}}" start="" end="" bindchange="bindDateChange" style="margin-right:40rpx">
+              <view class="picker {{creatTime?'active':''}}">
+                开始时间<image class="bg-active" src="../../images/bg-active.png"></image>
+              </view>
+            </picker>
+            <picker wx:if="{{creatTime}}" mode="date" value="{{creatTime}}" start="" end="" bindchange="bindDateChangeEndTime">
+              <view class="picker {{creatEndTime?'active':''}}">
+                结束时间<image class="bg-active" src="../../images/bg-active.png"></image>
+              </view>
+            </picker>
+         </view>
+         <view wx:if="{{creatEndTime}}" style="margin:10rpx 0 0 10rpx">已选时间：{{creatTime}}~{{creatEndTime}}</view>
+         <view class="tf-title">预计售卖金额（元）</view>
+         <view class="flow-time">
+            <view class="sell-money-input">
+                <input class="weui-input" type="number" bindblur="getStartPrice" value="{{startPrice}}" maxlength="10" placeholder="输入价格" />
+                <view class="middel-line"></view>
+                <input class="weui-input" type="number" bindblur="getEndPrice" value="{{endPrice}}" maxlength="10" placeholder="输入价格" />
+            </view>
+         </view>
+         <view class="tf-title">产品意向度</view>
+         <view class="flow-time">
+            <view 
+              wx:for="{{consentLevel}}" 
+              wx:key="index" 
+              class="{{intentType==item.value?'active':''}}" 
+              data-val="{{item.value}}"
+              bindtap="setIntent"
+              style="margin-top:16rpx"
+              >{{item.label}}<image class="bg-active" src="../../images/bg-active.png"></image></view>
+         </view>
+         <view class="tf-title">阶段筛选</view>
+         <view class="flow-time">
+            <view 
+              wx:for="{{stageList}}" 
+              wx:key="index" 
+              class="{{yearValueIndex==item.value?'active':''}}" 
+              data-year-value-index="{{item.value}}"
+              bindtap="yearValue"
+              style="margin-top:16rpx"
+              >{{item.label}}<image class="bg-active" src="../../images/bg-active.png"></image></view>
+         </view>
+        <view class="tf-title">项目名称</view>
+        <view class="flow-time" style="padding-right:26rpx">
+          <view class="filter-search">
+               <icon class="iconfont iconsousuo"></icon>
+               <input class="weui-input" maxlength="30" bindblur="filterSearch" value="{{filterSearchValue}}" placeholder="请输入项目名称" />
+               <view class="iconfont-block" catchtap="clearFilterSearch">
+                 <icon class="iconfont iconxingzhuang"></icon>
+               </view>
+          </view>
+        </view>
+      </view>
+    <view class="top-footer">
+      <view class="reset" bindtap="reset">重置</view>
+      <view class="sure" bindtap="sure">确定</view>
+    </view>
+  </view>
+  <!--排序-->
+    <view class="top-float {{topStatus&&topIndex==2?'active':''}}">
+      <view class="list-ul">
+        <view class="list-li {{sortSelect==index?'active':''}}" wx:for="{{sortSelectList}}" data-sort-select="{{index}}" wx:key="index" bindtap="sortSelect">{{item}}</view> 
+      </view>
+    </view>
+    <view class="top-bg {{topStatus?'active':''}}" bindtap="closeTopFloat"></view>
+  </view>
+  <!--列表-->
+  <earnings-estimate id="component" list="{{orgList}}" bind:updateList="updateList"></earnings-estimate> 
+</view>

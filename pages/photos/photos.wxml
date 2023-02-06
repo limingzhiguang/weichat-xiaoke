@@ -1,0 +1,30 @@
+<!--pages/photos/photos.wxml-->
+<view class='photos'>
+	<view class="content">
+		<view class="text-box">
+			<image src="../../images/pay_success.png" class='img'></image>
+			<text class="text text1">您已经录入成功</text>
+			<text class="text">下面可以拍照或上传该机构照片。</text>
+			<text class="text">如果不需要，可以直接点击返回。</text>
+		</view>
+		<view class="upload-box">
+			<view class="upload-btn" bindtap="upload">
+				<view class="icon-box">
+					<text class="iconfont icontianjiazhaopian"></text>
+					<text class="split"></text>
+					<text class="iconfont iconzhaopian"></text>
+				</view>
+				<text class="upload-text">点击上传照片</text>
+			</view>
+		</view>
+		<view class="photo-list flex-box" wx:if="photos.length>1">
+			<view wx:for="{{photos}}" wx:key="{{index}}" class="photo-box">
+				<image data-src="{{item.picAddress}}" src="{{item.picAddress}}" mode="scaleToFill" lazy-load bindtap="showBigPhoto"></image>
+				<text size="20" class="iconfont icon-sd-delete" bindtap="cancel" data-index="{{index}}"></text>
+			</view>
+		</view>
+	</view>
+	<view class="btn-box">
+		<view class="go-back" bindtap="saveAndBack">{{photos.length>0?'保存并返回':'返回'}}</view>
+	</view>
+</view>

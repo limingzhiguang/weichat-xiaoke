@@ -1,0 +1,195 @@
+<!--pages/addContact/index.wxml-->
+<view class="add-contact">
+  <view class="b-title">基础信息</view>
+  
+  <view class="info-block" wx:if="{{isOrgDetail}}">
+    <text class="red">*</text>
+    <text>机构名称：{{form.orgQuanName}}</text>
+  </view>
+  <view class="info-block" catchtap="selectOrg" wx:else>
+    <text class="red">*</text>
+    <text>机构名称：</text>
+    <text class="right">{{form.orgQuanName?form.orgQuanName:'请选择'}}<text class="iconfont iconChevron"></text></text>
+  </view>
+  <view class="info-block">
+    <!-- <text class="red">*</text> -->
+    <text>是否设置成为该机构主联系人：</text>
+    <switch class="next-remind" color="#017FFF" checked="{{form.isMainContact===1}}" bindchange="switch1Change"/>
+  </view>
+  <view class="info-block info-input-block">
+    <text class="red">*</text>
+    <text>姓名：</text>
+    <input class="in-input" bindblur="uesrName" value="{{form.userName}}"  placeholder="请输入"/>
+  </view>
+  <view class="info-block">
+    <text class="red">*</text>
+    <text>联系电话1：</text>
+    <text wx:if="{{!isTwoMobile}}" class="iconfont iconjia right" catchtap="addMobile"></text>
+  </view>
+  <view class="info-block info-input-block only-input">
+    <input class="in-input" bindblur="mobilePhone" value="{{form.mobilePhone}}" maxlength="11" type="number" placeholder="请输入手机号"/>
+  </view>
+  <block wx:if="{{isTwoMobile||form.secondPhone}}">
+    <view class="info-block">
+      <!-- <text class="red">*</text> -->
+      <text>联系电话2：</text>
+      <text class="iconfont iconshanchu right red" catchtap="deleteMobile"></text>
+    </view>
+    <view class="info-block info-input-block only-input">
+      <input class="in-input" bindblur="secondPhone" value="{{form.secondPhone}}" maxlength="11" type="number" placeholder="请输入手机号"/>
+    </view>
+  </block>
+  
+  <view class="info-block">
+    <text>微信1：</text>
+    <text class="iconfont iconjia right" wx:if="{{!isTwoWeiXin}}" catchtap="addTwoWeiXin"></text>
+  </view>
+  <view class="info-block info-input-block only-input">
+    <input class="in-input" bindblur="weixinId" value="{{form.weixinId}}" placeholder="请输入微信号"/>
+  </view>
+  <block wx:if="{{isTwoWeiXin||form.secondWeixin}}">
+    <view class="info-block">
+      <text>微信2：</text>
+      <text class="iconfont iconshanchu right red" catchtap="deleteTwoWeiXin"></text>
+    </view>
+    <view class="info-block info-input-block only-input">
+      <input class="in-input" bindblur="secondWeixin" value="{{form.secondWeixin}}" placeholder="请输入微信号"/>
+    </view>
+  </block>
+  <view class="info-block">
+    <text>邮箱1：</text>
+    <text class="iconfont iconjia right" wx:if="{{!isTwoEmail}}" catchtap="addTwoEmail"></text>
+  </view>
+  <view class="info-block info-input-block only-input">
+    <input class="in-input" bindblur="email" value="{{form.email}}" placeholder="请输入邮箱"/>
+  </view>
+  <block wx:if="{{isTwoEmail||form.email}}">
+    <view class="info-block">
+      <text>邮箱2：</text>
+      <text class="iconfont iconshanchu right red" catchtap="deleteTwoEmail"></text>
+    </view>
+    <view class="info-block info-input-block only-input">
+      <input class="in-input" bindblur="secondEmail" value="{{form.secondEmail}}" placeholder="请输入邮箱"/>
+    </view>
+  </block>
+  <view class="info-block info-input-block">
+    <text class="red">*</text>
+    <text>担任职务：</text>
+    <input class="in-input" bindblur="jobName" value="{{form.jobName}}"  placeholder="请输入"/>
+  </view>
+  <view class="info-block info-input-block">
+    <text class="red">*</text>
+    <text>所在部门：</text>
+    <input class="in-input" bindblur="deptNo" value="{{form.deptNo}}"  placeholder="请输入"/>
+  </view>
+  <picker class="info-block" bindchange="bindPickerChangePolicy" value="{{index}}"   range-key="name" range="{{policyRelationList}}" wx:if="{{viewType===2}}">
+    <text class="red">*</text>
+    <text>决策关系</text>
+    <text class="right">{{form.policyRelation?policyRelationList[form.policyRelation-1].name:'请选择'}} <text class="iconfont iconChevron"></text></text>
+  </picker>
+  <picker class="info-block" bindchange="bindPickerChangeIdCard" value="{{index}}"   range-key="name" range="{{certificatesTypeList}}">
+   <text>证件类型：</text>
+    <view class="right">{{form.certificatesType?certificatesTypeList[form.certificatesType-1].name:'请选择'}}<text class="iconfont iconChevron"></text></view>
+  </picker>
+  <view class="info-block info-input-block only-input" wx:if="{{form.certificatesType==1}}">
+    <input class="in-input" bindblur="idCard" value="{{form.idCard}}" maxlength="18" type="idcard" placeholder="请输入证件号"/>
+  </view>
+  <view class="info-block info-input-block only-input" wx:else>
+    <input class="in-input" bindblur="idCard" value="{{form.idCard}}" placeholder="请输入证件号"/>
+  </view>
+  <view class="id-card-image" catchtap="selectIdCard">
+     <image wx:if="{{form.certificatesPic}}" src="{{form.certificatesPic}}"></image>
+     <image wx:else src="../../images/id-card.png"></image>
+     <text class="id-card-tips">请上传二代身份证正面</text>
+  </view>
+  <view class="b-title">其他信息</view>
+  <view class="info-block info-input-block">
+    <text>对外姓名：</text>
+    <input class="in-input" bindblur="externalName" value="{{form.externalName}}" placeholder="请输入"/>
+  </view>
+  <picker class="info-block" bindchange="sexChange" value="{{index}}" range="{{sexList}}">
+   <text>性别：</text>
+    <view class="right">{{form.sex?sexList[form.sex-1]:'请选择'}}<text class="iconfont iconChevron"></text></view>
+  </picker>
+  <picker class="info-block" bindchange="calendarTypeChange" value="{{index}}" range="{{calendarTypeList}}">
+   <text>生日类型：</text>
+    <view class="right">{{form.calendarType?calendarTypeList[form.calendarType-1]:'请选择'}}<text class="iconfont iconChevron"></text></view>
+  </picker>
+   <picker class="info-block" bindchange="bindPickerBirthdayDate"  mode="date" value="{{form.birthdayDate}}">
+    <text>生日：</text>
+    <text class="right">{{form.birthdayDate?form.birthdayDate+'-'+form.constellation+'-'+form.zodiac:'请选择'}}<text class="iconfont iconChevron"></text></text>
+  </picker>
+  <view class="info-block info-input-block" wx:if="{{viewType===1}}">
+    <text>民族：</text>
+    <input class="in-input" bindblur="minzu" value="{{form.nation}}" placeholder="请输入"/>
+  </view>
+  <view class="info-block info-input-block" wx:if="{{viewType===1}}">
+    <text>籍贯：</text>
+    <input class="in-input" bindblur="jiguan" value="{{form.nativePlace}}" placeholder="请输入"/>
+  </view>
+  <view class="info-block info-input-block" wx:if="{{viewType===2}}">
+    <text>毕业学校：</text>
+    <input class="in-input" bindblur="graduateSchool" value="{{form.graduateSchool}}" placeholder="请输入"/>
+  </view>
+  <view class="info-block info-input-block" wx:if="{{viewType===2}}">
+    <text>毕业专业：</text>
+    <input class="in-input" bindblur="major" value="{{form.major}}"  placeholder="请输入"/>
+  </view>
+  <picker class="info-block" bindchange="bindPickerChangeMarriage" value="{{index}}" range="{{marriageList}}" wx:if="{{viewType===2}}">
+    <text>婚姻状况</text>
+    <text class="right">{{form.maritalStatus?marriageList[form.maritalStatus-1]:'请选择'}}<text class="iconfont iconChevron"></text></text>
+  </picker>
+  <view class="info-textarea-block" wx:if="{{viewType===2}}">
+    <text>家庭情况：</text>
+    <textarea bindinput="bindFamilyStatus" maxlength="200" value="{{form.familyStatus}}" class="w-textarea" auto-height placeholder="请输入" />
+    <view class="text-right">{{form.familyStatus.length}}/200</view>
+  </view>
+  <view class="info-textarea-block">
+    <text>爱好：</text>
+    <textarea bindinput="bindHobby" maxlength="200" value="{{form.hobby}}" class="w-textarea" auto-height placeholder="请输入" />
+    <view class="text-right">{{form.hobby.length}}/200</view>
+  </view>
+  <view class="b-title" style="margin-top:54rpx">工作信息</view>
+  <view class="info-block info-input-block" wx:if="{{viewType===2}}">
+    <text>工作年限：</text>
+    <input class="in-input" bindblur="workingLife" type="number" value="{{form.workingLife}}" placeholder="请输入"/>
+  </view>
+  <view class="info-block info-input-block" wx:if="{{viewType===2}}">
+    <text>在此工作年限：</text>
+    <input class="in-input" bindblur="serviceLife" type="number" value="{{form.serviceLife}}" placeholder="请输入"/>
+  </view>
+  <view class="info-block" bindtap="officeAddress">
+    <text>办公地址</text>
+    <text class="right">{{form.province?(form.province+''+form.city+form.area):'请选择'}}<text class="iconfont iconChevron"></text></text>
+  </view>
+  <view class="info-block info-input-block only-input">
+    <input class="in-input" bindblur="addressDetail" value="{{form.addressDetail}}" placeholder="请输入详细地址"/>
+    <text class="iconfont iconxingzhuang1 detail-icon" catchtap="selectDetailAddress"></text>
+  </view>
+  <view class="social-resources">
+    <view class="sr-title">社会关系资源：</view>
+     <checkbox-group class="group-checkbox" bindchange="checkboxChange">
+        <label class="checkbox" wx:for="{{checkboxList}}" wx:key="index">
+          <checkbox value="{{item.name}}" color="#017FFF" checked="{{item.checked}}"/>{{item.name}}
+        </label>
+      </checkbox-group>
+  </view>
+  <view class="info-textarea-block">
+    <text>社会关系详情：</text>
+    <textarea bindinput="bindsocialRelationsDetail" maxlength="200" value="{{form.socialRelationsDetail}}" class="w-textarea" auto-height placeholder="请输入" />
+    <view class="text-right">{{form.socialRelationsDetail.length}}/200</view>
+  </view>
+  <view class="info-textarea-block">
+    <text>备注：</text>
+    <textarea bindinput="bindRemark" maxlength="200" value="{{form.remark}}" class="w-textarea" auto-height placeholder="请输入" />
+    <view class="text-right">{{form.remark.length}}/200</view>
+  </view>
+  <view class="btn-area">
+      <button 
+      bindtap="submit"
+      loading="{{submitLoading}}"
+      class="submit active">提交</button>
+  </view>
+  <mp-toptips msg="{{message}}" type="{{toptipsType}}" show="{{message}}" ext-class="{{message?'toptips-ext-class':''}}"></mp-toptips>
+  <sd-address bind:confirm="confirm" bind:cancer="cancer" isShow="{{isShow}}"></sd-address>
+</view>

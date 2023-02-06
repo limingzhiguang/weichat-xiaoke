@@ -1,0 +1,172 @@
+<!--pages/basicsInfor/index.wxml-->
+<wxs module="filter" src="../../filter/filterArray.wxs"></wxs>
+
+<view class="orginfor-page {{ isEditing?'active':'' }}">
+  <view class="orginfor-box">
+    <common-header></common-header>
+    <view class="orginfor-container">
+      <view class="orginfor-header {{isEditing?'active':''}}">
+        <view class="title">基本信息</view>
+        <text class="edit" bindtap="editInfor" wx:if="{{ !isEditing && editPermission }}">
+          <text class="iconfont iconxingzhuang2-copy"></text>修改        
+        </text>
+      </view>
+      <view class="orginfor-content" style="padding-bottom:{{isEditing?'100rpx':'140rpx'}}">
+        <form bindsubmit="formSubmit">
+          <view class="infor-row flex-row">
+            <text class="label is-required">{{ orgInfor.orgStatus == '2'?'品牌':'企业' }}名称：</text>                 
+            <input 
+              class="content editing"
+              name="orgName"
+              value="{{ setForm.orgName }}" 
+              placeholder="请输入机构名称"
+              wx:if="{{isEditing}}"
+              bindinput="setOrgName"
+              placeholder-class="placeholder"></input>
+            <text class="content" wx:else>{{ inforData.orgJianName || inforData.brandName  }}</text>   
+          </view>
+
+          <view class="infor-row flex-row" wx:if="{{orgInfor.orgStatus != 2}}">
+            <text class="label">曾用名：</text>
+                  
+            <input 
+              name="nameUsedBefore"
+              class="content editing"
+              value="{{ setForm.nameUsedBefore }}" 
+              placeholder="请输入曾用名"
+              wx:if="{{isEditing}}" 
+              bindinput="setUsedName"
+              placeholder-class="placeholder"></input>
+            <text class="content" wx:else>{{ inforData.nameUsedBefore?inforData.nameUsedBefore:'' }}</text>  
+          </view>
+
+          <view class="infor-row flex-row" wx:if="{{orgInfor.orgStatus == 2}}">
+            <text class="label">机构所属国家：</text>                
+            <input 
+              name="country"
+              class="content editing"
+              value="{{ setForm.country }}" 
+              placeholder="请输入机构所属国家"
+              wx:if="{{isEditing}}" 
+              bindinput="setCountry"
+              placeholder-class="placeholder"></input>
+            <text class="content" wx:else>{{ inforData.country?inforData.country:'' }}</text>    
+          </view>
+
+          <view class="infor-row flex-row">
+            <text class="label">固定电话：</text>            
+            <input 
+              name="fixedTelephone"
+              class="content editing"
+              value="{{ setForm.fixedTelephone }}" 
+              placeholder="请输入固定电话"
+              wx:if="{{isEditing}}" 
+              bindinput="setFixedTelephone"
+              placeholder-class="placeholder"></input>
+            <text class="content" wx:else>{{ inforData.fixedTelephone?inforData.fixedTelephone:'' }}</text>  
+          </view>
+
+          <view class="infor-row flex-row">
+            <text class="label">网址：</text>
+             
+            <input 
+              name="website"
+              class="content editing"
+              value="{{ setForm.website }}" 
+              placeholder="请输入网址"
+              wx:if="{{isEditing}}"
+              bindinput="setWbsite"
+              placeholder-class="placeholder"></input>
+            <text class="content" wx:else>{{ inforData.website?inforData.website:'' }}</text>   
+          </view>
+
+          <view class="infor-row flex-row {{isEditing?'between':''}}">
+            <text class="label">企业生日：</text>
+            <text class="content" wx:if="{{ !isEditing }}">{{ inforData.buildSchoolDate?inforData.buildSchoolDate:'' }}</text>
+
+            <picker class="content" mode="date" name="buildSchoolDate" value="{{setForm.buildSchoolDate}}" bindchange="setDate">
+              <view wx:if="{{ isEditing }}" class="text-right editing">
+                {{ setForm.buildSchoolDate?setForm.buildSchoolDate:'请选择' }}
+                <text>
+                  <text class="iconfont iconChevron"></text>
+                </text>
+              </view>
+            </picker>
+          </view>
+
+          <view class="infor-row flex-row {{isEditing?'between':''}}">
+            <text class="label">是否建立党组织：</text>
+            <text class="content" wx:if="{{ !isEditing }}">{{ filter.getLabel(filterData.hasFoundParty,inforData.isEstablistPartyOrg) }}</text>
+
+            <picker class="content" name="isEstablistPartyOrg" value="{{setForm.isEstablistPartyOrg}}" range="{{ filterData.hasFoundParty }}" range-key="label" bindchange="setParty">
+              <view wx:if="{{ isEditing }}" class="text-right editing">            
+                {{ setForm.isEstablistPartyOrg == null || setForm.isEstablistPartyOrg === ''?'请选择':filterData.hasFoundParty[setForm.isEstablistPartyOrg].label}}
+                <text>
+                  <text class="iconfont iconChevron"></text>
+                </text>
+              </view>
+            </picker>
+          </view>
+
+          <view class="infor-row flex-row {{isEditing?'between':''}}">
+            <text class="label is-required">门店地址：</text>
+            <text class="content" wx:if="{{ !isEditing }}">{{ inforData.orgAddressProvince?inforData.orgAddressProvince:'' }}{{ inforData.orgAddressCity?inforData.orgAddressCity:'' }}{{ inforData.orgAddressArea?inforData.orgAddressArea:'' }}{{ inforData.orgAddressDetail?inforData.orgAddressDetail:'' }}</text>
+            
+            <block wx:else>
+              <view class="content text-right flex-row editing" bindtap="selectAddress">
+                <text class="text-left">{{ setForm.orgAddressProvince }}{{ setForm.orgAddressCity }}{{ setForm.orgAddressArea }}</text>
+                <text>
+                    <text class="iconfont iconChevron"></text>
+                  </text>
+              </view>
+            </block>        
+          </view>
+  
+          <view class="infor-row flex-row between row-padding" hidden="{{ !isEditing }}">
+            <input name="orgAddressDetail" class="content editing" value="{{setForm.orgAddressDetail}}" placeholder="{{ setForm.orgAddressDetail || '请输入详细地址' }}" bindinput="setDetailAddress" placeholder-class="placeholder"></input>
+            <text class="clear-button" catchtap="clearAdressDetailInput" wx:if="{{ setForm.orgAddressDetail }}">
+              <text class="iconfont iconxingzhuang"></text>
+            </text>
+            <view catchtap="chooseAddress" class="position-box">
+              <image src="../../images/marker.png"></image>
+            </view>
+          </view>
+
+          <view class="infor-row">
+            <text class="label">企业信息简介：</text>            
+            <text class="content remark" wx:if="{{ !isEditing }}">{{ inforData.remark?inforData.remark:'' }}</text>
+            <view class="content remark editing" wx:if="{{ isEditing && !selectAddress }}">
+              <textarea
+                auto-height                                                         
+                name="remark" 
+                class="editing" 
+                value="{{ setForm.remark }}" 
+                placeholder="请输入企业信息简介"                
+                bindinput="setRemark"
+                maxlength="500"                
+                placeholder-class="placeholder"></textarea>
+              <text class="word-box">{{ wordNumber }}/500</text> 
+            </view>   
+          </view>
+
+          <cover-view class="button-group flex-row {{ isIphoneX?'pb-30':'' }}" wx:if="{{ isEditing && !selectAddress}}">
+            <cover-view class="cancle" bindtap="cancle">取消</cover-view>
+            <button formType="submit" class="confirm {{ isEnough?'active':'' }}"  >提交</button>
+          </cover-view>
+        </form>
+      </view>
+    </view>
+  </view>
+  <map-tabbar
+    wx:if="{{!isEditing}}"
+    currentTab="-1"
+    orgId="{{inforData.orgId}}"
+    orgName="{{ inforData.orgJianName || inforData.brandName}}"
+  ></map-tabbar>
+  <mp-address
+    isShow="{{ selectAddress }}"
+    bind:confirm="selectedAddress"
+    bind:cancer="hideAddress"
+  ></mp-address>
+
+</view>

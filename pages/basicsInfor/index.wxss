@@ -1,0 +1,3 @@
+/* pages/basicsInfor/index.wxss */
+@import "../../wxss/detailInfor.wxss"
+

@@ -1,0 +1,19 @@
+<!--components/tags/index.wxml-->
+<view wx:if="{{isShow}}" class="tags-container {{show?'':'hidden-container'}}">
+  <view class="container {{show?'show-container':''}} {{extClass}}">
+    <view class="button-group">
+      <text class="cancel" bindtap="cancel">取消</text>
+      <text class="confirm" bindtap="confirm">确定</text>
+    </view>
+    <view class="tags-box">
+      <text
+        wx:for="{{tags}}"
+        wx:key="index"
+        class="{{ item.status == 1?'active':''}}"
+        data-index="{{ index }}"
+        data-id="{{ item.labelId }}"
+        bindtap="toggle"
+      >{{ item.labelName }}</text>
+    </view>
+  </view>
+</view>

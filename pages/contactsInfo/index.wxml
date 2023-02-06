@@ -1,0 +1,142 @@
+<!--pages/contactsInfo/index.wxml-->
+<wxs src="../../utils/filter.wxs" module="filter" />
+<view class="contacts-info {{ isEditing?'overflow-hidden':'' }}">
+  <view class="top-main">
+    <view class="top-info">
+    <view class="left">                                                               
+      <view class="user-name">
+        <text class="name">{{orgInfo.userName}}</text>
+        <text class="zhu" wx:if="{{orgInfo.isMainContact&&orgInfo.isMainContact==1}}">主</text>
+      </view>
+      <view class="org-name one-ellipsis" catchtap="toDetail">{{orgName}}
+        <text class="icon-box"><text class="iconfont iconChevron"></text></text>
+      </view>
+    </view>
+    <view class="right">
+       <text wx:if="{{ editPermission }}" class="edit-info" catchtap="editOrgInfo">修改信息<text class="iconfont iconChevron"></text></text> 
+       <text wx:if="{{ memorandumButton }}" class="write-follow" catchtap="writeFollow"><text class="iconfont iconbaifangjiluS"></text>写跟进</text> 
+    </view>
+  </view>
+  </view>
+  <view class="switch-tab">
+    <view class="tab-item {{tabIndex==='1'?'active':''}}" data-tab-index="1" bindtap="switchTab">
+      <text>人员信息</text>
+    </view>
+    <view class="tab-item {{tabIndex==='2'?'active':''}}" data-tab-index="2" bindtap="switchTab">
+      <text>跟进记录</text>
+    </view>
+  </view>
+  <!--人员信息-->
+  <view class="base-info" wx:if="{{tabIndex==='1'}}">
+    <view class="b-title">基础信息</view>
+    <view class="info-block">
+      <text class="red">*</text>
+      <text>联系电话1：{{orgInfo.mobilePhone}}</text>
+      <icon wx:if="{{orgInfo.mobilePhone}}" catchtap="callPhone" data-mobile="{{orgInfo.mobilePhone}}" class="iconfont icondianhua"></icon>
+    </view>
+    <view class="info-block">
+      <text>联系电话2：{{orgInfo.secondPhone}}</text>
+      <icon wx:if="{{orgInfo.secondPhone}}" catchtap="callPhone" data-mobile="{{orgInfo.secondPhone}}" class="iconfont icondianhua"></icon>
+    </view>
+    <view class="info-block">
+      <text>微信1：{{orgInfo.weixinId}}</text>
+    </view>
+    <view class="info-block">
+      <text>微信2：{{orgInfo.secondWeixin}}</text>
+    </view>
+    <view class="info-block">
+      <text>邮箱1：{{orgInfo.email}}</text>
+    </view>
+    <view class="info-block">
+      <text>邮箱2：{{orgInfo.secondEmail}}</text>
+    </view>
+    <view class="info-block">
+      <text class="red">*</text>
+      <text>担任职务：{{orgInfo.jobName}}</text>
+    </view>
+    <view class="info-block">
+      <text class="red">*</text>
+      <text>所在部门：{{orgInfo.deptNo}}</text>
+    </view>
+    <view class="info-block" wx:if="{{viewType===2}}">
+      <text class="red">*</text>
+      <text>决策关系：{{filter.policyRelation(orgInfo.policyRelation)}}</text>
+    </view>
+    <view class="id-card-block">
+      <text>证件类型：{{filter.certificatesType(orgInfo.certificatesType)}}</text>
+      <view class="id-card-number">{{orgInfo.idCard}}</view>
+      <image class="id-card-image" bindtap="lookImage" wx:if="{{!!orgInfo.certificatesPic}}" src="{{orgInfo.certificatesPic}}"></image>
+    </view>
+    <view class="b-title">其他信息</view>
+    <view class="info-block">
+      <text>对外姓名：{{orgInfo.externalName}}</text>
+    </view>
+    <view class="info-block">
+      <text>性别：<text wx:if="{{orgInfo.sex}}">{{orgInfo.sex==1?'男':'女'}}</text></text>
+    </view>
+    <view class="info-block">
+      <text>生日：{{orgInfo.birthdayDate}}{{orgInfo.lunarDate}}</text>
+    </view>
+    <view class="info-block">
+      <text>生肖：{{orgInfo.zodiac}}</text>
+    </view>
+    <view class="info-block" wx:if="{{viewType===1}}">
+      <text>民族：{{orgInfo.nation}}</text>
+    </view>
+     <view class="info-block" wx:if="{{viewType===1}}">
+      <text>籍贯：{{orgInfo.nativePlace}}</text>
+    </view>
+     <view class="info-block">
+      <text>星座：{{orgInfo.constellation}}</text>
+    </view>
+    <view class="info-block" wx:if="{{viewType===2}}">
+      <text>毕业学校：{{orgInfo.graduateSchool}}</text>
+    </view>
+    <view class="info-block" wx:if="{{viewType===2}}">
+      <text>毕业专业：{{orgInfo.major}}</text>
+    </view>
+    <view class="info-block" wx:if="{{viewType===2}}">
+      <text>婚姻状况：{{filter.marriage(orgInfo.maritalStatus)}}</text>
+    </view>
+    <view class="info-block" style="height:auto;min-height:'95rpx';line-height:50rpx;padding:20rpx 0" wx:if="{{viewType===2}}">
+      <text>家庭情况：{{orgInfo.familyStatus}}</text>
+    </view>
+    <view class="info-block" style="height:auto;min-height:'95rpx';line-height:50rpx;padding:20rpx 0">
+      <text>爱好：{{orgInfo.hobby}}</text>
+    </view>
+
+     <view class="b-title">工作信息</view>
+     <view class="info-block" wx:if="{{viewType===2}}">
+      <text>工作年限：{{orgInfo.workingLife?orgInfo.workingLife+'年':''}}</text>
+    </view>
+    <view class="info-block" wx:if="{{viewType===2}}">
+      <text>在此工作年限：{{orgInfo.serviceLife?orgInfo.serviceLife+'年':''}}</text>
+    </view>
+    <view class="info-block" style="height:auto;min-height:'95rpx';line-height:46rpx;padding:20rpx 0">
+      <text>办公地址：{{orgInfo.province}}{{orgInfo.city}}{{orgInfo.area}}{{orgInfo.addressDetail}}</text>
+    </view>
+    <!-- <view class="info-block">
+      <text>测试办公地址：15809098765</text>
+    </view> -->
+    <view class="info-block" style="height:auto;min-height:'95rpx';line-height:50rpx;padding:20rpx 0">
+      <text>社会关系资源：{{orgInfo.socialRelationsResources}}</text>
+    </view>
+    <view class="info-block" style="height:auto;min-height:'95rpx';line-height:50rpx;padding:20rpx 0">
+      <text>社会关系详情：{{orgInfo.socialRelationsDetail}}</text>
+    </view>
+    <view class="info-block" style="height:auto;min-height:'95rpx';line-height:50rpx;padding:20rpx 0">
+      <text>备注：{{orgInfo.remark}}</text>
+    </view>
+  </view>
+  <!--跟进记录-->
+  <view class="follow-record">
+    <follow-record 
+      detail="1" 
+      wx:if="{{tabIndex==='2'}}" 
+      hasMore="{{hasMore}}" 
+      list="{{followList}}" 
+      bind:cancel="hideMask"
+      bind:edit="showMask"
+      bind:updateList="updateList"></follow-record>
+  </view>
+</view>

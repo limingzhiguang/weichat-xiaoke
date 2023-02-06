@@ -1,0 +1,55 @@
+<!--pages/dataFlow/index.wxml-->
+<!-- 提交客户 -->
+<view class="data-flow">
+  <view class="data-box">
+    <view class="select-status">
+        <radio-group bindchange="changeLink">
+          <block
+            wx:for="{{ dataType }}"
+            wx:key="index"
+          >
+            <radio              
+              value="{{item.value}}"
+              checked="{{ item.checked }}"
+              color="#017FFF"          
+            >
+              <text>{{item.label}}</text>            
+            </radio>
+            <text class="explain">说明：{{item.explain}}</text>
+          </block>  
+      </radio-group>
+    </view>
+
+    <view class="module wait-send" wx:if="{{ statusLink == '3' }}">
+      <view class="title">待下发客户</view>
+      <view class="explain">
+        <view>是否有关键决策人：<text class="color-black">{{ pageData.keyPolicyMaker?'是':'否' }}</text></view>
+        <view>关键决策人是否有微信：<text class="color-black">{{ pageData.weChat?'是':'否' }}</text></view>
+      </view>
+    </view>
+
+    <view class="module flex-row between" wx:if="{{ statusLink == '3' || statusLink == '5' }}">
+      <view class="title">数据交付</view>
+      <view wx:if="{{ statusLink == '3'}}" class="select-button" bindtap="selectCounselor">
+        {{ counselor?counselor:'选择城市经理' }}
+        <text class="iconfont iconChevron"></text>
+      </view>
+      <view wx:if="{{ statusLink == '5'}}" class="select-button" bindtap="selectServicer">
+        {{ counselor?counselor:'选择客服专员' }}
+        <text class="iconfont iconChevron"></text>
+      </view>
+    </view>
+
+    <view class="module wait-send" wx:if="{{ statusLink == '4' }}">
+      <view class="title">数据将退还给</view>
+      <view class="explain">
+        <view>部门：<text class="color-black">{{ pageData.department }}</text></view>
+        <view>顾问：<text class="color-black">{{ pageData.username }}</text></view>
+      </view>
+    </view>
+  </view>
+  <view class="bottom-button {{canSubmit?'bg-color-blue':'bg-color-silver'}}" bindtap="submit">
+    <text>提交</text>
+  </view>
+</view>
+

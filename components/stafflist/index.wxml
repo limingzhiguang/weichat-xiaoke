@@ -1,0 +1,49 @@
+ <!--components/stafflist/index.wxml-->
+<view class="list-container">
+  <view class="header flex-row between">
+    <view class="input-box flex-row between">
+      <text class="iconfont iconsousuo"></text>
+      <input class="input" type="text" placeholder="请输入" value="{{keyword}}" bindinput="inputWord"></input>
+      <text class="clear iconfont iconxingzhuang" hidden="{{ !keyword }}" bindtap="clear"></text>
+    </view>
+    <view class="cancel" bindtap="cancel">取消</view>
+  </view>
+  <view class="content">
+    <scroll-view
+      class="scroll-view-v"
+      scroll-into-view="{{intoView}}" 
+      enable-back-to-top scroll-y 
+      bindscroll="scrolling">
+      <block        
+        wx:for="{{ dataList }}"
+        wx:key="index">
+        <view id="{{item.id}}">
+          <view
+            class="counselor"
+            wx:for="{{item.children}}"
+            wx:key="name"
+            wx:for-item="user"
+            wx:for-index="idx"
+            data-index="{{ item.id }}"
+            data-id="{{user.userId}}"
+            data-en="{{user.userNameEn}}"
+            data-cn="{{user.userNameCn}}"
+            bindtap="choose">
+            {{ user.userNameEn }}{{ user.userNameCn }}
+          </view>
+        </view>        
+      </block>
+    </scroll-view>
+  
+    <view class="letter-box">
+      <text
+        wx:for="{{ letter }}"
+        wx:key="index"
+        data-index="{{item}}"
+        data-id="{{item == '#'?'_':item}}"
+        bindtap="scrollTo"
+        class="{{ current == item || (current == '_' && item == '#')?'active':'' }}"
+      >{{item}}</text>
+    </view>
+  </view>    
+</view>

@@ -1,0 +1,22 @@
+<!--pages/user/user.wxml-->
+<view class="user">
+  
+  <view class="header">  
+    <view class="user-top">我的</view>
+    <view class="change-account">
+     <text bindtap="loginOut"><text class="iconfont iconcredentials_icon"></text>更换账号</text>
+    </view>
+    <view class="user-avatar">
+      <image wx:if="{{ userInfor.headImgUrl }}" src="{{ userInfor.headImgUrl }}"></image>
+      <image wx:else src="../../images/avatar.png"></image> 
+    </view>
+    <view class="user-name">{{userInfor.userNameCE}}</view>
+    <view class="user-role">
+      <text wx:if="{{userInfor.roleNames.length>0}}" wx:for="{{userInfor.roleNames}}" wx:key="index">{{item}} <text wx:if="{{(index+1)!==userInfor.roleNames.length}}"> | </text></text>
+    </view>
+    <view class="department">
+      <text class="de-name" bindtap="changeDepartment"> {{ viewType==1?'商务中心':'销售中心' }}<text class="iconfont iconneirongqiehuan"></text> </text>
+    </view>
+  </view>  
+  <!-- <tab-bar currentTab="4"></tab-bar> -->
+</view>

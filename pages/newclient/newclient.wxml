@@ -1,0 +1,109 @@
+<!--pages/newclient.wxml-->
+<view class="bussiness-infor">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <view class="form-box">
+      <view class="split-title">机构信息</view>
+ <!-- <button form-type="reset">重置</button> -->
+      <view class="normal-input-box flex-box border-bottom" wx:if="{{viewType===2}}">
+        <view class="form-label is-required">企业名称：</view>
+        <input name="org_name" placeholder="请输入" placeholder-class="color-gray" placeholder-style="#999" />
+      </view>
+      <view class="normal-input-box flex-box border-bottom" wx:else>
+        <view class="form-label is-required">品牌名称：</view>
+        <input name="org_name" placeholder="请输入" placeholder-class="color-gray" placeholder-style="#999" />
+      </view>
+
+      <view class="normal-input-box flex-box border-bottom">
+        <view class="form-label is-required">{{viewType===2?"机构地址：":"门店地址："}}</view>        
+        <view class="input text-right color-gray" bindtap="linkAddressSelector">{{ address?address:'请选择省市区地址' }}
+          <text><text class="iconfont iconChevron"></text></text>
+        </view>
+          <!-- <input name="address_city" class="text-right" placeholder="请选择省市区地址 >" placeholder-class="color-gray" placeholder-style="#999" value="{{address}}" disabled bindtap="linkAddressSelector" />                 -->        
+      </view>      
+	  <view class="normal-input-box flex-box pr-65">
+		  <!-- <view class="form-label"><text class="is-required">*</text>详细地址：</view> -->
+      <view class="flex-box form-content">
+		    <input name="address_detail" placeholder-class="color-gray" placeholder-style="#999" placeholder="请输入详细地址" value="{{ detailAddress }}" />
+        <view class="location" bindtap="getLocation">
+          <image src="../../images/marker.png"></image>
+        </view>
+      </view>  
+	  </view>
+
+      <view class="split-title">机构联系人</view>
+      <view class="normal-input-box flex-box border-bottom">
+        <view class="form-label is-required">联系人：</view>
+        <input name="legal_person" placeholder-class="color-gray" placeholder-style="#999" placeholder="请输入" />
+      </view>
+	  <view wx:if="{{viewType===1}}">
+	    <view class="normal-input-box flex-box border-bottom">
+	      <view class="form-label is-required">联系人电话：</view>
+	      <input name="telephone_number" placeholder="请输入" type="number" placeholder-class="color-gray" placeholder-style="#999" maxlength="11" value="{{phone_number}}" bindinput="writePhone" />
+	    </view>
+	    <view class="normal-input-box flex-box border-bottom">
+	      <view class="form-label">微信号：</view>
+	      <view class="flex-box form-content">
+	        <input name="wechat_number" placeholder="请输入" placeholder-class="color-gray" placeholder-style="#999" disabled="{{ samewithphone }}" value="{{wechat_number}}" />
+	        <checkbox checked="{{samewithphone}}" bindtap="getPhone" name="same" class="phone-checkbox">与电话相同</checkbox>
+	      </view>
+	    </view>
+	  </view>
+      <view wx:if="{{viewType===2}}">
+        <view class="normal-input-box flex-box border-bottom">
+          <view class="form-label is-required">联系人电话：</view>
+          <input name="telephone_number" placeholder-class="color-gray" placeholder-style="#999" placeholder="请输入" type="number" maxlength="11" value="{{phone_number}}" bindinput="writePhone" />
+        </view>
+        <view class="normal-input-box flex-box border-bottom">
+          <view class="form-label">微信号：</view>
+          <view class="flex-box form-content">
+            <input name="wechat_number" placeholder="请输入" placeholder-class="color-gray" placeholder-style="#999" disabled="{{ samewithphone }}" value="{{wechat_number}}" />
+            <radio checked="{{samewithphone}}" bindtap="getPhone" name="same" class="phone-checkbox">与电话相同</radio>
+          </view>
+        </view>
+      </view>
+      <view class="normal-input-box flex-box border-bottom">
+        <view class="form-label">性别：</view>
+        <view class="select-gender form-content">
+          <radio-group bindchange="changeGender" name="gender">
+            <label class="{{ gender == 1?'active':'' }}"><radio color="#017FFF" value="1"></radio><text class="">男</text></label>
+            <label class="{{ gender == 2?'active':'' }}"><radio color="#017FFF" value="2"></radio><text class="">女</text></label> 
+          </radio-group> 
+        </view>
+      </view>
+      <view class="normal-input-box border-bottom flex-box {{viewType===2?'border-bottom':''}}">
+        <view class="form-label is-required">职务：</view>
+        <input name="duty" placeholder="请输入" placeholder-class="color-gray" placeholder-style="#999" />
+      </view>
+      <view wx:if="{{viewType===2}}">
+        <view class="normal-input-box border-bottom flex-box pb-54">
+          <view class="form-label">联系人备注：</view>
+          <input name="person_remark" placeholder="请输入" placeholder-class="color-gray" placeholder-style="#999"></input>
+        </view>
+        <view class="split-title">其他</view>
+        <view class="normal-input-box flex-box border-bottom">
+          <view class="form-label is-required">来源分类：</view>
+          <view class="select-source form-content">
+            <picker bindchange="selectSource" range="{{source_classify}}" range-key="label" value="{{source}}" class="picker" mode="selector">
+              <view class="input">{{source_classify[source].label}} <text class="fr">请选择 <text class="iconfont iconChevron font-12"></text> </text> </view>			  
+            </picker>
+          </view>
+          <view class="picker-icon">
+            <i class="iconfont icon-sd-choose"></i>
+          </view>
+        </view>      
+        <view class="normal-input-box border-bottom flex-box pb-54">
+          <view class="form-label">企业信息简介：</view>
+          <input name="org_remark" placeholder="请输入" placeholder-class="color-gray" placeholder-style="#999"></input>
+        </view>
+      </view>       
+	   <view class="submit-btn {{ isIphoneX?'active':'' }}">
+       <button formType="submit" class="btn" hover-class='submit-btn-active'>{{viewType===1?"确认新建客户":"提交"}}</button>
+       </view>
+    </view>
+    <mp-toptips msg="{{message}}" type="{{toptipsType}}" show="{{message}}" ext-class="{{message?'toptips-ext-class':''}}"></mp-toptips>
+  </form>
+  <!-- <view wx:else class="form-box no-permission">
+    暂无添加新客户权限
+  </view>   -->
+  <!-- <tab-bar currentTab="2"></tab-bar> -->
+</view>

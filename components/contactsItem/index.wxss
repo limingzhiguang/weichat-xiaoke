@@ -1,0 +1,82 @@
+/* components/contactsItem/index.wxss */
+@import "../../icon/iconfont.wxss";
+.one-ellipsis{
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+.contacts-item{
+  display: flex;
+  height: 132rpx;
+  margin: 0 25rpx;
+  padding:0 10rpx;
+  font-size:28rpx;
+  color:#333;
+  border-bottom: 1rpx solid #ddd;
+}
+.contacts-item >view{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.contacts-item .left{
+   width: 376rpx;
+}
+.c-name{
+  overflow: hidden;
+}
+
+.c-name .name{
+  float:left;
+  overflow: hidden;
+  margin-right: 12rpx;
+  max-width: 310rpx;  
+  line-height: 48rpx;  
+  font-size:34rpx;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color:#333;
+}
+
+.c-name .zhu{
+  float:left;
+  margin-top:8rpx;
+  border-radius:20rpx;  
+  border: 2rpx solid #FF3545;
+  padding:0 13rpx;
+  height:28rpx;
+  line-height: 28rpx;
+  font-size:24rpx;  
+  font-weight: 500;
+  text-align: center;
+  color: #FF3545;
+}
+.c-name .fu{
+  padding: 0 14rpx;
+  text-align: center;
+  color: #00C800;
+  border: 2rpx solid #00C800;
+  font-size:24rpx;
+  border-radius:16rpx;
+  font-weight: 500;
+}
+.c-orgname{
+  margin-top: 12rpx;
+  color: #999;
+
+}
+.contacts-item .middle{
+  flex: 2;
+  font-size:34rpx;
+  color:#333;
+}
+.contacts-item .right{
+  width: 70rpx;
+  color: #1890FF;
+  align-items: flex-end;
+}
+.contacts-item .right .iconfont{
+  font-size:46rpx;
+ 
+}

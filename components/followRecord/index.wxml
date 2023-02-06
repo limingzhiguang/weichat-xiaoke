@@ -1,0 +1,83 @@
+<!--components/followRecord/index.wxml-->
+<wxs src="../../utils/filter.wxs" module="filter" />
+<view class="follow-list {{isEdit?'overflow-hidden':''}}">
+  <view class="list-item" wx:for="{{list}}" wx:key="index">
+    <view class="remind-info">
+        提醒：{{filter.formatTimeDateTime(item.remindTime)}}
+        <text class="fr" wx:if="{{item.remindMyself}}">
+        {{item.remindMyself}}        
+        </text> 
+        <text class="fr" wx:if="{{item.remindUsername}}">
+          @{{item.remindUsername}}
+        </text>         
+      </view>
+      <view class="org-list">
+        <text class="lab-name">{{filter.filterFollowType(item.type)}}</text>/
+        <text class="lab-name">{{filter.filterFollowForm(item.form)}}</text>/
+        <text class="lab-name">{{item.target}}</text>
+      </view>
+      <view class="org-name" data-org-id="{{item.orgId}}" data-org-type="{{item.orgType}}" catchtap="toDetailPage">
+      <text>{{item.orgName?item.orgName:'--'}}</text>
+      <text class="iconfont iconChevron font-12"></text>
+      </view>
+      <view class="list-item-des-title" style="margin-bottom:17rpx">内容：
+      <view class="fr" data-row-content="{{item.content}}" data-org-id="{{item.id}}" catchtap="rowEdit">
+        <icon class="iconfont iconxingzhuang2-copy" />
+        <text class="fr-edit">修改</text> 
+      </view>
+      </view>      
+      <!-- <textarea
+        wx:if="{{ !isEdit && !hideContent }}"
+        disabled
+        auto-height
+        class="list-item-des"        
+        value="{{item.content}}"></textarea> -->
+        <view class="list-item-des" wx:for="{{filter.changLine(item.content)}}" wx:key="index" wx:for-item="current">{{current}}</view>
+      <view class="label-group" style="margin-top:32rpx">
+        标签：
+        <text class="label-group-item" wx:for="{{item.labelNameList}}" wx:for-item="cur" wx:key="index" wx:if="{{cur}}">{{cur}}</text>
+      </view>
+
+      <view class="file-list one-ellipsis">
+      <view class="file-title">附件：</view>
+        <filter-icon row="{{item}}" bind:update="lookFile"></filter-icon>
+      </view>
+      <view class="item-bottom">
+      <text class="create-man">{{item.createMan}}-{{item.organizationName||item.organizationalStructureName}}</text>  
+      {{filter.formatTimeDateTime(item.createTime)}}
+      录入
+    </view>
+  </view>
+
+  <view style="color:#999;text-align:center" wx:if="{{list.length>1}}">
+    <!-- <text wx:if="{{hasMore}}">加载更多数据中...</text> -->
+    <view class="bottom-line-tips" wx:if="{{!hasMore}}">———————我是有底线的———————</view>
+  </view>
+  <view class="no-data" wx:if="{{!list.length}}">
+    <image class="no-data-image" src="../../images/no-data.png"></image>
+    <view class="no-data-tips">暂无跟进记录</view>
+  </view>
+</view>
+
+<!--修改内容-->
+<view class="static-data-tips" wx:if="{{isEdit}}">
+  <view class="st-da-main" style="bottom:{{bottom}}">
+    <view class="tips-foot">
+      <text  catchtap="editCancer">取消</text>
+      <text class="add-new-record" catchtap="editConfirm">确定</text>
+    </view> 
+    <view class="tips-text">
+      <view class="follow-content"><text style="color:#FF3545">*</text>跟进内容：</view>
+      <textarea placeholder="请输入内容" maxlength="200" auto-focus bindkeyboardheightchange="keyboardheight" bindinput="getTextareaContent" value="{{rowContent}}"/>
+      <view> <text class="fr">{{rowContent.length}}/200</text> </view>
+    </view>
+  </view>
+</view>
+
+<!--查看附件-->
+<view class="look-video" wx:if="{{isVideoPlay}}">
+  <view class="file-body">
+    <video id="myVideo" src="{{filePath}}" enable-danmu danmu-btn controls></video>
+    <view class="close-video" catchtap="closeVideo">关闭</view>
+  </view>
+</view>

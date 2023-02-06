@@ -1,0 +1,50 @@
+<!--pages/address/address.wxml-->
+<view class="flex-box select-address">
+  <!-- <view class="search-input-box">
+    <view class="search-box flex-box">
+      <input class="search-input" bindinput="searchWriting" value="{{ searchValue }}" placeholder="请输入省份/城市/市区搜索" confirm-type="search" bindconfirm="search"></input>
+      <view class="search-btn" bindtap="search">{{ hadSearched?'取消':'搜索' }}</view>
+    </view>
+  </view> -->
+  
+  <view class="bottom flex-box">
+    <!-- 搜索列表 -->
+    <view class="search-list-box" wx:if="{{ resultList.length > 1 }}">
+      <text>搜索列表</text>
+    </view>
+
+    <!-- 地址pick -->
+    <view class="hot-city">
+      <text class="title">热门城市</text>
+      <view class="hot-city-list flex-box">
+        <text bindtap="selectHotCity" data-id="{{item.pid}}" data-code="{{item.code}}" data-index="{{index}}" wx:key="index" wx:for="{{ cityList }}" wx:for-item="item" wx:for-index="index" class="{{ index == hotIndex?'active city':'city' }}">{{ item.name }}</text>
+      </view>
+    </view>
+    <view class="pick-box">
+      <view class="block">
+        <view class="pick-container">
+          <view class="pick-header">
+            <text class="title">省份</text>
+            <text class="title">城市</text>
+            <text class="title">区县</text>
+          </view>
+          <picker-view bindchange="changeAddress" bindpickstart="changStart" bindpickend="changeEnd" indicator-style="" class="picker" value="{{pickValue}}">
+            <picker-view-column>
+              <view wx:for="{{provinces}}" data-code="{{item.code}}" wx:for-index="idx" wx:key="idx" class="selecter {{pIndex>0 && pIndex==idx?'active':''}}">{{item.name}}</view>
+            </picker-view-column>
+            <picker-view-column>
+              <view wx:for="{{citys}}" data-code="{{item.code}}" wx:for-index="idx" wx:key="idx" class="selecter {{cIndex>0 && cIndex == idx?'active':''}}">{{item.name}}</view>
+            </picker-view-column>
+            <picker-view-column>
+              <view wx:for="{{areas}}" wx:for-index="idx" wx:key="idx" class="selecter {{aIndex>0 && aIndex == idx?'active':''}}">{{item.name}}</view>
+            </picker-view-column>
+          </picker-view>
+        </view>
+        <view class="btn-box">
+          <button bindtap="sureAddress">确定</button>
+        </view>
+      </view>
+    </view>
+  </view>  
+  <mp-toptips msg="{{message}}" type="error" show="{{message}}"></mp-toptips>
+</view>

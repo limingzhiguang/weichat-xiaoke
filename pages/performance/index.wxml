@@ -1,0 +1,10 @@
+<!--pages/performance/index.wxml-->
+<common-header></common-header>
+<view class="list-box">
+  <earnings-estimate detail="1" list="{{performanceList}}" bind:updateList="updateList"></earnings-estimate>
+</view>
+<map-tabbar    
+  currentTab="-1"
+  orgId="{{orgInfor.orgId}}"
+  orgName="{{ orgInfor.orgJianName || orgInfor.brandName}}"
+></map-tabbar>

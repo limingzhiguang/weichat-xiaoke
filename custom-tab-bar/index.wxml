@@ -1,0 +1,7 @@
+<!--custom-tab-bar/index.wxml-->
+<cover-view class="tabbar-box flex-box" >
+  <cover-view wx:for="{{ list }}" wx:key="index" class="item  {{ tab === index?'active':null }}" data-path="{{item.pagePath}}" data-index="{{index}}" bindtap="tab">
+    {{item.text}}
+    <cover-view class="line"></cover-view>
+  </cover-view>  
+</cover-view>

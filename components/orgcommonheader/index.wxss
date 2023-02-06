@@ -1,0 +1,8 @@
+/* components/orgcommonheader/index.wxss */
+@import "../../app.wxss";
+@import "../../wxss/detail.wxss";
+
+.org-button-group{
+  padding-bottom: 0;
+  background: #fff;
+}

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "common-header": "../../components/orgcommonheader/index",
+    "map-tabbar": "../../components/detailTabBar/index"
+  },
+  "navigationBarTitleText": "经营项目/人员规模"
+}

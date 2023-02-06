@@ -1,0 +1,205 @@
+/**
+* 机构详情子页面通用样式
+*/
+.orginfor-page{
+  position: relative;
+  box-sizing: border-box;  
+  width: 100%;
+  height: 100%;  
+}
+
+.orginfor-page.active{
+  padding-bottom: 94rpx;
+}
+
+.orginfor-header{
+  position: relative;
+  padding:0 32rpx 0 40rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  font-size: 28rpx;
+  background: #EAF4FD;
+  overflow: hidden;
+  transition: all .3s;
+}
+
+.orginfor-header.active{
+  text-align: center;
+  height: 56rpx;
+  line-height: 56rpx;
+}
+
+.orginfor-header .title{
+  color:#003E7C;
+  transition: all .3s;
+}
+
+.orginfor-header .edit{
+  position: absolute;
+  top:0;
+  right: 32rpx;
+  line-height: 72rpx;
+  color:#1890FF;
+}
+
+.orginfor-header .edit .iconfont{
+  margin-right: 6rpx;
+}
+
+.orginfor-box{
+  box-sizing: border-box;  
+  height: 100%;
+}
+
+.orginfor-content{
+  padding: 0 25rpx 160rpx;
+  background: #fff;
+  transition: all .3s;
+}
+
+.orginfor-page.active .orginfor-content{
+  background:none;
+}
+
+.infor-row{
+  border-bottom:2rpx solid #ddd;
+  padding:25rpx 0;  
+  font-size: 30rpx;
+}
+
+.infor-row .label{
+  flex:0 0 auto;
+  display: block;
+  position: relative;
+  padding-left:16rpx;  
+  line-height:42rpx;
+  color:#333;  
+}
+
+.infor-row .label.is-required::before{
+  position: absolute;
+  content:'*';
+  left:-2rpx;
+  top:6rpx;
+  font-size:30rpx;
+  color:#FF3545;
+}
+
+.infor-row input{
+  line-height:42rpx;
+  color:#333;
+}
+
+.infor-row .editing{
+  color:#999;
+}
+
+.placeholder{
+  line-height:42rpx;
+  color:#999;
+}
+
+.button-group{
+  position: fixed;
+  left:0;
+  bottom: 0; 
+  z-index:99;
+  box-sizing: content-box;
+  border-top:2rpx solid #eee;  
+  width: 100%;
+  height: 92rpx;
+  line-height: 90rpx;
+  font-size: 36rpx;
+  background: #fff;  
+}
+
+.button-group.pb-30{
+  padding-bottom:30rpx;
+}
+
+.button-group .cancle{
+  box-sizing: border-box;
+  border-radius: 8rpx;
+  border-right: 2rpx solid #eee;
+  padding: 0;
+  width:50%;
+  color:#999;
+  height: 92rpx;
+  line-height: 92rpx;
+  text-align: center;
+  background: #ddd;
+}
+
+.button-group .confirm{
+  box-sizing: border-box;
+  padding: 0;
+  width:50%;
+  height: 92rpx;
+  line-height: 92rpx;
+  font-weight: 400;
+  color:#999;
+  text-align: center;
+  background: #ddd;
+}
+
+.button-group .confirm.active{
+  color: #fff;
+  background:#017FFF; 
+}
+
+.infor-row .content{
+  flex:1;
+  display: block;
+  justify-content: flex-end;
+  line-height:42rpx;
+  overflow:hidden;
+}
+
+.infor-row .iconChevron{
+  padding-left:30rpx;
+  color:#C7C7CC;
+  font-size: 32rpx;
+}
+
+.infor-row .clear-button{
+  display: inline-block;
+  padding: 5rpx 10rpx;
+  color: #C7C7CC;  
+}
+
+.infor-row .remark{
+  position: relative;
+  box-sizing: border-box;
+  padding:8rpx 16rpx;
+  width: 100%;
+}
+
+.infor-row .remark .word-box{
+  position: absolute;
+  right:25rpx;
+  bottom: 16rpx;
+  font-size: 24rpx;
+  color:#999;
+}
+
+.infor-row .remark textarea{
+  display: block;
+  width: 100%;
+  min-height: 300rpx;
+}
+
+.infor-row.row-padding{
+  padding-right:16rpx;
+  padding-left:32rpx;
+}
+
+.position-box{
+  padding:0 12rpx;
+  width:32rpx;
+  height: 42rpx;
+}
+
+.position-box image{
+  width: 100%;
+  height: 100%;
+}

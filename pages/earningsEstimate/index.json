@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "earnings-estimate":"../../components/earningsEstimate/index"    
+  },
+  "navigationBarTitleText":"业绩预测"
+}

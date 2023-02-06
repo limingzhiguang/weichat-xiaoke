@@ -1,0 +1,226 @@
+<!--pages/project/index.wxml-->
+
+<wxs module="filter" src="../../filter/filterArray.wxs"></wxs>
+
+<view class="orginfor-page {{ isEditing?'active':'' }}">
+  <view class="orginfor-box">
+    <common-header></common-header>
+    <view class="orginfor-container">
+      <view class="orginfor-header {{isEditing?'active':''}}">
+        <view class="title">营销项目</view>
+        <text class="edit" bindtap="editInfor" wx:if="{{ !isEditing && editPermission }}">
+          <text class="iconfont iconxingzhuang2-copy"></text>修改        
+        </text>
+      </view>
+      <view class="orginfor-content">
+        <form bindsubmit="formSubmit">
+          <view class="infor-row flex-row">
+            <text class="label">总人数：</text>
+            <text class="content" wx:if="{{ !isEditing }}">{{ inforData.orgTotalNum?inforData.orgTotalNum:''}}</text>      
+            <input 
+              class="content editing"
+              name="orgTotalNum"
+              value="{{ setForm.orgTotalNum }}" 
+              placeholder="请输入总人数"
+              type="number"
+              wx:else
+              bindinput="setOrgName"
+              placeholder-class="placeholder"></input>
+          </view>
+          
+          <view class="infor-row flex-row">
+            <text class="label">中层管理人数：</text>
+            <text class="content" wx:if="{{ !isEditing }}">{{ inforData.middleManagementNum?inforData.middleManagementNum:''}}</text>      
+            <input 
+              class="content editing"
+              name="middleManagementNum"
+              value="{{ setForm.middleManagementNum }}" 
+              placeholder="请输入中层管理人数"
+              type="number"
+              wx:else
+              bindinput="setOrgName"
+              placeholder-class="placeholder"></input>
+          </view>
+
+          <view class="infor-row flex-row">
+            <text class="label">教学教务人数：</text>
+            <text class="content" wx:if="{{ !isEditing }}">{{ inforData.teachingNum?inforData.teachingNum:''}}</text>      
+            <input 
+              class="content editing"
+              name="teachingNum"
+              value="{{ setForm.teachingNum }}" 
+              placeholder="请输入教学教务人数"
+              type="number"
+              wx:else
+              bindinput="setOrgName"
+              placeholder-class="placeholder"></input>
+          </view>
+
+          <view class="infor-row flex-row">
+            <text class="label">市场销售人数：</text>
+            <text class="content" wx:if="{{ !isEditing }}">{{ inforData.marketingManagementNum?inforData.marketingManagementNum:''}}</text>      
+            <input 
+              class="content editing"
+              name="marketingManagementNum"
+              value="{{ setForm.marketingManagementNum }}" 
+              placeholder="请输入市场销售人数"
+              type="number"
+              wx:else
+              bindinput="setOrgName"
+              placeholder-class="placeholder"></input>
+          </view>
+
+          <view class="infor-row flex-row">
+            <text class="label">全职老师人数：</text>
+            <text class="content" wx:if="{{ !isEditing }}">{{ inforData.fullTimeTeacherNum?inforData.fullTimeTeacherNum:''}}</text>      
+            <input 
+              class="content editing"
+              name="fullTimeTeacherNum"
+              value="{{ setForm.fullTimeTeacherNum }}" 
+              placeholder="请输入全职老师人数"
+              type="number"
+              wx:else
+              bindinput="setOrgName"
+              placeholder-class="placeholder"></input>
+          </view>
+
+          <view class="infor-row flex-row">
+            <text class="label">兼职老师人数：</text>
+            <text class="content" wx:if="{{ !isEditing }}">{{ inforData.partTimeTeacherNum?inforData.partTimeTeacherNum:''}}</text>      
+            <input 
+              class="content editing"
+              name="partTimeTeacherNum"
+              value="{{ setForm.partTimeTeacherNum }}" 
+              placeholder="请输入兼职老师人数"
+              type="number"
+              wx:else
+              bindinput="setOrgName"
+              placeholder-class="placeholder"></input>
+          </view>
+
+          <view class="infor-row {{ isEditing?'':'flex-row' }}">
+            <text class="label">客户类型：</text>
+            <text class="content" wx:if="{{ !isEditing }}">{{inforData.teachingRange?inforData.teachingRange:''}}</text>    
+            
+            <view class="content checkbox-box" wx:else>
+              <checkbox-group bindchange="changeTeachingRange">
+                <label class="checkbox" wx:for="{{ filterData.teachingRange }}" wx:key="index">
+                  <checkbox value="{{item}}" color="#017FFF" checked="{{ teachingRangeChecked[index] }}">{{item}}</checkbox>
+                </label>
+              </checkbox-group>
+            </view>            
+          </view>
+
+          <view class="infor-row {{ isEditing?'':'flex-row' }}">
+            <text class="label">主客户类型：</text>
+            <text class="content" wx:if="{{ !isEditing }}">{{inforData.mainTeachingRange?inforData.mainTeachingRange:''}}</text>    
+            
+            <view class="content checkbox-box" wx:else>
+              <checkbox-group bindchange="changeMainTeachingRange">
+                <label class="checkbox" wx:for="{{ filterData.teachingRange }}" wx:key="index">
+                  <checkbox value="{{item}}" color="#017FFF" checked="{{ mainTeachingRangeChecked[index]}}">{{item}}</checkbox>
+                </label>
+              </checkbox-group>
+            </view>
+          </view>
+
+          <view class="infor-row {{ isEditing?'':'flex-row' }}">
+            <text class="label">授课内容：</text>
+            <text class="content" wx:if="{{ !isEditing }}">
+              <block wx:if="{{ inforData.teachingSubject && inforData.teachingSubject.length }}">学科类：</block>
+              <block>{{ inforData.teachingSubject?inforData.teachingSubject:'' }}</block>
+              <block wx:if="{{ inforData.teachingSubject && inforData.teachingSubject.length && inforData.teachingInterest && inforData.teachingInterest.length }}">/</block>
+              <block wx:if="{{ inforData.teachingInterest && inforData.teachingInterest.length }}">兴趣类：</block>              
+              <block>{{ inforData.teachingInterest?inforData.teachingInterest:'' }}</block>       
+            </text>    
+            
+            <view class="content checkbox-box" wx:else>
+              <block>学科类：</block>
+              <checkbox-group bindchange="changeTeachingSubject">
+                <label class="checkbox" wx:for="{{ filterData.teachingSubject }}" wx:key="index">
+                  <checkbox value="{{item}}" color="#017FFF" checked="{{ teachingSubjectChecked[index]}}">{{item}}</checkbox>
+                </label>
+              </checkbox-group>
+              
+              <block>兴趣类：</block>
+              <checkbox-group bindchange="changeTeachingInterest">
+                <label class="checkbox" wx:for="{{ filterData.teachingInterest }}" wx:key="index">
+                  <checkbox value="{{item}}" color="#017FFF" checked="{{ teachingInterestChecked[index]}}">{{item}}</checkbox>
+                </label>
+              </checkbox-group>
+            </view>            
+          </view>
+          
+          <view class="infor-row {{ isEditing?'':'flex-row' }}">
+            <text class="label">主授课内容：</text>
+            <text class="content" wx:if="{{ !isEditing }}">
+              <block wx:if="{{ inforData.mainTeachingSubject && inforData.mainTeachingSubject.length }}">学科类：</block>
+              <block>{{ inforData.mainTeachingSubject?inforData.mainTeachingSubject:'' }}</block>
+              <block wx:if="{{ inforData.mainTeachingSubject && inforData.mainTeachingSubject.length && inforData.mainTeachingInterest && inforData.mainTeachingInterest.length }}">/</block>
+              <block wx:if="{{ inforData.mainTeachingInterest && inforData.mainTeachingInterest.length }}">兴趣类：</block>              
+              <block>{{ inforData.mainTeachingInterest?inforData.mainTeachingInterest:'' }}</block>           
+            </text>    
+            
+            <view class="content checkbox-box" wx:else>
+              <block>学科类：</block>
+              <checkbox-group bindchange="changeMainTeachingSubject">
+                <label class="checkbox" wx:for="{{ filterData.teachingSubject }}" wx:key="index">
+                  <checkbox value="{{item}}" color="#017FFF" checked="{{ mainTeachingSubjectChecked[index]}}">{{item}}</checkbox>
+                </label>
+              </checkbox-group>
+
+              <block>兴趣类：</block>
+              <checkbox-group bindchange="changeMainTeachingInterest">
+                <label class="checkbox" wx:for="{{ filterData.teachingInterest }}" wx:key="index">
+                  <checkbox value="{{item}}" color="#017FFF" checked="{{ mainTeachingInterestChecked[index]}}">{{item}}</checkbox>
+                </label>
+              </checkbox-group>
+            </view>            
+          </view>
+
+          <view class="infor-row {{ isEditing?'':'flex-row' }}">
+            <text class="label">授课模式：</text>
+            <text class="content" wx:if="{{ !isEditing }}">{{ inforData.teachingType?inforData.teachingType:'' }}</text>    
+            
+            <view class="content checkbox-box" wx:else>
+              <checkbox-group bindchange="changeTeachingType">
+                <label class="checkbox" wx:for="{{ filterData.teachingType }}" wx:key="index">
+                  <checkbox value="{{item}}" color="#017FFF" checked="{{ teachingTypeChecked[index]}}">{{item}}</checkbox>
+                </label>
+              </checkbox-group>
+            </view>            
+          </view>
+          
+          <view class="infor-row">
+            <text class="label">授课备注：</text>            
+            <view class="content remark editing" wx:if="{{ isEditing }}" >
+              <textarea
+                auto-height
+                name="remark" 
+                class="editing" 
+                value="{{ setForm.remark }}" 
+                placeholder="请输入授课备注"
+                bindinput="setRemark"
+                maxlength="500"
+                placeholder-class="placeholder"></textarea>
+                <text class="word-box">{{ wordNumber }}/500</text> 
+            </view>
+            <text class="content remark" wx:else>{{ inforData.remark?inforData.remark:'' }}</text>
+          </view>
+
+          <cover-view class="button-group flex-row {{ isIphoneX?'pb-30':'' }}" hidden="{{ !isEditing }}">
+            <cover-view class="cancle" bindtap="cancle">取消</cover-view>
+            <button formType="submit" class="confirm active">提交</button>
+          </cover-view>
+        </form>
+      </view>
+    </view>
+  </view>
+  <map-tabbar
+    wx:if="{{!isEditing}}"
+    currentTab="-1"
+    orgId="{{inforData.orgId}}"
+    orgName="{{ orgInfor.orgJianName || orgInfor.brandName}}"
+  ></map-tabbar>
+</view>
+

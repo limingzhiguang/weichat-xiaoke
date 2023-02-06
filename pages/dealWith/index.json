@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "follow-record":"../../components/followRecord/index",
+    "tab-bar":"../components/tabBar/index"
+  },
+  "navigationBarTitleText":"待办"
+}

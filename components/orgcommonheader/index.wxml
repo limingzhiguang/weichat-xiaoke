@@ -1,0 +1,47 @@
+<!--components/orgcommonheader/index.wxml-->
+<view class="detail-header color-white bg-color-blue big-orange">
+  <image
+    class="banner-img"
+    src="{{imgSrc}}"
+  ></image>
+  <view class="title-box">
+    <text class="font-20 title text-clip">{{ inforData.orgJianName || inforData.brandName }}</text>
+    <text class="font-12 {{ inforData.orgStatus == '2'?'upper':'down' }} mark text-center">{{inforData.orgStatus == '2'?'上游':'下游'}}</text>
+  </view>
+  <view class="row text-clip font-14">
+    门店地址：{{inforData.address}}
+  </view>    
+</view>
+
+<view class="org-button-group flex-row between wrap">
+  <view wx:if="{{ (inforData.orgStatus == '2' && upperPermission.orgInfoPage) || (inforData.orgStatus != '2' && downPermission.orgInfoPage) }}" class="org-button {{ inforData.type == '1'?'active':'' }}" hover-class="hover-btn" bindtap="toBasics">基本信息
+    <text class="text-center arrow {{ inforData.type == '1'?'rotate':'' }}">
+      <text class="iconfont iconChevron"></text>
+    </text>
+  </view>
+  <view wx:if="{{ (inforData.orgStatus == '2' && upperPermission.orgInfoPage) || (inforData.orgStatus != '2' && downPermission.orgInfoPage) }}" class="org-button {{ inforData.type == '2'?'active':'' }}" hover-class="hover-btn" bindtap="toRegister">注册信息
+    <text class="text-center arrow {{ inforData.type == '2'?'rotate':'' }}">
+      <text class="iconfont iconChevron"></text>
+    </text>
+  </view>
+  <view wx:if="{{ (inforData.orgStatus == '2' && upperPermission.orgInfoPage) || (inforData.orgStatus != '2' && downPermission.orgInfoPage) }}" class="org-button {{ inforData.type == '3'?'active':'' }}" hover-class="hover-btn" bindtap="toProject">经营项目
+    <text class="text-center arrow {{ inforData.type == '3'?'rotate':'' }}">
+      <text class="iconfont iconChevron"></text>
+    </text>
+  </view>
+  <view wx:if="{{ (inforData.orgStatus == '2' && upperPermission.preIncomeInfoPage) || (inforData.orgStatus != '2' && downPermission.preIncomeInfoPage) }}" class="org-button {{ inforData.type == '4'?'active':'' }}" hover-class="hover-btn" bindtap="toPerformance">业绩预测
+    <text class="text-center arrow {{ inforData.type == '4'?'rotate':'' }}">
+      <text class="iconfont iconChevron"></text>
+    </text>
+  </view>
+  <view wx:if="{{ (inforData.orgStatus == '2' && upperPermission.memorandumButton) || (inforData.orgStatus != '2' && downPermission.memorandumButton) }}" class="org-button {{ inforData.type == '5'?'active':'' }}" hover-class="hover-btn" bindtap="toFollowUp">跟进记录
+    <text class="text-center arrow {{ inforData.type == '5'?'rotate':'' }}">
+      <text class="iconfont iconChevron"></text>
+    </text>
+  </view>
+  <view wx:if="{{ (inforData.orgStatus == '2' && upperPermission.personnelInfoPage) || (inforData.orgStatus != '2' && downPermission.personnelInfoPage) }}" class="org-button {{ inforData.type == '6'?'active':'' }}" bindtap="toContact">联系人
+    <text class="text-center arrow {{ inforData.type == '6'?'rotate':'' }}">
+      <text class="iconfont iconChevron"></text>
+    </text>
+  </view>
+</view>

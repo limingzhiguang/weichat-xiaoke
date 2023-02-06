@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "map-tabbar": "../../components/detailTabBar/index"
+  }
+}

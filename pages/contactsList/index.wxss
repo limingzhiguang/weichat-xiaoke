@@ -1,0 +1,84 @@
+/* pages/contactsList/index.wxss */
+.contacts{
+  position: relative;
+  box-sizing: border-box;
+  padding-top:88rpx;
+  width: 100%;
+  height: 100%;
+}
+
+.contacts .header{
+  position: fixed;
+  top:0;
+  left:0;
+  z-index: 2;
+  box-sizing: border-box;
+  padding:16rpx 24rpx;
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  background-color: #F5F5F5;
+}
+
+.input-box{
+  flex:1;
+  background: #fff;
+  overflow: hidden;
+}
+
+.input-box .iconsousuo{
+  float:left;
+  box-sizing: border-box;
+  padding:0 12rpx 0 24rpx ;
+  line-height: 56rpx;
+  height: 56rpx;
+  color:#bbb;
+}
+
+.input-box .input{
+  flex: 1;
+  border: 0 none;
+  height: 56rpx;
+  line-height: 56rpx;
+  font-size: 30rpx;
+}
+
+.input-box .clear{
+  padding-right: 24rpx;
+  line-height: 56rpx;
+  font-size: 36rpx;
+  color:#ccc;
+}
+
+.header .cancel{
+  flex:0 1 auto;
+  padding-left:30rpx;
+  line-height: 56rpx;
+  font-size: 32rpx;
+  color:#017FFF;
+}
+
+/*列表*/
+.c-list{
+  background-color: #fff;
+}
+.write-follow{
+  position: fixed;
+  bottom:180rpx;
+  right:0;
+  z-index: 1;
+  width: 180rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 40rpx 0 0 40rpx;
+  font-size: 28rpx;
+  color: #fff;
+  background:linear-gradient(135deg,rgba(255,194,74,1) 0%,rgba(255,123,2,1) 100%);
+  box-shadow: 0 0 12rpx 2rpx rgba(255,194,74,1);
+}
+.write-follow .iconfont{
+  margin-right: 10rpx;
+  margin-left:-20rpx;
+  font-size: 36rpx;
+}

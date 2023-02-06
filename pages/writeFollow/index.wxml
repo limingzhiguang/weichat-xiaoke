@@ -1,0 +1,224 @@
+<!--pages/writeFollow/index.wxml-->
+<view class="write-follow">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+  <view class="w-inout-list">
+    <view class="block-title">基础信息{{isOrgDetail}}</view>
+    <view class="w-input-item"  wx:if="{{ !isOrgDetail }}" bindtap="getOrgName" >
+      <view class="one-ellipsis" style="width:500rpx;">
+        <text class="red">*</text>
+        <text class="w-title">机构名称</text>        
+      </view>
+      <text class="w-tips"> 
+      <text class="color-dark" wx:if="{{orgName}}">{{orgName}}</text>
+      <text wx:else>请选择</text>
+      <text class="iconfont iconChevron"></text> </text>
+    </view>
+    <view class="w-input-item" wx:else>
+      <view class="one-ellipsis" style="width:500rpx;">
+        <text class="red">*</text>
+        <text class="w-title">机构名称</text>
+        {{orgName}}        
+      </view>
+    </view>
+    <view class="w-input-item" bindtap="getOrgPerson">
+      <text class="red">*</text>
+      <text class="w-title">对象</text>
+      <text class="w-tips">
+      <text class="color-dark" wx:if="{{orgPerson}}">{{orgPerson}}</text>
+      <text wx:else>请选择</text>
+      <text class="iconfont iconChevron"></text> </text>
+    </view>
+    <picker 
+      class="w-input-item" 
+      bindchange="bindPickerSelectForm" 
+      value="{{index}}" 
+      mode="selector"
+      range="{{followFormList}}">
+      <view class="picker">
+      <text class="red">*</text>
+        <text class="w-title">跟进形式</text><text wx:if="{{followForm!==null}}"></text>
+        <text class="w-tips">
+        <text class="color-dark" wx:if="{{followFormList[followForm-1]}}">{{followFormList[followForm-1]}}</text>
+        <text wx:else>请选择</text>
+        <text class="iconfont iconChevron"></text></text>
+      </view>
+    </picker>
+    <picker 
+      class="w-input-item" 
+      bindchange="bindPickerSelectType" 
+      value="{{index}}" 
+      mode="selector"
+      range="{{followTypeList}}">
+      <view class="picker">
+      <text class="red">*</text>
+        <text class="w-title">跟进方式</text>
+        <text></text>
+        <text class="w-tips">
+        <text class="color-dark" wx:if="{{followTypeList[followTypeIndex]}}">{{followTypeList[followTypeIndex]}}</text>
+        <text wx:else>请选择</text>
+        <text class="iconfont iconChevron"></text></text>
+      </view>
+    </picker>
+    <view class="w-input-item">
+      <text class="red">*</text>
+      <text class="w-title">跟进内容</text>
+      <textarea bindinput="bindTextAreaBlur" maxlength="200" value="{{textareaValue}}" class="w-textarea" auto-height placeholder="请输入" />
+      <view class="text-right">{{textareaValueIndex}}/200</view>
+    </view>
+    <view class="w-input-item" catchtap="uploadFile">
+      <text class="w-title">上传图片</text>
+      <text class="gray">（支持jpg/png 8张内）</text>
+      <text wx:if="{{fileList.length>0}}">共{{fileList.length}}个文件</text>
+      <text class="w-tips"><text class="iconfont iconlujing blue"></text></text>
+    </view>
+    <view class="w-input-item" catchtap="chooseVideo">
+      <text class="w-title">视频 <text class="gray">（1个视频自拍/本地选择）</text></text>
+      <text wx:if="{{!!videoPath}}">1个视频 </text>
+      <text class="w-tips"><text class="iconfont iconshipin blue"></text></text>
+    </view>
+    <view class="w-input-item" bindtap="toRecording">
+      <text class="w-title">音频 <text class="gray">（1个音频）</text> </text>
+      <text wx:if="{{!!playRecordUrl}}">1个音频</text>
+      <text class="w-tips"><text class="iconfont iconxingzhuang2 blue"></text></text>
+    </view>
+    <!-- <picker 
+      class="w-input-item" 
+      bindchange="bindPickerSelectLabel" 
+      value="{{index}}" 
+      range-key="labelName"
+      mode="selector"
+      range="{{labelList}}">
+      <view class="picker">
+        <text class="w-title" style="margin-right:27rpx">标签</text>
+        <text class="label-group" wx:if="{{singelLabelIndex!==null}}">{{labelList[singelLabelIndex].labelName}}</text>
+        <text class="w-tips">请选择<text class="iconfont iconChevron"></text></text>
+      </view>
+    </picker> -->
+    <view class="w-input-item" catchtap="selectLabel">
+      <text class="w-title" style="margin-right:27rpx">标签</text>
+      <text class="label-group" wx:for="{{selectLabelName}}" wx:key="index" wx:if="{{index===0}}">{{item}}</text>
+      <!-- <text wx:if="{{selectLabelName.length>0}}"></text> -->
+      <text class="w-tips">
+      <text class="color-dark" wx:if="{{selectLabelName.length}}">共{{selectLabelName.length}}个标签</text>
+      <text wx:else>请选择</text>
+      <text class="iconfont iconChevron"></text></text>
+    </view>
+    <view class="space-white"></view>
+    <view class="block-title" style="margin-top:16rpx">关联信息</view>
+    <view class="w-input-item">
+      <text class="w-title">下次跟进提醒：</text>
+      <switch class="next-remind" color="#017FFF" checked="{{nextRemind}}" bindchange="switch1Change"/>
+    </view>
+    <picker wx:if="{{nextRemind}}" class="w-input-item" mode="date" value="{{date}}" bindchange="bindDateNextFollowTime">
+      <text class="w-title">下次跟进时间</text>
+      <text class="w-tips">
+      <text class="color-dark" wx:if="{{nextFollowTime}}">{{nextFollowTime}}</text>
+      <text wx:else>请选择</text>
+      <text class="iconfont iconChevron"></text></text>
+    </picker>
+    <!-- <view class="w-input-item">
+      <text class="w-title">下次跟进时间</text>
+      <text class="w-tips">请选择<text class="iconfont iconChevron"></text></text>
+    </view> -->
+    <picker 
+      class="w-input-item" 
+      bindchange="bindPickerRemindUserList"
+      catchtap="getRemindUserList" 
+      value="{{index}}" 
+      range-key="userNameEnCn"
+      mode="selector"
+      range="{{remindUserList}}">
+      <text class="w-title">@人</text>
+      <!-- <text wx:if="{{remindUserIndex!==null&&remindUserList.length>0}}">{{remindUserList[remindUserIndex].userNameEnCn}}</text>  -->
+      <text class="w-tips">
+      <text class="color-dark" wx:if="{{(remindUserIndex!==null&&remindUserList.length>0)}}">{{remindUserList[remindUserIndex].userNameEnCn}}</text>
+      <text wx:else>请选择</text>
+      <text class="iconfont iconChevron"></text></text>
+    </picker>
+    <!-- <view class="w-input-item">
+      <text class="w-title">@人</text>
+      <text class="w-tips">请选择<text class="iconfont iconChevron"></text></text>
+    </view> -->
+  </view>
+  <view class="btn-area">
+    <button
+      wx:if="{{!(orgName&&orgPerson&&followForm&&followType&&textareaValue)}}"
+      class="submit">提交</button>
+      <button 
+      wx:else
+      formType="submit" 
+      loading="{{submitLoading}}"
+      class="submit active">提交</button>
+  </view>
+</form>
+  <!--录音-->
+  <!-- bindtap="closeAudioDialog" -->
+  <view class="sound-recording {{audioDialog?'active':''}}"></view>
+  <view class="sound-recording-main {{audioDialog?'active':''}}">
+    <view class="au-title-main">
+      <text catchtap="closeAudioDialog" class="gray left">取消</text>
+      <text class="au-title middle">音频</text>
+      <text class="iconfont iconxingzhuang2 blue right"></text>
+      <!-- <text class="au-close" catchtap="closeAudioDialog">关闭</text> -->
+    </view>
+    <view class="au-body">
+      <!-- <view class="record-list">
+         <view class="current-record {{currentRecordIndex===index?'active':''}}" catchtap="playCurrentRecord" wx:for="{{recordList}}" wx:key="index" data-current-record-index="{{index}}">
+           新录音{{index}}
+           <text wx:if="{{listItemRecordStatus&&currentRecordIndex===index}}">
+             <text class="iconfont iconxingzhuang2 blue"></text>播放中...
+           </text>
+           <text class="iconfont iconxingzhuang" catchtap="deleteRecord"></text>
+         </view>
+      </view> -->
+      <view class="timer">
+        <text>{{timer}}</text>
+        <view class="timer-recording" wx:if="{{recording}}">正在录音...</view>
+      </view>
+      <!-- <view class="play-timer">
+        <text>{{palyTimer}}</text>
+        <view>播放录音</view>
+      </view> -->
+      <view class="record-tips" wx:if="{{!startRecording}}">点击后录音</view>
+      <view class="record-sections">
+        <view class="rec-item">
+          <text wx:if="{{recording||playing}}" catchtap="cancerRecord">取消</text>
+        </view>
+        <icon wx:if="{{!startRecording}}" catchtap="startRecord" class="rec-item iconfont iconbianzu4"></icon>
+        <icon wx:if="{{startRecording&&recording}}" catchtap="stopRecord" class="rec-item iconfont iconbianzu21"></icon>
+        <icon wx:if="{{playing}}" catchtap="palyRecording" class="rec-item iconfont iconbianzu3"></icon>
+  
+        <view class="rec-item save">
+          <text wx:if="{{stopRecording&&!!playRecordUrl}}" catchtap="saveRecord">保存</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!--标签部分-->
+  <view class="label-select {{labelDialog?'active':''}}" bindtap="closeLabelDialog"></view>
+  <view class="label-select-main {{labelDialog?'active':''}}">
+    <view class="au-title">
+      <text class="au-close " catchtap="closeLabelDialog">取消</text>
+      <text class="au-title" catchtap="confirm">确定</text>
+    </view>
+    <view class="au-body">
+      <text 
+        wx:for="{{labelList}}" 
+        wx:key="index" 
+        data-label-index="{{index}}" 
+        class="label-item {{item.status?'active':''}}"
+        bindtap="selectCurrentLabel">{{item.labelName}}</text>
+    </view>
+  </view>
+  <!--暂存的提醒-->
+  <view class="static-data-tips" wx:if="{{isPrevious}}">
+    <view class="st-da-main">
+       <view class="tips-text">是否继续编辑上一次跟进记录</view>
+       <view class="tips-foot">
+         <view class="add-new-record" catchtap="addNewRecord">添加新记录</view>
+         <view catchtap="continueEdit">继续编辑</view>
+       </view> 
+    </view>
+  </view>
+</view>

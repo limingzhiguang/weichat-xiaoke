@@ -1,0 +1,37 @@
+<!--pages/orgPicture/index.wxml-->
+<wxs module="format" src="../../filter/filterDate.wxs"></wxs>
+
+<view class="scroll-page">
+  <view class="detail-header">
+    <image
+      class="banner-img"
+      src="{{imgSrc}}"
+    ></image>
+    <view class="title-box">
+      <view class="font-20 title text-clip">{{ orgInfor.orgJianName || orgInfor.brandName }}</view>
+      <view class="font-12 {{ orgInfor.orgStatus == '2'?'upper':'down' }} mark text-center">{{orgInfor.orgStatus == '2'?'上游':'下游'}}</view>  
+      <view class="row text-clip font-14">门店地址：{{orgInfor.address}}</view>     
+    </view>
+  </view>
+  <view class="header">
+    <view class="title">门店照片</view>
+    <view class="button" bindtap="addPicture" wx:if="{{addPicPermission}}">
+      <text><text class="iconfont icontianjiazhaopian"></text>新增</text>
+    </view>
+  </view>
+  <view class="pic-container">
+    <view class="box" wx:for="{{ imgList }}" wx:key="index">
+      <view class="picture"><image src="{{ item.picAddress }}" mode="aspectFit" data-src="{{ item.picAddress }}" catchtap="checkImg"></image></view>
+      <view class="infor">
+        <view class="date">上传时间：{{ format.timestampToDatetime(item.createTime) }}</view>
+        <text data-id="{{item.id}}" class="iconfont iconshanchu" bindtap="removePicture"></text>
+      </view>
+    </view>
+  </view>
+
+  <map-tabbar
+    currentTab="2"
+    orgId="{{ orgInfor.orgId }}"
+    orgName="{{ orgInfor.orgJianName || orgInfor.brandName }}">
+  </map-tabbar>
+</view>

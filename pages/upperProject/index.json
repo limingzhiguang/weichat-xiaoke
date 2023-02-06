@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "common-header": "../../components/orgcommonheader/index"
+  },
+  "navigationBarTitleText": "经营项目/人员规模"
+}

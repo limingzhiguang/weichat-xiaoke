@@ -1,0 +1,140 @@
+<!--pages/allCustomer/index.wxml-->
+<wxs src="../../utils/filter.wxs" module="filter" />
+<view class="all-customer" style="{{topStatus?'overflow:hidden':''}}">
+   <view class="customer-top">
+     <view class="top-switch">
+        <view bindtap="topSwitch" data-top-index='0' class="{{topIndex==0?'active':''}}">
+        全部  
+        <text class="iconfont iconSort-up ico" wx:if="{{topIndex==0&&topStatus}}"></text>
+        <text class="iconfont iconSort ico" wx:else></text>
+        </view>
+        <view bindtap="topSwitch" data-top-index='1' class="{{topIndex==1?'active':''}}">
+        筛选
+        <text class="iconfont iconSort-up ico" wx:if="{{topIndex==1&&topStatus}}"></text>
+        <text class="iconfont iconSort ico" wx:else></text>
+        </view>
+        <!-- <view bindtap="topSwitch" data-top-index='2' class="{{topIndex==2?'active':''}}">排序</view> -->
+        <view bindtap="topSwitch" data-top-index='3' class="sear-ch {{topIndex==3?'active':''}}">
+          <view class="search" wx:if="{{searchStatus}}">
+            <view class="we-input">
+              <input 
+                class="weui-input" 
+                maxlength="30" 
+                value="{{orgName}}" 
+                auto-focus 
+                bindconfirm="toSearch" 
+                confirm-type="search"
+                bindinput="getOrgName" 
+                placeholder="请输入机构名称" />
+              <icon class="iconfont iconxingzhuang" catchtap="clearSearchInput"></icon> 
+              <icon class="iconfont iconsousuo" catchtap="toSearch"></icon>
+            </view>
+            <view class="to-search" catchtap="toSearch"><text>搜索</text></view>
+          </view>
+          <icon class="iconfont iconsousuo" style="margin-top:-10rpx"></icon> 
+        </view>
+     </view>
+     <!--全部-->
+      <view class="top-float {{topStatus&&topIndex==0?'active':''}}">
+        <view class="list-ul">
+          <view class="list-li {{allSelect==index?'active':''}}" wx:for="{{allSelectList}}" data-all-select="{{index}}" wx:key="index" bindtap="allSelect">{{item}}</view> 
+       </view>
+      </view>
+      <!--筛选-->
+      <view class="top-float {{topStatus&&topIndex==1?'active':''}}">
+        <view>
+         <view class="tf-title" wx:if="{{noContactsTimeIndex===''||!noContactsTimeIndex}}">最后跟进时间</view>
+         <view class="flow-time" wx:if="{{noContactsTimeIndex===''||!noContactsTimeIndex}}">
+            <view 
+              wx:for="{{flowTimeList}}" 
+              wx:key="index" 
+              class="{{followTimeIndex==item.value?'active':''}}" 
+              data-follow-time-index="{{item.value}}"
+              bindtap="followTime">{{item.label}}<image class="bg-active" src="../../images/bg-active.png"></image></view>
+         </view>
+         <view class="tf-title" wx:if="{{followTimeIndex===''||!followTimeIndex}}">未联系时间</view>
+         <view class="flow-time" wx:if="{{followTimeIndex===''||!followTimeIndex}}">
+            <view 
+              wx:for="{{noContantTimeList}}" 
+              wx:key="index" 
+              class="{{noContactsTimeIndex==item.value?'active':''}}" 
+              data-no-contacts-time-index="{{item.value}}" bindtap="noContactsTime">{{item.label}}<image class="bg-active" src="../../images/bg-active.png"></image></view>
+         </view>
+         <view class="tf-title">区域</view>
+         <view class="flow-time">
+            <view catchtap="selectAddress" class="{{province?'active':''}}">
+                选择省市区<image class="bg-active" src="../../images/bg-active.png"></image>
+            </view>
+            <text wx:if="{{province}}" style="margin:10rpx 0 0 10rpx">{{province}}{{city}}{{area}}</text>
+            <!-- <view>选择省市区</view> -->
+            <!-- <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+              <view class="picker {{region.length>0?'active':''}}">
+                选择省市区<image class="bg-active" src="../../images/bg-active.png"></image>
+              </view>
+            </picker>
+            <text wx:if="{{region&&region.length>0}}" style="margin:10rpx 0 0 10rpx">{{region[0]}}{{region[1]}}{{region[2]}}</text> -->
+         </view>
+         <!-- <view>客户年产值</view>
+         <view class="flow-time">
+            <view 
+              wx:for="{{yearValueList}}" 
+              wx:key="index" 
+              class="{{yearValueIndex==index?'active':''}}" 
+              data-year-value-index="{{index}}"
+              bindtap="yearValue"
+              >{{item.label}}</view>
+         </view> -->
+         <view class="tf-title">客户状态</view>
+         <view class="flow-time">
+             <view 
+              wx:for="{{customerStatusList}}" 
+              wx:key="index" 
+              class="{{customerStatusIndex==item.value?'active':''}}" 
+              data-customer-status-index="{{item.value}}"
+              bindtap="customerStatus"
+              >{{item.label}}<image class="bg-active" src="../../images/bg-active.png"></image></view>
+            
+         </view>
+       </view>
+       <view class="top-footer">
+         <view class="reset" bindtap="reset">重置</view>
+          <view class="sure" bindtap="sure">确定</view>
+       </view>
+        </view>
+        <!--排序-->
+        <view class="top-float {{topStatus&&topIndex==2?'active':''}}">
+          <view class="list-ul">
+            <view class="list-li {{sortSelect==index?'active':''}}" wx:for="{{sortSelectList}}" data-sort-select="{{index}}" wx:key="index" bindtap="sortSelect">{{item}}</view> 
+          </view>
+        </view>
+     <view class="top-bg {{topStatus?'active':''}}" bindtap="closeTopFloat"></view>
+  </view>
+
+   <!--列表-->
+  <view class="customer-list">
+    <view class="item" wx:for="{{customerList}}" wx:key="index" bindtap="toDetail" data-org-id="{{item.orgId}}" data-org-type="{{item.orgType}}">
+      <view class="title">
+        <text wx:if="{{item.orgType === 1}}">{{item.brandName}}</text>
+        <text wx:else>{{item.orgJianName}}</text>
+        <!-- <text class="distance" bindtap="lookMap">
+        {{item.distance}}点击进入机构位置{{index}}
+        </text> -->
+      </view>
+      <view class="des">最后一次跟进时间：{{item.lastFollowUpDays}}</view>
+      <view class="label-group">
+        <text wx:if="{{item.orgStatus}}" class="customer-status">{{filter.orgStatus(item.orgStatus)}}</text>
+        <text wx:if="{{item.businessCentreLevel&&item.orgType===1}}">商务中心{{filter.oneLevelLabel(item.businessCentreLevel)}}{{filter.twoLevelLabel(item.businessCentreSecondLevel)}}</text>
+        <text wx:if="{{item.consultationDepartmentLevel&&item.orgType===2}}">城市经理-{{filter.ziXunBu(item.consultationDepartmentLevel)}}</text>
+        <text wx:if="{{item.cooperateLevel&&item.orgType===2}}">客服部-{{item.cooperateLevel}}</text>
+      </view>
+    </view>
+    <!-- <view class="bottom-line-tips" wx:if="{{hasMore}}">数据加载中...</view> -->
+    <view class="bottom-line-tips" wx:if="{{customerList.length>1&&!hasMore}}">———————我是有底线的———————</view>
+    <view class="no-data" wx:if="{{customerList.length===0}}">
+      <image src="../../images/no-data.png"></image>
+      <view class="no-data-tips">暂无数据</view>
+    </view>
+   </view>
+   <tab-bar currentTab="3"></tab-bar> 
+   <sd-address bind:confirm="confirm" bind:cancer="cancer" isShow="{{isShow}}"></sd-address>
+</view>

@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "common-header": "../../components/orgcommonheader/index",
+    "follow-record":"../../components/followRecord/index",
+    "map-tabbar": "../../components/detailTabBar/index"
+  },
+  "navigationBarTitleText": "跟进记录"
+}

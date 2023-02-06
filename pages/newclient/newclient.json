@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "mp-toptips": "../../components/toptips/toptips"
+  },
+  "navigationBarTitleText": "添加新客户"
+}

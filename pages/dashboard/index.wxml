@@ -1,0 +1,155 @@
+<!--pages/home/home.wxml-->
+<wxs src="../../utils/filter.wxs" module="filter" />
+<view class="dashboard">
+    <view class="common-use">
+      <view class="item" bindtap="allCluser" data-index2="1">
+        <view class="tip-icon tip-icon0">
+          <icon class="iconfont iconkehu"></icon>
+        </view>
+        <view class="des"> <text >全部客户</text></view>
+       
+      </view>
+      <view class="item" bindtap="followRecord" data-index2="2">
+         <view class="tip-icon tip-icon1">
+           <icon class="iconfont iconqianyuejilu"></icon>
+         </view>
+         <text class="des">跟进记录</text>
+      </view>
+      <view class="item" bindtap="earningsEstimate">
+         <view class="tip-icon tip-icon2">
+            <icon class="iconfont iconshuju"></icon>
+         </view>
+         <text class="des">业绩预测</text>
+      </view>
+      <view class="item" bindtap="contacts">
+         <view class="tip-icon tip-icon3">
+          <icon class="iconfont iconlianxiren"></icon>
+         </view>
+         <text class="des">联系人</text>
+      </view>
+    </view>
+      <view class="b-title">
+        <icon class="iconfont iconshujuweihu"></icon>
+         <text class="b-title-text">简报看板</text>
+        <view class="switch-date">
+          <text wx:for="{{boardDateList}}" wx:key='index' bindtap="boardDateSelect" data-board-date-index="{{index}}" class="{{boardDateIndex==index?'active':''}}">{{item}}</text>
+        </view>
+      </view> 
+      <view class="board-block">
+        <view class="board-block-item" bindtap="toCurrentCustomer">
+         <text class="iconfont iconChevron"></text>
+          <view class="board-block-item-title">当前客户数</view>
+          <view class="board-block-item-number">{{reportBulletin.currentCustomerNum||0}}</view>
+        </view>
+        <view class="board-block-item" bindtap="toAddCustomer">
+         <text class="iconfont iconChevron"></text>
+          <view class="board-block-item-title">新增客户数</view>
+          <view class="board-block-item-number">{{reportBulletin.addCustomerNum||0}}</view>
+        </view>
+        <view class="board-block-item" bindtap="toFollowCustomer">
+         <text class="iconfont iconChevron"></text>
+          <view class="board-block-item-title">跟进客户数</view>
+          <view class="board-block-item-number">{{reportBulletin.followUpCustomerNum||0}}</view>
+        </view>
+        <view class="board-block-item" bindtap="toFollowNum">
+         <text class="iconfont iconChevron"></text>
+          <view class="board-block-item-title">跟进次数</view>
+          <view class="board-block-item-number">{{reportBulletin.followUpNum||0}}</view>
+        </view>
+        <view class="board-block-item" bindtap="toAddEarningsEstimate">
+         <text class="iconfont iconChevron"></text>
+          <view class="board-block-item-title">新增业绩预测</view>
+          <view class="board-block-item-number">{{reportBulletin.addSaleChangeNum||0}}</view>
+        </view>
+        <view class="board-block-item" bindtap="toAddEarningsEstimateMoney">
+         <text class="iconfont iconChevron"></text>
+          <view class="board-block-item-title">新增业绩预测金额</view>
+          <view class="board-block-item-number">{{filter.formatMoney(reportBulletin.addSaleChangeMoney)}}</view>
+        </view>
+         <!-- <view class="board-block-item">
+         reportBulletin.addSaleChangeMoney
+          <view class="board-block-item-title">待踢单客户数（个）</view>
+          <view class="board-block-item-number">{{filter.formatMoney('123123.12234')}}</view>
+        </view> -->
+      </view>
+      <view class="b-title">
+        <icon class="iconfont iconqianyuejilu"></icon>
+        <text class="b-title-text">跟进记录</text>
+        <view class="switch-date">
+          <text wx:for="{{flowDateList}}" wx:key='index' bindtap="flowDateSelect" data-flow-date-index="{{index}}" class="{{flowDateIndex==index?'active':''}}">{{item}}</text>
+        </view>
+      </view> 
+      <view class="follow-record">
+        <view class="fo-block">
+          <view class="org-num" bindtap="followOrgNumber" style="margin-right:24rpx">
+            <view class="title">跟进机构数量</view> 
+            <view class="content">
+            {{orgQuantity}}
+            <text class="iconfont iconChevron"></text>
+            </view> 
+         </view>
+           <view class="org-num" bindtap="followOrgCount">
+            <view class="title">跟进机构次数</view> 
+            <view class="content">
+            {{orgFrequency}}
+            <text class="iconfont iconChevron"></text>
+            </view> 
+           </view>
+        </view>
+        <view class="follow-mode">
+           <view class="title">跟进方式</view> 
+           <view class="follow-mode-body">
+              <view class="follow-mode-block" wx:for="{{followModeList}}" wx:key='index' >
+               <view class="inner-title">{{item.name}}</view>
+               <view class="inner-num">{{item.value}}</view>
+              </view>
+           </view>
+        </view>
+        <view class="follow-mode">
+           <view class="title">跟进形式</view> 
+           <view class="follow-mode-body">
+              <view class="follow-mode-block" wx:for="{{followFormList}}" wx:key='index' >
+               <view class="inner-title">{{item.name}}</view>
+               <view class="inner-num">{{item.value}}</view>
+              </view>
+           </view>
+        </view>
+      </view>
+      <!--遗忘提醒-->
+      <view class="b-title">
+        <icon class="iconfont iconxiaoxitongzhitixinglingshenglingdang"></icon>
+         <text class="b-title-text">遗忘提醒</text>
+      </view> 
+      <view class="forget-remind">
+        <view class="left-line"></view>
+        <view class="fr-item" data-forget-remind-index="1" bindtap="forgetRemind">
+          1~2周 未联系
+          <view class="fr">{{moreOneWeekNum}}个
+           <text class="iconfont iconChevron"></text>
+          </view>
+          <view class="small-dot"></view>
+        </view>
+        <view class="fr-item" data-forget-remind-index="2" bindtap="forgetRemind">
+          2周~1个月 未联系
+          <view class="fr">{{moreTwoWeekNum}}个
+          <text class="iconfont iconChevron"></text>
+          </view>
+          <view class="small-dot small-dot-blue"></view>
+        </view>
+         <view class="fr-item" data-forget-remind-index="3" bindtap="forgetRemind">
+          1~2个月 未联系
+          <view class="fr">{{moreOneMonthNum}}个
+          <text class="iconfont iconChevron"></text>
+          </view>
+          <view class="small-dot small-dot-yellow"></view>
+        </view>
+         <view class="fr-item" data-forget-remind-index="4" bindtap="forgetRemind">
+          2个月以上 未联系
+          <view class="fr">{{moreTwoMonthNum}}个
+          <text class="iconfont iconChevron"></text>
+          </view>
+          <view class="small-dot small-dot-red"></view>
+        </view>
+      </view>
+  <tab-bar currentTab="0"></tab-bar>    
+</view>

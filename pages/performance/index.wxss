@@ -1,0 +1,4 @@
+/* pages/performance/index.wxss */
+.list-box{
+  padding-bottom: 120rpx;
+}

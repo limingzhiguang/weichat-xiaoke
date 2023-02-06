@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "mp-action": "../../components/actionsheet/actionsheet"
+  },
+  "enablePullDownRefresh":true,
+  "navigationBarTitleText": "统计排名"
+}

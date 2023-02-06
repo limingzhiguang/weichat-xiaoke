@@ -1,0 +1,64 @@
+<!--components/earningsEstimate/index.wxml-->
+<wxs src="../../utils/filter.wxs" module="filter" />
+<view class="estimate-list" style="{{topStatus || isEdit?'overflow:hidden':''}}">
+    <view wx:for="{{list}}" wx:key="index">
+      <view class="estimate-list-item {{item.products.length?'active':''}}">
+       <view class="es-title">
+        {{item.projectName}}
+        <view wx:if="{{item.type===1&&needBtnUp}}" class="fr" bindtap="rowEdit" data-number="{{item.yjPredictionId}}" data-stage="{{item.stageContent}}">
+        {{filter.stageContent(item.stageContent)}}
+          <text class="iconfont iconChevron"></text>
+        </view>
+         <view wx:if="{{item.type===2&&needBtnDown}}" class="fr" bindtap="rowEdit" data-number="{{item.yjPredictionId}}" data-stage="{{item.stageContent}}">
+        {{filter.stageContent(item.stageContent)}}
+          <text class="iconfont iconChevron"></text>
+        </view>
+       </view>
+       <view class="row">
+        <text class="es-num">预计售卖金额：{{filter.formatMoney(item.predictionCjAmount)}}</text>
+        <view wx:if="{{(item.type===1&&updateUpperIntent) || (item.type===2&&updateDownIntent)}}" class="fr color-blue1" bindtap="changeIntent" data-number="{{item.yjPredictionId}}">{{!item.intentType || item.intentType === 'N/A'?'未分类':item.intentType}}<text class="iconfont iconChevron"></text></view>
+       </view>
+       <view class="es-num"></view>
+       <view class="es-orgname"  data-org-id="{{item.orgId}}" data-org-type="{{item.orgType}}" data-org-name="{{item.orgName}}" catchtap="toDetail">{{item.orgName}}
+         <text class="iconfont iconChevron"></text>
+       </view>
+       <view class="es-p">预计成交时间：{{item.predictionCjDate}}</view>  
+       <view class="es-p">决策人：{{item.policyPerson}}</view>  
+       <view class="es-p">负责人：{{item.managePerson}}</view>  
+    </view>
+    <!--详情的产品列表-->
+    <view class="product-list {{item.products.length?'active':''}}" wx:if="{{item.products.length}}">
+      <view class="pro-item">
+        <text class="pro-item-text pro-title left">产品名称</text>
+        <text class="pro-item-text pro-title right">售卖数量</text>
+      </view>
+      <view class="pro-item"  wx:for="{{item.products}}" wx:for-item="current" wx:key="index">
+        <text class="pro-item-text left">{{current.productName}}</text>
+        <text class="pro-item-text right">{{current.predictionSellNum}}</text>
+      </view>
+    </view>
+    </view>
+    <view class="bottom-line-tips" wx:if="{{list.length>1&&!hasMore}}">———————我是有底线的———————</view>
+    <view class="no-data" wx:if="{{list.length===0}}">
+      <image src="../../images/no-data.png"></image>
+      <view class="no-data-tips">暂无数据</view>
+    </view>
+  </view>
+  <!--修改内容-->
+  <view class="static-data-tips" wx:if="{{isEdit}}">
+    <view class="st-da-main">
+      <view class="tips-foot">
+        <text class="tf-cancer" catchtap="editCancer">取消</text>
+        <text>销售状态</text>
+        <text class="add-new-record" catchtap="editConfirm">确定</text>
+      </view> 
+      <view class="tips-text">
+        <view 
+          catchtap="selectCurrentStage"
+          class="item-stage {{((item.value==stage)||stageIndex===index)?'active':''}}" 
+          wx:for="{{stageList}}" 
+          wx:key="index" 
+          data-stage-index="{{index}}">{{item.name}}</view>
+      </view>
+    </view>
+  </view>

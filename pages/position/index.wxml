@@ -1,0 +1,53 @@
+<!--pages/position/index.wxml-->
+<wxs module="format" src="../../filter/filter.wxs"></wxs>
+
+<view class="position-page">
+  <cover-view class="detail-header">
+    <cover-image
+      class="banner-img"
+      src="{{imgSrc}}"
+    ></cover-image>
+    <cover-view class="title-box">
+      <cover-view class="font-20 title text-clip">{{ orgInfor.orgJianName || orgInfor.brandName }}</cover-view>
+      <cover-view class="font-12 {{ orgInfor.orgStatus == '2'?'upper':'down' }} mark text-center">{{orgInfor.orgStatus == '2'?'上游':'下游'}}</cover-view>  
+      <cover-view class="row text-clip font-14">门店地址：{{orgInfor.address}}</cover-view>     
+    </cover-view>       
+  </cover-view>
+  <map
+    wx:if="{{ isLoaded }}"
+    id="positionMap"
+    longitude="{{longitude}}"
+    latitude="{{latitude}}"
+    markers="{{markers}}"      
+    enable-traffic
+    show-scale
+    include-points="points"
+    scale="{{scale}}"
+    bindmarkertap="tapMarker"
+    bindcallouttap="tapMarker"
+    bindregionchange="regionChange"
+  ></map>
+  <!-- <cover-view class="controls">
+    <cover-view class="button" catchtap="blowUp">
+      <cover-view class="iconfont iconjiahao"></cover-view>
+    </cover-view>
+    <cover-view class="button" catchtap="shrink">
+      <cover-view class="iconfont iconiconjian"></cover-view>
+    </cover-view>
+  </cover-view> -->
+  <!-- <map-tabbar
+    currentTab="-1"
+    orgId="{{ orgInfor.orgId }}"
+    orgName="{{ orgInfor.orgJianName || orgInfor.brandName }}"
+  ></map-tabbar> -->
+  <cover-view class="bottom {{isShowBottom?'show':''}}">
+    <cover-view class="row">
+      <cover-view class="border-right inline-block">{{ distance == -1?'未知': format.formatDistance(distance) }}</cover-view>
+      <cover-view class="inline-block">地址：{{ mapInfor }}</cover-view>      
+    </cover-view>  
+    <cover-view class="row">
+      <cover-view  class="border-right inline-block">驾车耗时：{{ format.formatDate(duration) }}</cover-view>
+      <cover-view class="inline-block">步行耗时：未知</cover-view>
+    </cover-view>
+  </cover-view>
+</view>

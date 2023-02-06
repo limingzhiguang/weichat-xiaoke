@@ -1,0 +1,42 @@
+/**
+ * @params arr: Array<object>
+ * @params val：String | Number  == object.value
+ * @return object.label: String
+ */
+var getLabel = function(arr,val){
+  if (!arr) return ''
+  var result = ''
+  
+  for(var i=0;i<arr.length;i++){
+    if(arr[i].value == val){
+      result = arr[i].label
+    }
+  }
+
+  return result
+}
+
+var formatDistance = function(n){
+  var reg = getRegExp('^\d+$')
+  if (!reg.test(n)) return '未知'
+
+  if(n < 1000){
+    return n + 'm'
+  }else{
+    return (n / 1000).toFixed(2) + 'Km'
+  }
+}
+
+var formatDate = function(n){
+  var reg = getRegExp('^\d+$')
+  if (!reg.test(n)) return '未知'
+
+  return Math.ceil(n / 60) + '分钟'
+}
+
+
+module.exports  = {
+  getLabel: getLabel,
+  formatDistance: formatDistance,
+  formatDate: formatDate
+}

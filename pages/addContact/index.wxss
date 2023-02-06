@@ -1,0 +1,131 @@
+/* pages/addContact/index.wxss */
+.add-contact{
+  background-color: #fff;
+  font-family:PingFangSC-Regular,PingFang SC;
+}
+.base-info{
+  margin-top: 16rpx;
+  background-color: #fff;
+}
+.b-title{
+  height: 56rpx;
+  line-height: 56rpx;
+  font-size:26rpx;
+  text-align: center;
+  color: #003E7C;
+  background-color: #EAF4FD;
+
+}
+.info-block{
+  position: relative;
+  height: 95rpx;
+  line-height: 95rpx;
+  margin:0 25rpx;
+  border-bottom: 1rpx solid #F5F5F5;
+  color: #333;
+  font-size:30rpx;
+}
+.info-block .right{
+  position: absolute;
+  top:0;
+  right: 0;
+  color: #999;
+}
+.info-block .iconfont{
+  margin-left: 30rpx;
+  font-size: 28rpx;
+  color: #999;
+}
+.info-block .red{
+  margin-right: 4rpx;
+  color: #FF3545;
+}
+.info-block .iconjia{
+   color: #017FFF;
+   font-size: 36rpx;
+}
+.info-input-block{
+  display: flex;
+  align-items: center;
+}
+.info-input-block .in-input{
+   display: inline-block;
+}
+.only-input{
+  position: relative;
+  margin-left: 40rpx;
+}
+.only-input .detail-icon{
+   position: absolute;
+   top:0;
+   right: 0;
+   z-index: 1;
+   font-size: 34rpx;
+   color: #017FFF;
+}
+.id-card-image{
+  margin: 30rpx 0 53rpx 38rpx;
+}
+.id-card-image image{
+  width: 242rpx;
+  height: 157rpx;
+}
+.id-card-tips{
+  margin-left: 15rpx;
+  font-size:24rpx;
+  font-weight:400;
+  color: #999;
+}
+.next-remind{
+  position: absolute;
+  right: 0;
+  text-align: right;
+}
+.info-textarea-block{
+  margin:26rpx 25rpx 0 25rpx;
+  border-bottom: 1rpx solid #F5F5F5;
+}
+.w-textarea{
+  margin-top: 8rpx;
+  width: 100%;
+  min-height: 266rpx;
+  background-color: #fff;
+}
+.info-textarea-block .text-right{
+  margin-bottom: 16rpx;
+  color: #999;
+  font-size:24rpx;
+}
+.social-resources{
+  padding-top: 26rpx;
+  margin:0 25rpx;
+}
+
+.sr-title{
+  color: #333;
+  font-size:30rpx;
+}
+.group-checkbox{
+  margin-top: 16rpx;
+  padding:2rpx 40rpx 28rpx 40rpx;
+  background-color: #F5F5F5;
+}
+.group-checkbox .checkbox{
+  display: inline-block;
+  width: 50%;
+  margin-top: 24rpx;
+}
+.btn-area .submit{
+  width: 100%;
+  height: 94rpx;
+  line-height: 60rpx;
+  margin-top: 210rpx;
+  font-size: 36rpx;
+  color: #bbb;
+  background-color: #ddd;
+  font-weight:400;
+}
+.submit.active{
+  color: #fff;
+  background-color: #017FFF;
+}

@@ -1,0 +1,7 @@
+<!--pages/stafflist/index.wxml-->
+<staff-list
+  lists="{{lists}}"
+  bind:choose="choose"
+></staff-list>
+  
+

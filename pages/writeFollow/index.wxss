@@ -1,0 +1,333 @@
+/* pages/writeFollow/index.wxss */
+.red{
+  color: #FF3545;
+  font-size:30rpx;
+}
+.gray{
+  color: #999;
+}
+.blue{
+  color: #017FFF;
+}
+.write-follow{
+  font-size: 28rpx;
+}
+.w-inout-list{
+
+}
+.w-inout-list .w-input-item{
+  position: relative;
+  padding: 26rpx 25rpx;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+}
+
+.w-inout-list .w-input-item .text-right{
+  color: #999;
+}
+.w-inout-list .block-title{
+   height: 56rpx;
+   line-height: 56rpx;
+   color: #003E7C;
+   background-color: #EAF4FD;
+   text-align: center;
+}
+.w-tips{
+  position: absolute;
+  top:24rpx;
+  right:25rpx;
+  color: #999;
+  font-size:30rpx;
+}
+.w-tips .iconfont{
+  margin-left: 30rpx;
+  font-size: 24rpx;
+}
+.w-title{
+  margin-right: 20rpx;
+}
+.w-tips .blue{
+  font-size: 32rpx;
+}
+.w-textarea{
+  min-height: 266rpx;
+  margin-top: 8rpx;
+}
+.label-group{
+  margin-right: 16rpx;
+  padding: 4rpx 16rpx;
+  color:#FF3545;
+  background-color: #FFF1F0;
+  border:2rpx solid rgba(255,163,158,1);
+  border-radius: 20rpx;
+  font-size:24rpx;
+}
+.space-white{
+  height: 54rpx;
+  background-color: #fff;
+}
+.next-remind{
+  float: right;
+  text-align: right;
+  width: 162rpx;
+  height: 62rpx;
+  margin-top: -16rpx;
+}
+.btn-area .submit{
+  width: 100%;
+  margin-top: 51rpx;
+  color: #bbb;
+  background-color: #ddd;
+}
+.submit.active{
+  color: #fff;
+  background-color: #017FFF;
+}
+.sound-recording{
+  position: fixed;
+  left:0;
+  bottom:0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: none;
+}
+.sound-recording.active{
+  display: block;
+}
+.sound-recording-main{
+  position: fixed;
+  left:0;
+  bottom:0;
+  z-index: 2;
+  width: 100%;
+  height: 40%;
+  background-color: #fff;
+  transition: all .5s;
+  transform: translateY(100%);
+}
+.sound-recording-main.active{
+  transform: translateY(0);
+}
+.sound-recording-main .au-title-main{
+  display: flex;
+  padding:26rpx 37rpx 26rpx 41rpx;
+  border-bottom: 1rpx solid #ddd;
+}
+.au-title-main > text{
+  flex:1
+}
+.au-title-main .left{
+  text-align: left;
+}
+.au-title-main .middle{
+  text-align: center;
+}
+.au-title-main .right{
+  text-align: right;
+}
+.sound-recording-main .au-title .au-title{
+  font-size: 30rpx;
+}
+.sound-recording-main .au-title-main .iconxingzhuang2{
+  font-size: 36rpx;
+}
+.sound-recording-main .au-title .au-close{
+  float: right;
+  padding: 10rpx;
+}
+.sound-recording-main .au-title-main .iconfont{
+  font-size: 36rpx;
+}
+.sound-recording-main .au-body{
+  padding-top: 48rpx;
+  padding-bottom:48rpx;
+  background-color: #fff;
+}
+.sound-recording-main .au-body .timer{
+  margin-top: 20rpx;
+  text-align: center;
+  font-size:28rpx;
+  color: #333;
+}
+.sound-recording-main .au-body .timer .timer-recording{
+  font-size:24rpx;
+  color: #999;
+}
+.sound-recording-main .au-body .play-timer{
+  text-align: center;
+  font-size:24rpx;
+  color: #999;
+}
+.sound-recording-main .au-body .record-tips{
+  margin-top: 48rpx;
+  text-align: center;
+  font-size:28rpx;
+  color: #333;
+}
+.sound-recording-main .au-body .record-sections{
+   margin-top: 48rpx;
+   display: flex;
+   padding:0 164rpx;
+}
+.sound-recording-main .au-body .record-sections .rec-item{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sound-recording-main .au-body .record-sections .rec-item > text{
+  flex: 1;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.red{
+  color: red!important;
+}
+.sound-recording-main .au-body .record-sections .iconfont{
+   width: 120rpx;
+   height: 120rpx;
+   font-size: 120rpx;
+   color: #017FFF;
+}
+.sound-recording-main .au-body .record-sections .iconxingzhuang2{
+   color: #017FFF;
+}
+.sound-recording-main .au-body .record-sections .save{
+  color: #017FFF;
+}
+.sound-recording-main .record-list{
+  max-height: 300rpx;
+  overflow-y: scroll;
+}
+.sound-recording-main .record-list .current-record{
+   position: relative;
+   height: 96rpx;
+   line-height: 96rpx;
+   margin: 0 25rpx 0 65rpx;
+   border-bottom: 1rpx solid #ddd;
+}
+.sound-recording-main .record-list .current-record.active{
+  color: #017FFF;
+}
+.sound-recording-main .record-list .current-record .iconfont{
+   position: absolute;
+   top:0;
+   right: 0;
+   font-size: 30rpx;
+   color: #C7C7CC;
+}
+/*标签部分*/
+.label-select{
+  position: fixed;
+  left:0;
+  bottom:0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: none;
+}
+.label-select.active{
+  display: block;
+}
+.label-select-main{
+  position: fixed;
+  left:0;
+  bottom:0;
+  z-index: 10;
+  width: 100%;
+  height: 50%;
+  background-color: #fff;
+  transition: all .5s;
+  transform: translateY(100%);
+}
+.label-select-main.active{
+  transform: translateY(0);
+}
+.label-select-main .au-title{
+  padding: 18rpx 32rpx;
+  font-size: 30rpx;
+  border-bottom: 1rpx solid #eee;
+}
+.label-select-main .au-title .au-title{
+  color: #108EE9;
+  float: right;
+  margin-top: -18rpx;
+}
+.label-select-main .au-title .au-close{
+  color: #999;
+}
+.label-select-main .au-body{
+  /* display: flex;
+  flex-wrap: wrap; */
+  height: 80%;
+  padding: 43rpx 40rpx;
+  background-color: #fff;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch
+}
+.label-select-main .au-body .label-item{
+  display: inline-block;
+  color: #017FFF;
+  height: 56rpx;
+  line-height: 56rpx;
+  padding: 0 20rpx;
+  margin-bottom: 30rpx;
+  margin-right: 16rpx;
+  border:1rpx solid #017FFF;
+  border-radius: 28rpx;
+}
+.label-select-main .au-body .label-item.active{
+  color: #fff;
+  border:1rpx solid #017FFF;
+  background-color: #23a0ff;
+}
+
+/*暂存提醒*/
+.static-data-tips{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left:0;
+  bottom:0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+}
+.static-data-tips .st-da-main{
+   width: 540rpx;
+   background-color: #fff;
+   font-family:PingFangSC-Medium,PingFang SC;
+   border-radius:4rpx;
+}
+.static-data-tips .tips-text{
+   height: 112rpx;
+   padding-top: 45rpx;
+   text-align: center;
+   font-weight:500;
+}
+.static-data-tips .tips-foot{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 99rpx;
+  font-size:36rpx;
+  color: #333;
+  font-size:30rpx;
+  border-top: 1rpx solid #ddd;
+}
+.static-data-tips .tips-foot > view{
+  flex:1;
+  color: #017FFF;
+}
+.static-data-tips .tips-foot .add-new-record{
+  border-right: 1rpx solid #ddd;
+  color: #999;
+}

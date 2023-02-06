@@ -1,0 +1,153 @@
+<!--pages/followUpRecord/index.wxml-->
+
+<view class="follow-up-record" style="{{topStatus || isEditing?'overflow:hidden':''}}">
+  <view class="customer-top">
+    <view class="top-switch">
+        <view bindtap="topSwitch" data-top-index='0' class="{{topIndex==0?'active':''}} {{topIndex==0&&topStatus?'active2':''}}">
+        全部  
+        <text class="iconfont iconSort-up ico" wx:if="{{topIndex==0&&topStatus}}"></text>
+        <text class="iconfont iconSort ico" wx:else></text>
+        </view>
+        <view bindtap="topSwitch" data-top-index='1' class="{{topIndex==1?'active':''}} {{topIndex==1&&topStatus?'active2':''}}">
+         筛选
+        <text class="iconfont iconSort-up ico" wx:if="{{topIndex==1&&topStatus}}"></text>
+        <text class="iconfont iconSort ico" wx:else></text>
+        </view>
+        <view bindtap="topSwitch" data-top-index='3' class="{{topIndex==3?'active':''}}">
+         <view class="search" wx:if="{{searchStatus}}">
+            <!-- <view class="cancer" catchtap="cancerSearch"><text data-search-status='false'>取消</text></view> -->
+            <view class="we-input">
+              <input 
+                class="weui-input" 
+                maxlength="30" 
+                value="{{orgName}}" 
+                auto-focus 
+                bindconfirm="toSearch" 
+                confirm-type="search" 
+                bindinput="getOrgName" 
+                placeholder="请输入机构名称" />
+              <icon class="iconfont iconxingzhuang" catchtap="clearSearchInput"></icon> 
+              <icon class="iconfont iconsousuo" catchtap="toSearch"></icon>
+            </view>
+            <view class="to-search" catchtap="toSearch"><text>搜索</text></view>
+          </view>
+          <icon class="iconfont iconsousuo" style="margin-top:-10rpx"></icon> 
+        </view>
+      </view>
+      <!--全部-->
+      <view class="top-float {{topStatus&&topIndex==0?'active':''}}">
+        <view class="list-ul">
+          <view class="list-li {{allSelect==index?'active':''}}" wx:for="{{allSelectList}}" data-all-select="{{index}}" wx:key="index" bindtap="allSelect">{{item}}</view> 
+       </view>
+      </view>
+      <!--筛选-->
+      <view  class="top-float {{topStatus&&topIndex==1?'active':''}}">
+        <view>
+         <view class="tf-title">创建顾问</view>
+         <view class="flow-time">
+            <!-- <view>选择员工</view> -->
+            <picker bindchange="bindPickerChange" mode="selector" range="{{staffList}}" value="{{index}}" range-key="enNamecnName">
+              <view class="picker {{staffIndex==0?'active':''}}">
+                选择员工
+                <image class="bg-active" src="../../images/bg-active.png"></image>
+              </view>
+            </picker>
+            <text wx:if="{{currentStaff}}" style="margin-top:10rpx">已选员工：{{currentStaff}}</text>
+         </view>
+         <view class="tf-title">时间选择</view>
+         <view class="flow-time">
+            <picker bindchange="bindPickertimeType" mode="selector" range="{{timeType}}" value="{{index}}">
+                <view class="picker {{timeTypeIndex==index?'active':''}}">
+                  {{timeType[timeTypeIndex]}}
+                  <image class="bg-active" src="../../images/bg-active.png"></image>
+                </view>
+            </picker>
+            <picker mode="date" value="{{creatDate}}" start="" end="" bindchange="bindDateChange">
+              <view class="picker {{creatTimeIndex==0?'active':''}}">
+                <text>开始时间</text>
+                <image class="bg-active" src="../../images/bg-active.png"></image>
+              </view>
+            </picker>
+            <picker mode="date" value="{{customDate}}" start="" end="" bindchange="customBindDateChange">
+              <view class="picker {{remindTimeIndex==0?'active':''}}">
+                结束时间
+                <image class="bg-active" src="../../images/bg-active.png"></image>
+              </view>
+            </picker>
+            <!-- <text wx:if="{{creatDate}}" style="margin-top:10rpx">已选时间：{{creatDate}}</text> -->
+         </view>
+         <view class="flow-time">
+            <text wx:if="{{creatDate}}" style="margin-top:10rpx">时间范围：{{creatDate}}</text>
+            <text wx:if="{{customDate}}" style="margin-top:10rpx">~{{customDate}}</text>
+         </view>
+         <view class="tf-title">跟进方式</view>
+         <view class="flow-time">
+            <view wx:for="{{followMode}}" wx:key="index" data-flollw-index="{{index}}" class="{{flollwIndex==index?'active':''}}" bindtap="followMode">
+            {{item}}
+            <image class="bg-active" src="../../images/bg-active.png"></image>
+            </view>
+         </view>
+         <view class="tf-title">跟进形式</view>
+         <view class="flow-time">
+            <view wx:for="{{followForm}}" wx:key="index" data-form-index="{{index}}" class="{{formIndex==index?'active':''}}" bindtap="followForm">
+            {{item}}
+            <image class="bg-active" src="../../images/bg-active.png"></image>
+            </view>
+         </view>
+          <!-- <view class="tf-title">标签</view>
+          <view class="flow-time">
+            <view catchtap="selectLabel" class="{{selectLabelIds.length>0?'active':''}}">
+            选择标签
+            <image class="bg-active" src="../../images/bg-active.png"></image>
+          </view> -->
+            <!-- <view 
+            wx:for="{{labelList}}" 
+            wx:key="index" 
+            data-label-index="{{index}}" 
+            class="{{labelIndex==0?'active':''}}"
+            bindtap="selectLabel">{{item.labelName}}</view> -->
+      </view>
+      <view class="top-footer">
+        <view class="reset" bindtap="reset">重置</view>
+        <view class="sure" bindtap="sure">确定</view>
+      </view>
+    </view>
+     <!--排序-->
+      <view class="top-float {{topStatus&&topIndex==2?'active':''}}">
+        <view class="list-ul">
+          <view class="list-li {{sortSelect==index?'active':''}}" wx:for="{{sortSelectList}}" data-sort-select="{{index}}" wx:key="index" bindtap="sortSelect">{{item}}</view> 
+        </view>
+      </view>
+    <view class="top-bg {{topStatus?'active':''}}" bindtap="closeTopFloat"></view>
+  </view>
+  <!--列表-->
+  
+  <follow-record
+    list="{{followList}}"
+    hasMore="{{hasMore}}"
+    hideContent="{{ topStatus }}"
+    bind:cancel="hideMask"
+    bind:edit="showMask"
+    bind:updateList="updateList"></follow-record>
+  <!--end/-->
+  <view class="write-follow" bindtap="writeFollow">
+    <icon class="iconfont iconbaifangjiluS"></icon>写跟进
+  </view>
+ 
+  <!--标签选择-->
+  <view class="label-select {{labelDialog?'active':''}}" bindtap="closeLabelDialog"></view>
+  <view class="label-select-main {{labelDialog?'active':''}}">
+    <view class="au-title">
+      <text class="au-close " catchtap="closeLabelDialog">取消</text>
+      <text class="au-title" catchtap="confirm">确定</text>
+    </view>
+    <view class="au-body">
+      <view 
+        wx:for="{{labelList}}" 
+        wx:key="index" 
+        data-label-index="{{index}}" 
+        class="label-item {{item.status?'active':''}}"
+        bindtap="selectCurrentLabel">{{item.labelName}}</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,153 @@
+/* components/earningsEstimate/index.wxss */
+
+@import "../../app.wxss";
+.fr{
+  float: right;
+}
+/*列表*/
+.estimate-list{
+  box-sizing: border-box;
+  padding:0 25rpx;
+  height: 100%;
+  font-size: 28rpx;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch
+}
+.estimate-list-item{
+  margin-top: 16rpx;
+  padding:35rpx 32rpx 27rpx 25rpx;
+  background-color: #fff;
+  border-radius:16rpx;
+}
+.estimate-list-item.active{
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.estimate-list-item .es-title{
+  font-size:36rpx;
+  font-family:PingFang-SC-Bold,PingFang-SC;
+  font-weight:bold;
+  color: #333;
+}
+.estimate-list-item .es-title .fr{
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color: #017FFF;
+}
+.estimate-list-item .es-title .fr .iconfont{
+  font-size: 24rpx;
+}
+.estimate-list-item .row{
+  margin: 24rpx 0;
+}
+.estimate-list-item .es-num{ 
+  font-size:32rpx;
+  font-weight:400;
+  color: #FFAA00;
+}
+
+.estimate-list-item .es-orgname{
+  position: relative;
+  color: #017FFF;
+  margin-top: 18rpx;
+  margin-bottom: 25rpx;
+}
+.estimate-list-item .es-orgname .iconfont{
+  display: inline-block;
+  width: 34rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  margin-left:6rpx;
+  color: #003E7C;
+  background-color: #F5F5F5;
+  border-radius: 50%;
+  font-size: 20rpx;
+  text-align: center;
+  vertical-align: middle;
+}
+.estimate-list-item .es-p{
+  margin-top: 7rpx;
+  color: #999;
+  font-size: 28rpx;
+}
+/*产品列表*/
+.product-list{
+  padding: 4rpx 40rpx 24rpx 50rpx;
+  background-color: #E8F4FE;
+}
+.product-list.active{
+  border-bottom-left-radius: 16rpx;
+  border-bottom-right-radius: 16rpx;
+}
+.pro-item{
+   display: flex;
+   margin-top: 16rpx;
+   color: #333;
+   font-size: 28rpx;
+}
+.pro-item-text.pro-title{
+   color: #595866;
+}
+.pro-item-text.left{
+  flex: 3;
+}
+.pro-item-text.right{
+  flex: 1;
+  text-align: center;
+}
+/*内容修改*/
+.static-data-tips{
+  position: fixed;
+  left:0;
+  bottom:0;
+  z-index: 20;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+}
+.static-data-tips .st-da-main{
+  position: absolute;
+  bottom:0;
+  left:0;
+  z-index: 2;
+  width: 100%;
+  background-color: #fff;
+  font-family:PingFangSC-Medium,PingFang SC;
+  border-radius:4rpx;
+}
+.static-data-tips .tips-text{
+   height: 400rpx;
+   overflow-y: scroll;
+   margin:28rpx 25rpx 0 25rpx;
+   font-size:36rpx;
+   color: #333;
+   border-bottom: 1rpx solid #ddd;
+}
+.static-data-tips .tips-text .item-stage{
+   height: 98rpx;
+   line-height: 98rpx;
+   text-align: center;
+   border-bottom: 1rpx solid #eee;
+}
+.static-data-tips .tips-text .item-stage.active{
+  color: #108EE9;
+}
+.static-data-tips .tips-foot{
+  height: 78rpx;
+  line-height: 78rpx;
+  padding:0 32rpx;
+  text-align: center;
+  font-size:34rpx;
+  color: #000;
+  border-bottom: 1rpx solid #eee;
+}
+.static-data-tips .tips-foot .tf-cancer{
+  float: left;
+  color: #108EE9;
+}
+.static-data-tips .tips-foot .add-new-record{
+  float: right;
+  color: #108EE9;
+}

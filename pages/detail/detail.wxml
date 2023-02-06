@@ -1,0 +1,187 @@
+<!--pages/detail/detail.wxml-->
+<wxs module="filter" src="../../filter/filterArray.wxs"></wxs>
+<wxs module="format" src="../../filter/filterDate.wxs"></wxs>
+
+<view class="detail-box">
+  <view class="detail-header color-white bg-color-blue big-orange">
+    <image
+      class="banner-img"
+      src="{{imgSrc}}"
+    ></image>
+    <view class="title-box">
+      <text class="font-20 title text-clip">{{ inforData.orgJianName || inforData.brandName }}</text>
+      <text class="font-12 {{ inforData.orgStatus == '2'?'upper':'down' }} mark text-center">{{inforData.orgStatus == '2'?'上游':'下游'}}</text>
+    </view>
+    <view class="row text-clip font-14">门店地址：{{inforData.orgAddressProvince}}{{inforData.orgAddressCity}}{{inforData.orgAddressArea}}{{inforData.orgAddressDetail}}</view>
+    <view class="row flex-row between font-14">
+      <view wx:if="{{inforData.orgStatus != '2'}}">客户等级：{{inforData.buOrgScoreSourceSummaryBO.orgLevel}}</view>
+      <view>状态：{{ filter.getLabel(filterData.orgStatus,inforData.orgStatus) }}</view>
+      <view wx:if="{{inforData.orgStatus == '2'}}">来源：{{ filter.getLabel(filterData.customerSource,inforData.customerSource) }}</view>
+    </view>
+    <view class="row font-14">    
+      <text class="iconfont "></text>最后跟进时间：{{ format.datetime(inforData.lastFollowupTime) }}
+    </view>
+  </view>
+
+  <view class="tag-container flex-row between module">
+    <view class="tag-box">
+      <text 
+        class="tag"
+        wx:for="{{inforData.buLabelInfoBoList}}"
+        wx:key="index"
+      >{{item.labelName}}</text>      
+    </view>
+    <view class="button color-blue2 font-14" bindtap="changeTag" wx:if="{{ (inforData.orgStatus == '2' && upperPermission.addLabelButton) || (inforData.orgStatus != '2' && downPermission.addLabelButton) }}">
+      <text class="iconfont iconxingzhuang2-copy"></text>标签修改
+    </view>
+  </view>
+
+  <view class="module">
+    <view class="title">
+      <text class="iconfont iconshuju"></text>数据统计
+      <view class="switch-date" bindtap="switchDate">
+        <text
+          class="{{ item.value == dateType?'active':null }}"
+          wx:for="{{ dateTypeArr }}"
+          wx:key="index"
+          id="{{item.value}}"
+        >{{ item.label }}</text>
+      </view>
+    </view>
+    <view class="stastics text-center">
+      <view class="box bg-color-gold">
+        <text class="number color-orange font-24">{{ followupNum }}</text>
+        <text class="name color-orange">跟进次数</text>
+      </view>
+      <view class="box bg-color-gold">
+        <text class="number color-orange font-24">{{ saleChangeNum }}</text>
+        <text class="name color-orange">业绩预测</text>
+      </view>
+      <view class="box bg-color-gold">
+        <text class="number color-orange font-24">{{ format.money(saleChangeMoney) }}</text>
+        <text class="name color-orange">预测金额</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="module">
+    <view class="title">
+      <text class="iconfont iconxingzhuang51"></text>机构信息
+    </view>
+    <view class="org-button-group flex-row between wrap text-center">
+      <view wx:if="{{ (inforData.orgStatus == '2' && upperPermission.orgInfoPage) || (inforData.orgStatus != '2' && downPermission.orgInfoPage) }}" class="org-button" bindtap="toBasics" hover-class="hover-btn">基本信息        
+        <text class="text-center arrow">
+          <text class="iconfont iconChevron"></text>
+        </text>
+      </view>
+      <view wx:if="{{ (inforData.orgStatus == '2' && upperPermission.orgInfoPage) || (inforData.orgStatus != '2' && downPermission.orgInfoPage) }}" class="org-button" bindtap="toRegister" hover-class="hover-btn">注册信息        
+        <text class="text-center arrow">
+          <text class="iconfont iconChevron"></text>
+        </text>
+      </view>
+      <view wx:if="{{ (inforData.orgStatus == '2' && upperPermission.orgInfoPage) || (inforData.orgStatus != '2' && downPermission.orgInfoPage) }}" class="org-button" bindtap="toProject" hover-class="hover-btn">经营项目
+        <text class="text-center arrow">
+          <text class="iconfont iconChevron"></text>
+        </text>
+      </view>
+      <view wx:if="{{ (inforData.orgStatus == '2' && upperPermission.preIncomeInfoPage) || (inforData.orgStatus != '2' && downPermission.preIncomeInfoPage) }}" class="org-button" bindtap="toPerformance" hover-class="hover-btn">业绩预测
+        <text class="text-center arrow">
+          <text class="iconfont iconChevron"></text>
+        </text>
+      </view>
+      <view wx:if="{{ (inforData.orgStatus == '2' && upperPermission.memorandumButton) || (inforData.orgStatus != '2' && downPermission.memorandumButton) }}" class="org-button" bindtap="toFollowUp" hover-class="hover-btn">跟进记录
+        <text class="text-center arrow">
+          <text class="iconfont iconChevron"></text>
+        </text>
+      </view>
+      <view wx:if="{{ (inforData.orgStatus == '2' && upperPermission.personnelInfoPage) || (inforData.orgStatus != '2' && downPermission.personnelInfoPage) }}" class="org-button" bindtap="toContact" hover-class="hover-btn">联系人
+        <text class="text-center arrow">
+          <text class="iconfont iconChevron"></text>
+        </text>
+      </view>
+    </view>
+  </view>
+
+  <view class="module">
+    <view class="title">
+      <text class="iconfont iconshezhi"></text>操作
+    </view>    
+    <view class="handler-box flex-row between wrap">
+      <picker
+        wx:if="{{inforData.orgStatus != 2 && downPermission.consultDepButton}}"
+        class="child" 
+        bindchange="changeContract" 
+        range="{{contractLevel}}" 
+        range-key="label" 
+        value="currentContract">
+        <view class="label">销售分类：{{contractLevel[currentContract].label?contractLevel[currentContract].label:''}}</view>
+        <text class="down-arrow">
+          <text class="iconfont iconSort"></text>
+        </text>         
+      </picker>
+
+      <picker 
+        wx:if="{{inforData.orgStatus != 2 && downPermission.custServDepButton}}"
+        class="child" 
+        bindchange="changeCooperation" 
+        range="{{cooperationIntensity}}" 
+        range-key="label" 
+        value="currentCooperation">        
+        <view class="label">客服分类：{{currentCooperation?currentCooperation:''}}</view>   
+        <text class="down-arrow">
+          <text class="iconfont iconSort"></text>
+        </text>
+      </picker>      
+      <picker 
+        wx:if="{{inforData.orgStatus == 2 && upperPermission.businessCentreUpdateButton }}"
+        class="child" 
+        bindchange="changeBusinessCenter" 
+        range="{{businessCenter}}" 
+        range-key="label" 
+        value="currentBusinessCenter">
+        <view class="label">商务中心分类：{{businessCenter[currentBusinessCenter].label}}</view>
+        <text class="down-arrow">
+          <text class="iconfont iconSort"></text>
+        </text>
+      </picker>
+
+      <view class="child" bindtap="allotClass" wx:if="{{inforData.orgStatus != 2 && downPermission.unallocatedUpdateButton }}">
+        <view class="label {{ clazzName?'color-blue1':null }}">班级：{{clazzName?clazzName:'未分配'}}</view>
+        <text class="arrow">
+          <text class="iconfont iconChevron"></text>
+        </text>
+      </view>
+
+      <view wx:if="{{ (inforData.orgStatus == '2' && upperPermission.personnelElasticFrame) || (inforData.orgStatus != '2' && downPermission.personnelElasticFrame) }}" class="child" bindtap="lookCounselor">
+        <view class="label color-blue1">查看顾问</view>
+        <text class="arrow">
+          <text class="iconfont iconChevron"></text>
+        </text>
+      </view>
+
+      <view class="child" bindtap="submitCustom" wx:if="{{inforData.orgStatus != 2 && inforData.orgStatus !=5 && downPermission.submitCustomerElasticFrame }}">
+        <view class="label color-blue1">提交客户</view>
+        <text class="arrow">
+          <text class="iconfont iconChevron"></text>
+        </text>
+      </view>
+
+    </view>
+  </view>
+
+  <map-tabbar
+    currentTab="-1"
+    orgId="{{inforData.orgId}}"
+    orgName="{{ inforData.orgJianName || inforData.brandName}}"
+  ></map-tabbar>
+  <prompt id="prompt" 
+    title="班级分配"
+    isShow="{{isShowClass}}"    
+    bind:confirm="getVal">
+  </prompt>
+  <mp-tags
+    id="tags"
+    isShow="{{isShowTags}}"
+    bind:confirm="setTags"
+  ></mp-tags>
+</view>

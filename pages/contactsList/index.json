@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "contacts-item":"../components/contactsItem/index"
+  },
+  "navigationBarTitleText": "联系人"
+}

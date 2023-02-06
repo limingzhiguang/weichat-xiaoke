@@ -1,0 +1,60 @@
+/* components/selectLabel/index.wxss */
+.label-select{
+  position: fixed;
+  left:0;
+  bottom:0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: none;
+}
+.label-select.active{
+  display: block;
+}
+.label-select-main{
+  position: fixed;
+  left:0;
+  bottom:0;
+  z-index: 10;
+  width: 100%;
+  height: 50%;
+  background-color: #fff;
+  transition: all .5s;
+  transform: translateY(100%);
+}
+.label-select-main.active{
+  transform: translateY(0);
+}
+.label-select-main .au-title{
+  padding: 18rpx 32rpx;
+  font-size: 30rpx;
+  border-bottom: 1rpx solid #eee;
+}
+.label-select-main .au-title .au-title{
+  color: #108EE9;
+  float: right;
+  margin-top: -18rpx;
+}
+.label-select-main .au-title .au-close{
+  color: #999;
+}
+.au-body{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 43rpx 40rpx;
+  background-color: #fff;
+}
+.au-body .label-item{
+  color: #017FFF;
+  padding: 10rpx 20rpx;
+  margin-bottom: 30rpx;
+  margin-right: 16rpx;
+  border:1rpx solid #017FFF;
+  border-radius: 28rpx;
+}
+.au-body .label-item.active{
+  color: #fff;
+  border:1rpx solid #017FFF;
+  background-color: #23a0ff;
+}

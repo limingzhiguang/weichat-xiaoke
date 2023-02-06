@@ -1,0 +1,152 @@
+/* pages/photos/photos.wxss */
+.photos {
+	box-sizing: border-box;
+	padding-bottom: 100rpx;
+	width: 100%;
+	height: 100%;
+}
+
+.photos .content {
+	height: 100%;
+	background: rgb(246, 248, 250);
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.text-box {
+	background: #fff;
+	margin-bottom: 18rpx;
+	padding-top: 120rpx;
+	padding-bottom: 40rpx;
+	text-align: center;
+}
+
+.text-box .img {
+	display: inline-block;
+	width: 160rpx;
+	height: 160rpx;
+}
+
+.text-box .text {
+	display: block;
+	width: 100%;
+	font-size: 28rpx;
+	color: #0F294D;
+	line-height: 48rpx;
+}
+
+.text-box .text1 {
+	margin-bottom: 30rpx;
+	font-size: 36rpx;
+	color: #30AF87;
+	font-weight: 500;
+}
+
+.upload-box {
+	margin-bottom: 40rpx;
+	text-align: center;
+}
+
+.upload-btn {
+	display: inline-block;
+	border-radius: 5px;
+	width: 686rpx;
+	height: 200rpx;
+	line-height: 200rpx;
+	text-align: center;
+	font-size: 28rpx;
+	-webkit-transition: all .3s;
+	transition: all .3s;
+	background: #fff;
+}
+
+.icon-box{
+	height:100rpx;
+	line-height:100rpx;
+	width:100%;
+}
+
+.icon-box .split{
+	display: inline-block;
+	margin-top:20rpx;
+	width: 2rpx;
+	height:100rpx;
+	line-height:100rpx;
+	background:#012840;
+}
+
+.icon-box .iconfont{
+	padding:0 40rpx;
+	font-size:80rpx;
+	color:#012840;
+}
+.upload-btn>text{
+	display: block;
+	height:100rpx;
+	line-height:100rpx;
+	width: 100%;
+	color:#012840;
+	font-size: 30rpx;
+}
+.upload-box .icon-box .upload-text{
+	margin-top: 60rpx;
+	height: 40rpx;
+	line-height: 40rpx;
+}
+.upload-btn:active {
+	background: rgba(0, 0, 0, .1)
+}
+
+.photo-list {
+	-webkit-box-direction: row;
+	flex-grow: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding: 0 40rpx;
+}
+
+.photo-box {
+	position: relative;
+	margin-bottom: 20rpx;
+	display: inline-block;
+	box-sizing: border-box;
+	width: 154rpx;
+	height: 120rpx;
+}
+
+.photo-box image {
+	display: inline-block;
+	border-radius: 8rpx;
+	width: 100%;
+	height: 100%;
+}
+
+.photo-box .iconfont {
+	position: absolute;
+	top: -14rpx;
+	right: -14rpx;
+	z-index: 2;
+	color:#DD5353;
+}
+
+.btn-box {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	padding: 0 40rpx;
+	width: 100%;
+	height: 100rpx;
+	box-sizing: border-box;
+	background: #fff;
+}
+
+.btn-box .go-back {
+	border-radius: 40rpx;
+	width: 100%;
+	height: 80rpx;
+	background: #175DFF;
+	color: #fff;
+	font-size: 32rpx;
+	text-align: center;
+	line-height: 80rpx;
+}

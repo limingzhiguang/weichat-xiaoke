@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "common-header": "../../components/orgcommonheader/index",
+    "earnings-estimate":"../../components/earningsEstimate/index",
+    "map-tabbar": "../../components/detailTabBar/index"
+  },
+  "navigationBarTitleText": "业绩预测"
+}

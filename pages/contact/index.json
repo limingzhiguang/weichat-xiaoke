@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "common-header": "../../components/orgcommonheader/index",
+    "contacts-item":"../components/contactsItem/index",
+    "map-tabbar": "../../components/detailTabBar/index"
+  },
+  "navigationBarTitleText": "联系人"
+}

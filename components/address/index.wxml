@@ -1,0 +1,24 @@
+<!--components/address/index.wxml-->
+<view class="address" wx:if="{{isShow}}">
+  <view class="address-body">
+    <view class="address-title">
+    <text class="cancer" catchtap="cancer">取消</text>
+    <text class="tips">区域</text>
+    <text class="confirm" catchtap="confirm">完成</text>
+  </view>  
+  <picker-view indicator-style="height: 50px;" class="address-main" value="{{value}}" bindchange="bindChange">
+    <picker-view-column>
+      <view  style="line-height: 50px;text-align:center">请选择</view>
+      <view wx:for="{{province}}" wx:key="index" style="line-height: 50px;text-align:center">{{item.name}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view  style="line-height: 50px;text-align:center">请选择</view>
+      <view wx:for="{{city}}" wx:key="index" style="line-height: 50px;text-align:center">{{item.name}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view  style="line-height: 50px;text-align:center">请选择</view>
+      <view wx:for="{{area}}" wx:key="index" style="line-height: 50px;text-align:center">{{item.name}}</view>
+    </picker-view-column>
+  </picker-view>
+  </view>
+</view>

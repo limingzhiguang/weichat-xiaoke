@@ -1,0 +1,6 @@
+/* pages/contact/index.wxss */
+.c-list{
+  margin-top: 16rpx;
+  padding-bottom: 120rpx;
+  background-color: #fff;
+}

@@ -1,0 +1,39 @@
+<!--pages/dealWith/index.wxml-->
+<view class="deal-with">
+  <view class="switch-tab">
+    <view class="tab-item {{switchIndex==='1'?'active':''}}" data-switch-index="1" bindtap="switchTab">
+      <text>跟进提醒</text>
+      <view class="tab-line"></view>
+    </view>
+    <view class="tab-item {{switchIndex==='2'?'active':''}}" data-switch-index="2" bindtap="switchTab">
+      <text>客户关怀</text>
+      <view class="tab-line"></view>
+    </view>
+  </view>
+
+  <!--跟进记录列表-->
+  <view wx:if="{{switchIndex==='1'}}" class="follow-list">
+    <follow-record list="{{followList}}" hasMore="{{hasMore}}" bind:updateList="updateList"></follow-record>
+  </view>
+  <!--客户关怀列表-->
+  <view class="customer-care" wx:if="{{switchIndex==='2'}}">
+    <view class="care-item" wx:for="{{customerCareList}}" wx:key="index" data-org-id="{{item.orgId}}" data-org-type="{{item.orgType}}" bindtap="toDetailPage">
+      <view class="care-item-title">
+        {{item.userName}}
+        <text>{{item.orgName}}</text>
+      </view>
+      <view class="care-item-birthday">
+        <text class="iconfont iconshengri"></text>
+        <text class="ca-date">{{item.birthdayDate}}</text>生日
+      </view>
+      <view class="tips-time {{item.distanceDay<0?'red':'green'}}">倒计时{{item.distanceDay}}天</view>
+    </view>
+     <view class="bottom-line-tips" wx:if="{{customerCareList.length>1&&!hasMore}}">———————我是有底线的———————</view>
+     <view class="no-data" wx:if="{{customerCareList.length===0}}">
+       <image src="../../images/no-data.png"></image>
+       <view class="no-data-tips">暂无数据</view>
+     </view>
+  </view> 
+  <!--/end-->
+  <tab-bar currentTab="1"></tab-bar>
+</view>

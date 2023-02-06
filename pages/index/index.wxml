@@ -1,0 +1,58 @@
+<!--pages/index/home.wxml-->
+<view class="login">
+	<view class="login-model">
+		<view class="yellow-bar bar1"></view>
+		<view class="yellow-bar bar2"></view>
+		<view class="yellow-bar bar3"></view>
+		<view class="yellow-bar bar4"></view>
+		<view class="banner-box">
+			<view class="img-box">
+				<image src="../../images/logo.png"></image>
+			</view>
+			<text class="mp-name">水镝</text>
+			<text class="des-text">开始旅程，让君学因为你而感到骄傲</text>
+		</view>
+		<view class="loggin-box">
+			<form bindsubmit="formSubmit">
+				<view>
+					<label class="flex-box {{ isMobileFocus?'input-focus':'login-input' }}">
+						<input type="number" maxlength="11" placeholder="请输入手机号码" name="telephone" bindfocus="focusMobile" bindblur="blurMobile"
+						 placeholder-style="color:#D1D8DC;" value="{{ mobile }}" bindinput="changeMobild" />
+						<view class="icon" hidden="{{ !mobile }}">
+							<i bindtap="clearMobile">
+								<em class="iconfont icon-sd-deletetext"></em>
+							</i>
+						</view>
+					</label>
+				</view>
+				<view>
+					<label class="flex-box {{ isPasswordFocus?'input-focus':'login-input' }}">
+						<input bindfocus="focusPassword" bindblur="blurPassword" value="{{ password }}" bindinput="changePassword"
+						 placeholder-style="color:#D1D8DC;" password placeholder="请输入密码" name="password" />
+						<view class="icon" hidden="{{ !password }}">
+							<i bindtap="clearPassword">
+								<em class="iconfont icon-sd-deletetext"></em>
+							</i>
+						</view>
+					</label>
+				</view>
+				<view>
+					<picker bindchange="selectDepartment" range="{{departmentList}}" range-key="label" value="{{currentDepartment}}" class="{{currentDepartment?'picker':'department'}}"
+					 mode="selector">
+						<view class="content">
+							<view class="title" hidden="{{currentDepartment}}">选择部门</view>
+							<view class="input" hidden="{{!currentDepartment}}">{{departmentList[currentDepartment].label}}</view>
+						</view>
+						<view class="picker-icon">
+							<i class="iconfont icon-sd-choose"></i>
+						</view>
+					</picker>
+				</view>
+				<text class="notice">请选择正确的部门，否则数据将流传到错误的部门下</text>
+				<view>
+					<button form-type="submit" class="login-button">登录</button>
+				</view>
+			</form>
+		</view>
+	</view>
+</view>

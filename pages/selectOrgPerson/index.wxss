@@ -1,0 +1,61 @@
+/* pages/selectOrgPerson/index.wxss */
+.org-page{
+  background-color: #fff;
+  height: 100%;
+}
+.org-search{
+  display: flex;
+  padding:16rpx 24rpx;
+  background-color: #ddd;
+}
+.org-search .search-input{
+  position: relative;
+  flex: 1;
+  width: 608rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  padding-left: 66rpx;
+  background-color: #fff;
+  border-radius:6rpx;
+}
+.org-search .search-input .iconfont{
+  position: absolute;
+  top:-5rpx;
+  left:24rpx;
+  width: 30rpx;
+  height: 30rpx;
+  color: #bbb;
+}
+.org-search .search-input input{
+  height: 100%;
+}
+.to-search{
+ line-height: 56rpx;
+ padding-left: 30rpx;
+ text-align: center;
+}
+.to-search text{
+  color: #017FFF;
+  font-size:32rpx;
+}
+.org-list{
+  background-color: #fff;
+}
+.radio-group .radio{
+  padding: 10rpx 20rpx;
+  display: block;
+}
+
+.save-org-info{
+  position: fixed;
+  left: 30rpx;
+  bottom: 30rpx;
+  z-index: 5;
+  width: 92%;
+  height: 94rpx;
+  line-height: 94rpx;
+  color: #fff;
+  background-color: #017FFF;
+  text-align: center;
+  border-radius: 10rpx;
+}

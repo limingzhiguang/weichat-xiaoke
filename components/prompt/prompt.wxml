@@ -1,0 +1,16 @@
+<!--components/prompt/prompt.wxml-->
+<view class="prompt-box {{show?'':'prompt-hidden'}}" wx:if="{{isShow}}" catchtap="hidePrompt">
+  <view class="prompt-container {{show?'show-dialog':''}}" catchtap="touchContainer">
+    <view class="title-box">
+      <text>{{ title }}</text>
+      <text class="iconfont icon-guanbi1" bindtap="hidePrompt"></text>
+    </view>
+    <view class="input-box">
+      <input auto-focus value="{{inputVal}}" bindinput="getVal" placeholder="请输入" placeholder-class="placeholder"></input>
+    </view>
+    <view class="btn-group">
+      <view class="cancel" bindtap="hidePrompt">{{ btnCancel }}</view>
+      <view class="confirm" bindtap="confirm">{{ btnTrue }}</view>
+    </view>
+  </view>
+</view>
